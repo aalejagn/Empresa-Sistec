@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SISTEC READ - Reseñas</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/header.css" />
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    
+  </head>
+
+  <body>
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="nav-container">
+                
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../../public/index.html" class="logo-link">
+                        <img src="../assets/Images/logo.png" alt="SIS" class="logo-imagen">
+                        <span class="logo-text">SISTEC</span>
+                    </a>
+                </div>
+
+                <!-- Navegación Principal -->
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="../pages/acerca_de.html" class="nav-link">Nosotros</a></li>
+                    <li class="nav-item"><a href="../pages/categorias.html" class="nav-link">Catálogo</a></li>
+                    <li class="nav-item"><a href="../pages/reseñas.html" class="nav-link active">Reseñas</a></li>
+                    <li class="nav-item"><a href="../pages/ubicacion.html" class="nav-link">Ubicación</a></li>
+                    <li class="nav-item"><a href="../pages/contactanos.html" class="nav-link">Contacto</a></li>
+                    <li class="nav-item"><a href="#footer" class="nav-link">Futuro</a></li>
+                </ul>
+
+                <!-- Área de Búsqueda e Íconos -->
+                <div class="nav-actions">
+                    <div class="search-container">
+                        <input type="search" placeholder="Buscar Libros" class="search-input">
+                        <button class="search-btn" aria-label="Buscar">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="action-icons">
+                        <a href="#" class="icon-link" aria-label="Carrito">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <!-- ENLACE AL LOGIN - MODIFICADO -->
+                        <a href="../pages/Login.jsx" class="icon-link" aria-label="Iniciar Sesión" title="Iniciar Sesión">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+      <div class="container">
+        <h1 class="page-title">Reseñas de Nuestros Clientes</h1>
+        <section class="reviews-section">
+          <h2>Se presenta:</h2>
+          <article class="review-card">
+            <div class="review-content">
+              <h2 class="review-title">Por invitación</h2>
+              <p class="review-author">Gomez - Actualizada el 19 sept 2025</p>
+              <p class="review-text">
+                SISTEC READ es genial todos sus productos llegan muy bien
+                envueltos el contenido en perfecto estado se comunican con el
+                cliente en inmediato tienen una gran variedad: tanto libros de
+                lectura...
+              </p>
+              <div class="review-rating">★★★★★</div>
+            </div>
+          </article>
+          <article class="review-card">
+            <div class="review-content">
+              <h2 class="review-title">Por invitación</h2>
+              <p class="review-author">ALSOLGAR - 18 sept 2025</p>
+              <p class="review-text">
+                Muy buena experiencia con CSISTEC READ. Destaco los puntos de
+                recogida, que hacen todo el proceso muy cómodo. En todo momento
+                pude localizar mi pedido sin problema, lo que da mucha
+                tranquilidad. Ade...
+              </p>
+              <div class="review-rating">★★★★★</div>
+            </div>
+          </article>
+        </section>
+        <section class="review-form-section">
+          <h2 class="categoria-titulo">Deja tu reseña</h2>
+          <p>
+            Comparte tu experiencia con SISTEC READ. ¡Tu opinión nos ayuda a
+            mejorar!
+          </p>
+          <form action="#" method="post" class="review-form">
+            <label for="nombre">Nombre:</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              required
+              placeholder="Ingresa tu nombre"
+            />
+
+            <label for="calificacion">Calificación:</label>
+            <select id="calificacion" name="calificacion" required>
+              <option value="" disabled selected>
+                Selecciona una calificación
+              </option>
+              <option value="5">★★★★★</option>
+              <option value="4">★★★★☆</option>
+              <option value="3">★★★☆☆</option>
+              <option value="2">★★☆☆☆</option>
+              <option value="1">★☆☆☆☆</option>
+            </select>
+
+            <label for="comentario">Comentario:</label>
+            <textarea
+              id="comentario"
+              name="comentario"
+              rows="5"
+              required
+              placeholder="Escribe tu reseña aquí"
+            ></textarea>
+
+            <button type="submit" class="btn btn-primary">Enviar reseña</button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <!-- Pie de página con información adicional -->
+
+<footer class="footer new-design" id="footer">
+  
+  <div class="footer-main-content">
+    
+    <p class="main-info-text">
+      Mantente conectado con SISTEC READ y recibe novedades exclusivas.
+    </p>
+
+    </div>
+
+  <div class="footer-bottom-bar">
+    
+    <div class="footer-links-row">
+      <p class="copyright-text">
+        &copy; 2025 <strong>SISTEC READ</strong>. Todos los derechos reservados.
+      </p>
+      
+      <ul class="legal-links">
+        <li><a href="../pages/politicas-privacidad.html">Políticas de Privacidad</a></li>
+        <li><span>|</span></li>
+        <li><a href="../pages/terminos-condiciones.html">Términos y Condiciones</a></li>
+        <li><span>|</span></li>
+        <li><a href="../pages/politica-devolucion.html">Política de Devolución</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-links-row corporate-row">
+      <p class="copyright-text">
+        Promoviendo la lectura y el conocimiento en nuestra comunidad.
+      </p>
+      
+      <ul class="corporate-links">
+        <li><a href="../pages/mision.html">Misión</a></li>
+        <li><span>|</span></li>
+        <li><a href="../pages/vision.html">Visión</a></li>
+        <li><span>|</span></li>
+        <li><a href="../pages/valores.html">Valores</a></li>
+      </ul>
+    </div>
+
+    <div class="payment-icons">
+      </div>
+    
+  </div>
+</footer>
+
+<script src="../assets/js/categorias-data.js"></script>
+<script src="../assets/js/search"></script>
+
+</body>
+</html>
+

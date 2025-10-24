@@ -1,0 +1,154 @@
+/* ========================================
+   CSS PARA PÁGINAS LEGALES
+   (Políticas de Privacidad, Términos y Condiciones, Política de Devolución)
+   ======================================== */
+
+/* === ESTRUCTURA PRINCIPAL === */
+.contact-section article {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.contact-section article h2 {
+    font-size: 1.8rem;
+    color: #667eea;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+    text-align: left;
+    text-shadow: none;
+}
+
+.contact-section article h2:first-of-type {
+    margin-top: 1rem;
+}
+
+.contact-section article p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.contact-section article p strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* === LISTAS === */
+.contact-section article ul.list-valores {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.5rem 0;
+}
+
+.contact-section article ul.list-valores li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    color: #666;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.contact-section article ul.list-valores li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #ff6b6b;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.contact-section article ul.list-valores li strong {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* === ESPACIADO ESPECIAL === */
+.contact-section article h2 + p {
+    margin-top: 0.8rem;
+}
+
+/* === ÚLTIMAS SECCIONES === */
+.contact-section article p:last-of-type {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    font-style: italic;
+    color: #999;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .contact-section article h2 {
+        font-size: 1.5rem;
+    }
+
+    .contact-section article p {
+        font-size: 0.95rem;
+    }
+
+    .contact-section article ul.list-valores li {
+        font-size: 0.9rem;
+        padding-left: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-section {
+        padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .contact-section article h2 {
+        font-size: 1.3rem;
+        margin-top: 2rem;
+    }
+
+    .contact-section article p {
+        font-size: 0.9rem;
+        text-align: left;
+    }
+
+    .contact-section article ul.list-valores li {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+}
+
+/* === MEJORAS VISUALES === */
+.contact-section article h2:hover {
+    color: #764ba2;
+    transition: color 0.3s ease;
+}
+
+.contact-section article ul.list-valores li:hover {
+    background: #f8f9fa;
+    padding-right: 0.5rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+/* === ANIMACIÓN DE ENTRADA === */
+.contact-section article {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

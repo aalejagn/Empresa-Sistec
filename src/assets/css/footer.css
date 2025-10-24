@@ -1,0 +1,174 @@
+/* ==== FOOTER BASADO EN LA IMAGEN DE EJEMPLO (Ancho y Centrado) ==== */
+
+/* Contenedor principal - Fíjate en los paddings reducidos */
+.footer.new-design {
+  background-color: #1a1a1a; /* Fondo muy oscuro, similar al ejemplo */
+  color: #f4f4f4;
+  width: 100%;
+  padding: 0; /* Padding se gestiona internamente */
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Sección Central (para el texto principal) */
+.footer-main-content {
+  background-color: #1a1a1a;
+  text-align: center;
+  padding: 40px 20px; /* Padding para dar espacio a la sección central */
+}
+
+.main-info-text {
+  font-size: 1rem;
+  color: #d1d1d1;
+  margin: 0;
+}
+
+/* Barra Inferior con Copyright y Enlaces */
+.footer-bottom-bar {
+  background-color: #0e0e0e; /* Color aún más oscuro para la barra inferior */
+  padding: 20px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* Separador sutil */
+}
+
+/* Estilo para las filas de enlaces (Legal y Corporativo) */
+.footer-links-row {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  align-items: center;
+  padding: 5px 0;
+  flex-wrap: wrap; /* Permitir que los elementos se envuelvan en móvil */
+}
+
+/* Separación entre las dos filas */
+.corporate-row {
+  margin-top: 5px; 
+}
+
+/* Texto de Copyright */
+.copyright-text {
+  font-size: 0.85rem;
+  color: #999;
+  margin: 0 15px 0 0; /* Espacio a la derecha del copyright */
+  white-space: nowrap; /* Evita que el texto de copyright se rompa */
+}
+
+.copyright-text strong {
+  color: #f9c80e;
+}
+
+/* Listas de Enlaces (Legales y Corporativos) */
+.legal-links,
+.corporate-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.legal-links li,
+.corporate-links li {
+  margin: 0 5px; /* Espacio entre cada enlace/separador */
+  font-size: 0.85rem;
+  color: #666; /* Color para los separadores '|' */
+}
+
+/* Enlaces */
+.legal-links a,
+.corporate-links a {
+  text-decoration: none;
+  color: #999;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.legal-links a:hover,
+.corporate-links a:hover {
+  color: #f9c80e; /* Tono amarillo al pasar el ratón */
+}
+
+/* Ocultar el separador '|' en el primer y último elemento */
+.legal-links li:first-child span,
+.corporate-links li:first-child span {
+    display: none;
+}
+
+
+/* ==== RESPONSIVO - SOLO MODIFICACIONES PARA MÓVIL ==== */
+@media (max-width: 850px) {
+  .footer-links-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .copyright-text {
+    margin: 0 0 10px 0;
+    order: 1; /* Asegura que el copyright esté primero */
+  }
+
+  .legal-links,
+  .corporate-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    order: 2; /* Los enlaces después del copyright */
+  }
+  
+  /* Ocultar separadores en móvil */
+  .legal-links li span,
+  .corporate-links li span {
+    display: none;
+  }
+
+  .legal-links li,
+  .corporate-links li {
+    margin: 0 8px 5px;
+  }
+}
+
+/* ==== RESPONSIVO EXTRA PARA MÓVILES PEQUEÑOS ==== */
+@media (max-width: 480px) {
+  .footer-main-content {
+    padding: 30px 15px;
+  }
+  
+  .main-info-text {
+    font-size: 0.9rem;
+  }
+  
+  .footer-bottom-bar {
+    padding: 15px 15px;
+  }
+  
+  .copyright-text {
+    font-size: 0.8rem;
+  }
+  
+  .legal-links li,
+  .corporate-links li {
+    font-size: 0.8rem;
+    margin: 0 5px 3px;
+  }
+  
+  .legal-links,
+  .corporate-links {
+    gap: 8px;
+  }
+}
+
+/* ==== RESPONSIVO PARA TABLETS ==== */
+@media (max-width: 768px) and (min-width: 481px) {
+  .footer-links-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .copyright-text {
+    margin: 0 15px 0 0;
+  }
+}

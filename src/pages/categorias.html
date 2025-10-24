@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEC READ - Catálogo de Libros</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/catalago.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!-- Encabezado con barra de navegación y logotipo -->
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="nav-container">
+                
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="../../public/index.html" class="logo-link">
+                        <img src="../assets/Images/logo.png" alt="SIS" class="logo-imagen">
+                        <span class="logo-text">SISTEC</span>
+                    </a>
+                </div>
+
+                <!-- Navegación Principal -->
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="../pages/acerca_de.html" class="nav-link">Nosotros</a></li>
+                    <li class="nav-item"><a href="../pages/categorias.html" class="nav-link active">Catálogo</a></li>
+                    <li class="nav-item"><a href="../pages/reseñas.html" class="nav-link">Reseñas</a></li>
+                    <li class="nav-item"><a href="../pages/ubicacion.html" class="nav-link">Ubicación</a></li>
+                    <li class="nav-item"><a href="../pages/contactanos.html" class="nav-link">Contacto</a></li>
+                    <li class="nav-item"><a href="#footer" class="nav-link">Futuro</a></li>
+                </ul>
+
+                <!-- Área de Búsqueda e Íconos -->
+                <div class="nav-actions">
+                    <div class="search-container">
+                        <input type="search" placeholder="Buscar Libros" class="search-input">
+                        <button class="search-btn" aria-label="Buscar">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="action-icons">
+                        <a href="#" class="icon-link" aria-label="Carrito">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <!-- ENLACE AL LOGIN - MODIFICADO -->
+                        <a href="../pages/Login.jsx" class="icon-link" aria-label="Iniciar Sesión" title="Iniciar Sesión">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="catalogo-main">
+        <div class="catalogo-container">
+            <h1 class="page-title">Catálogo de Libros</h1>
+
+            <div class="content-wrapper">
+                <!-- Contenido principal de libros -->
+                <section class="libros-content" id="libros-content">
+                    <!-- Los libros se cargarán dinámicamente aquí -->
+                </section>
+
+                <!-- Sidebar lateral derecho -->
+                <aside class="sidebar-categorias">
+                    <!-- Más Vendidos -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-fire"></i> Más Vendidos
+                        </h3>
+                        <ul class="categoria-list">
+                            <li class="bestseller-item" data-categoria="mas-vendidos">
+                                <i class="fas fa-star"></i> Top Ventas
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Categorías -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-bookmark"></i> Categorías
+                        </h3>
+                        <ul class="categoria-list">
+                            <li class="categoria-item active" data-categoria="literatura-contemporanea">
+                                <i class="fas fa-book"></i> Literatura Contemporánea
+                            </li>
+                            <li class="categoria-item" data-categoria="literatura-historica">
+                                <i class="fas fa-landmark"></i> Literatura Histórica
+                            </li>
+                            <li class="categoria-item" data-categoria="ficcion-afroamericana">
+                                <i class="fas fa-book-reader"></i> Ficción Afroamericana
+                            </li>
+                            <li class="categoria-item" data-categoria="novelas-graficas">
+                                <i class="fas fa-palette"></i> Novelas Gráficas
+                            </li>
+                            <li class="categoria-item" data-categoria="ficcion-internacional">
+                                <i class="fas fa-globe"></i> Ficción Internacional
+                            </li>
+                            <li class="categoria-item" data-categoria="ciencia-ficcion">
+                                <i class="fas fa-rocket"></i> Ciencia Ficción
+                            </li>
+                            <li class="categoria-item" data-categoria="infantiles-juveniles">
+                                <i class="fas fa-child"></i> Infantiles y Juveniles
+                            </li>
+                            <li class="categoria-item" data-categoria="no-ficcion">
+                                <i class="fas fa-graduation-cap"></i> No Ficción
+                            </li>
+                            <li class="categoria-item" data-categoria="filosofia-religion">
+                                <i class="fas fa-om"></i> Filosofía y Religión
+                            </li>
+                            <li class="categoria-item" data-categoria="cine-artes">
+                                <i class="fas fa-film"></i> Cine y Artes
+                            </li>
+                            <li class="categoria-item" data-categoria="misterio-thriller">
+                                <i class="fas fa-mask"></i> Misterio y Thriller
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+
+<footer class="footer new-design" id="footer">
+  
+  <div class="footer-main-content">
+    
+    <p class="main-info-text">
+      Mantente conectado con SISTEC READ y recibe novedades exclusivas.
+    </p>
+
+    </div>
+
+  <div class="footer-bottom-bar">
+    
+    <div class="footer-links-row">
+      <p class="copyright-text">
+        &copy; 2025 <strong>SISTEC READ</strong>. Todos los derechos reservados.
+      </p>
+      
+      <ul class="legal-links">
+        <li><a href="../pages/politicas-privacidad.html">Políticas de Privacidad</a></li>
+        <li><span>|</span></li>
+        <li><a href="../pages/terminos-condiciones.html">Términos y Condiciones</a></li>
+        <li><span>|</span></li>
+        <li><a href="../pages/politica-devolucion.html">Política de Devolución</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-links-row corporate-row">
+      <p class="copyright-text">
+        Promoviendo la lectura y el conocimiento en nuestra comunidad.
+      </p>
+      
+      <ul class="corporate-links">
+        <li><a href="../pages/mision.html">Misión</a></li>
+        <li><span>|</span></li>
+        <li><a href="../pages/vision.html">Visión</a></li>
+        <li><span>|</span></li>
+        <li><a href="../pages/valores.html">Valores</a></li>
+      </ul>
+    </div>
+
+    <div class="payment-icons">
+      </div>
+    
+  </div>
+</footer>    
+    
+    <script src="../assets/js/categorias-data.js"></script>
+</body>
+</html>
