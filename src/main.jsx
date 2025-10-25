@@ -1,15 +1,15 @@
 // src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './css/style.css';
+import App from './App';
+import '../src/assets/css/style.css';
+import '../src/assets/css/header.css';
+import '../src/assets/css/footer.css';
+import '../src/assets/css/catalago.css';
+import '../src/assets/css/legal-pages.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
-
-
-
-
