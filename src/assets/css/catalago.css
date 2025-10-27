@@ -368,6 +368,8 @@
 .libro-card-compacto:nth-child(7) { animation-delay: 0.35s; }
 .libro-card-compacto:nth-child(8) { animation-delay: 0.4s; }
 
+
+
 /* Animación suave para el sidebar */
 @keyframes slideInRight {
     from {
