@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
-import "../assets/css/login.css";
+import React, { useState } from 'react';
+import { Mail, Lock, Eye, EyeOff, Sparkles } from 'lucide-react';
+import '../assets/css/login.css';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState({ email: false, password: false });
@@ -15,21 +14,21 @@ const Login = () => {
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!value) {
-      setEmailError("El email es requerido");
+      setEmailError('El email es requerido');
     } else if (!regex.test(value)) {
-      setEmailError("Formato de email inválido");
+      setEmailError('Formato de email inválido');
     } else {
-      setEmailError("");
+      setEmailError('');
     }
   };
 
   const validatePassword = (value) => {
     if (!value) {
-      setPasswordError("La contraseña es requerida");
+      setPasswordError('La contraseña es requerida');
     } else if (value.length < 6) {
-      setPasswordError("La contraseña debe tener al menos 6 caracteres");
+      setPasswordError('La contraseña debe tener al menos 6 caracteres');
     } else {
-      setPasswordError("");
+      setPasswordError('');
     }
   };
 
@@ -54,14 +53,14 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("¡Login exitoso! 🎉");
+    alert('¡Login exitoso! 🎉');
   };
 
   return (
     <div className="login-container">
       <div className="login-decoration"></div>
-      <div className="login-decoration" style={{ animationDelay: "1s" }}></div>
-      <div className="login-decoration" style={{ animationDelay: "2s" }}></div>
+      <div className="login-decoration" style={{ animationDelay: '1s' }}></div>
+      <div className="login-decoration" style={{ animationDelay: '2s' }}></div>
       <div className="login-card">
         <div className="login-header">
           <div className="icon-wrapper">
@@ -97,7 +96,7 @@ const Login = () => {
             <label htmlFor="password">Contraseña</label>
             <div className="relative">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 id="password"
                 value={password}
                 onChange={handlePasswordChange}
@@ -112,11 +111,7 @@ const Login = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 className="login-password-toggle"
               >
-                {showPassword ? (
-                  <EyeOff className="w-5 h-5" />
-                ) : (
-                  <Eye className="w-5 h-5" />
-                )}
+                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
             </div>
             {passwordError && (
@@ -131,7 +126,7 @@ const Login = () => {
             disabled={!isSubmitEnabled}
             className="login-button"
           >
-            {isSubmitEnabled ? "Iniciar Sesión" : "Completa los campos"}
+            {isSubmitEnabled ? 'Iniciar Sesión' : 'Completa los campos'}
           </button>
         </form>
         <div className="login-separator">
@@ -144,9 +139,10 @@ const Login = () => {
         </div>
         <div className="text-center">
           <p className="text-sm text-gray-600">
-            ¿No tienes cuenta?{" "}
-            <Link to="/registrar" className="login-link" aria-label="Registrate Aqui">
-            </Link>
+            ¿No tienes cuenta?{' '}
+            <a href="/registro" className="login-link">
+              Regístrate aquí
+            </a>
           </p>
         </div>
         <div className="login-footer">
