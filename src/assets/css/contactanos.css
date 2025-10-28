@@ -1,0 +1,684 @@
+/* ========================================
+   ESTILOS ELEGANTES PARA PÁGINA CONTÁCTANOS
+   ======================================== */
+
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
+    color: #2c3e50;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ========================================
+   CONTENEDOR PRINCIPAL
+   ======================================== */
+.container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ========================================
+   SECCIÓN CONTACTO
+   ======================================== */
+.contact-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(65, 125, 128, 0.2);
+}
+
+/* ========================================
+   TÍTULO PRINCIPAL (H1)
+   ======================================== */
+.contact-section h1 {
+    background: linear-gradient(135deg, #417d80 0%, #53c9cb 100%);
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-section h1::before {
+    content: '✉️';
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.1;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%) rotate(-15deg);
+}
+
+.contact-section h1::after {
+    content: '📞';
+    position: absolute;
+    font-size: 6rem;
+    opacity: 0.1;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%) rotate(15deg);
+}
+
+/* ========================================
+   ARTÍCULO PRINCIPAL (FORMULARIO)
+   ======================================== */
+article {
+    padding: 3rem;
+    position: relative;
+}
+
+article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 3rem;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #53c9cb 0%, #417d80 100%);
+    border-radius: 2px;
+}
+
+.categoria-titulo {
+    font-size: 2.2rem;
+    color: #417d80;
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.categoria-titulo::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, #53c9cb 0%, transparent 100%);
+    border-radius: 2px;
+}
+
+article > p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #34495e;
+    text-align: justify;
+    margin-bottom: 2.5rem;
+    margin-left: 1.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+article > p::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: -15px;
+    font-size: 4rem;
+    color: #53c9cb;
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+/* ========================================
+   FORMULARIO DE CONTACTO
+   ======================================== */
+.contact-form {
+    margin-left: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, white 100%);
+    border-radius: 12px;
+    border-left: 4px solid #53c9cb;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.contact-form label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #417d80;
+    margin-bottom: 0.5rem;
+    margin-top: 1.2rem;
+}
+
+.contact-form label:first-of-type {
+    margin-top: 0;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #53c9cb;
+    box-shadow: 0 0 0 3px rgba(83, 201, 203, 0.1);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23417d80' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+/* Botón de envío */
+.btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #417d80 0%, #53c9cb 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(65, 125, 128, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(65, 125, 128, 0.4);
+    background: linear-gradient(135deg, #3e8184 0%, #4acedc 100%);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(65, 125, 128, 0.3);
+}
+
+/* ========================================
+   ASIDE - OTRAS FORMAS DE CONTACTO
+   ======================================== */
+aside {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
+    padding: 3rem;
+    margin: 2rem 3rem 3rem 3rem;
+    border-radius: 16px;
+    border-left: 5px solid #53c9cb;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+aside::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(83, 201, 203, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+aside::after {
+    content: '📱';
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 3rem;
+    opacity: 0.1;
+}
+
+aside:hover {
+    transform: translateX(5px);
+    border-left-width: 8px;
+    box-shadow: 0 6px 24px rgba(83, 201, 203, 0.2);
+}
+
+aside h3 {
+    font-size: 1.8rem;
+    color: #417d80;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+aside h3::before {
+    content: '→ ';
+    color: #53c9cb;
+    font-weight: 700;
+}
+
+/* ========================================
+   LISTAS DEL ASIDE
+   ======================================== */
+aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+aside > ul > li {
+    font-size: 1.05rem;
+    color: #34495e;
+    margin-bottom: 1.5rem;
+}
+
+aside > ul > li strong {
+    color: #417d80;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+aside ul li a {
+    color: #53c9cb;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+aside ul li a:hover {
+    color: #417d80;
+    transform: translateX(5px);
+}
+
+aside ul li a i {
+    font-size: 0.9rem;
+}
+
+/* Lista anidada de contactos por área */
+aside > ul > li > ul {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid #53c9cb;
+}
+
+aside > ul > li > ul > li {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+aside > ul > li > ul > li:last-child {
+    margin-bottom: 0;
+}
+
+aside > ul > li > ul > li strong {
+    font-size: 1rem;
+    color: #417d80;
+    margin-bottom: 0.3rem;
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Aplicar animaciones */
+.contact-section h1 {
+    animation: slideInRight 0.8s ease-out;
+}
+
+article {
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+aside {
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+/* ========================================
+   ESTILOS RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+        margin: 2rem auto;
+    }
+
+    .contact-section h1 {
+        font-size: 2.5rem;
+        padding: 2.5rem 1.5rem;
+    }
+
+    article {
+        padding: 2.5rem 2rem;
+    }
+
+    article::before {
+        left: 2rem;
+    }
+
+    .categoria-titulo {
+        font-size: 2rem;
+        margin-left: 1rem;
+    }
+
+    article > p {
+        font-size: 1.05rem;
+        margin-left: 1rem;
+        padding-left: 1rem;
+    }
+
+    .contact-form {
+        margin-left: 1rem;
+    }
+
+    aside {
+        margin: 2rem 2rem 2.5rem 2rem;
+        padding: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    .contact-section h1 {
+        font-size: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    .contact-section h1::before,
+    .contact-section h1::after {
+        font-size: 4rem;
+    }
+
+    article {
+        padding: 2rem 1.5rem;
+    }
+
+    article::before {
+        display: none;
+    }
+
+    .categoria-titulo {
+        font-size: 1.7rem;
+        margin-left: 0;
+    }
+
+    article > p {
+        font-size: 1rem;
+        margin-left: 0;
+        padding-left: 1rem;
+        text-align: left;
+    }
+
+    article > p::before {
+        font-size: 3rem;
+        top: -10px;
+    }
+
+    .contact-form {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
+
+    .contact-form label {
+        font-size: 0.95rem;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form select,
+    .contact-form textarea {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    aside {
+        margin: 1.5rem 1.5rem 2rem 1.5rem;
+        padding: 2rem;
+        border-left-width: 4px;
+    }
+
+    aside h3 {
+        font-size: 1.5rem;
+    }
+
+    aside > ul > li {
+        font-size: 1rem;
+    }
+
+    aside > ul > li strong {
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+
+    .contact-section {
+        border-radius: 16px;
+    }
+
+    .contact-section h1 {
+        font-size: 1.7rem;
+        padding: 1.5rem 1rem;
+    }
+
+    article {
+        padding: 1.5rem 1rem;
+    }
+
+    .categoria-titulo {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .categoria-titulo::after {
+        width: 80%;
+    }
+
+    article > p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-form {
+        padding: 1.2rem;
+        border-radius: 10px;
+    }
+
+    .contact-form label {
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form select,
+    .contact-form textarea {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    aside {
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    aside::after {
+        font-size: 2rem;
+        bottom: 10px;
+        right: 15px;
+    }
+
+    aside h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    aside > ul > li {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+    }
+
+    aside > ul > li strong {
+        font-size: 1rem;
+    }
+
+    aside > ul > li > ul {
+        padding-left: 0.8rem;
+    }
+
+    aside > ul > li > ul > li {
+        font-size: 0.9rem;
+    }
+}
+
+/* ========================================
+   EFECTOS ADICIONALES DE INTERACCIÓN
+   ======================================== */
+
+/* Efecto de brillo en hover */
+.categoria-titulo:hover {
+    color: #53c9cb;
+    transition: color 0.3s ease;
+}
+
+/* Efecto de resaltado en texto */
+article > p:hover::before {
+    color: #417d80;
+    transition: color 0.3s ease;
+}
+
+/* Animación sutil al hacer scroll */
+@media (prefers-reduced-motion: no-preference) {
+    .contact-section {
+        animation: fadeInUp 1s ease-out;
+    }
+}
+
+/* ========================================
+   SCROLL SUAVE
+   ======================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   MEJORAS DE ACCESIBILIDAD
+   ======================================== */
+*:focus-visible {
+    outline: 3px solid #53c9cb;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ========================================
+   OPTIMIZACIÓN DE IMPRESIÓN
+   ======================================== */
+@media print {
+    body {
+        background: white;
+    }
+
+    .contact-section {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    .contact-section h1 {
+        background: #417d80;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    aside {
+        page-break-inside: avoid;
+    }
+
+    .contact-form {
+        page-break-inside: avoid;
+    }
+
+    .btn {
+        display: none;
+    }
+}

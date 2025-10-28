@@ -1,0 +1,692 @@
+/* ========================================
+   ESTILOS ELEGANTES PARA PÁGINA UBICACIÓN
+   Basados en el diseño de Contáctanos
+   ======================================== */
+
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
+    color: #2c3e50;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ========================================
+   CONTENEDOR PRINCIPAL
+   ======================================== */
+.container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ========================================
+   TÍTULO PRINCIPAL DE PÁGINA
+   ======================================== */
+.page-title {
+    background: linear-gradient(135deg, #417d80 0%, #53c9cb 100%);
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin: 0 0 3rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-title::before {
+    content: '📍';
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.1;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%) rotate(-15deg);
+}
+
+.page-title::after {
+    content: '🗺️';
+    position: absolute;
+    font-size: 6rem;
+    opacity: 0.1;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%) rotate(15deg);
+}
+
+/* ========================================
+   SECCIÓN DE UBICACIÓN
+   ======================================== */
+.location-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.location-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(65, 125, 128, 0.2);
+}
+
+/* ========================================
+   TÍTULO DE SECCIÓN (H2 general)
+   ======================================== */
+.section-title {
+    background: linear-gradient(135deg, #417d80 0%, #53c9cb 100%);
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 2rem;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   ARTÍCULO PRINCIPAL (INFORMACIÓN)
+   ======================================== */
+article {
+    padding: 3rem;
+    position: relative;
+}
+
+article::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 3rem;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #53c9cb 0%, #417d80 100%);
+    border-radius: 2px;
+}
+
+.categoria-titulo {
+    font-size: 2.2rem;
+    color: #417d80;
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+.categoria-titulo::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, #53c9cb 0%, transparent 100%);
+    border-radius: 2px;
+}
+
+.categoria-titulo:hover {
+    color: #53c9cb;
+    transition: color 0.3s ease;
+}
+
+article > p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #34495e;
+    text-align: justify;
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+article > p:first-of-type::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: -15px;
+    font-size: 4rem;
+    color: #53c9cb;
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+article > p:first-of-type:hover::before {
+    color: #417d80;
+    transition: color 0.3s ease;
+}
+
+article > p strong {
+    color: #417d80;
+    font-weight: 600;
+}
+
+/* ========================================
+   TABLA DE HORARIOS
+   ======================================== */
+.location-table {
+    width: calc(100% - 3rem);
+    margin: 2rem 0 2rem 1.5rem;
+    border-collapse: collapse;
+    background: linear-gradient(135deg, #f8f9fa 0%, white 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 2px solid #e0e0e0;
+}
+
+.location-table caption {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #417d80;
+    padding: 1rem;
+    text-align: left;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
+}
+
+.location-table thead {
+    background: linear-gradient(135deg, #417d80 0%, #53c9cb 100%);
+}
+
+.location-table thead th {
+    color: white;
+    font-weight: 600;
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.location-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease;
+}
+
+.location-table tbody tr:hover {
+    background-color: rgba(83, 201, 203, 0.1);
+}
+
+.location-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.location-table tbody td {
+    padding: 1rem 1.5rem;
+    color: #34495e;
+    font-size: 1rem;
+}
+
+.location-table tbody td:first-child {
+    font-weight: 600;
+    color: #417d80;
+}
+
+/* ========================================
+   ASIDE - CÓMO LLEGAR
+   ======================================== */
+aside {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
+    padding: 3rem;
+    margin: 2rem 3rem;
+    border-radius: 16px;
+    border-left: 5px solid #53c9cb;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+aside::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(83, 201, 203, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+aside::after {
+    content: '🚗';
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 3rem;
+    opacity: 0.1;
+}
+
+aside:hover {
+    transform: translateX(5px);
+    border-left-width: 8px;
+    box-shadow: 0 6px 24px rgba(83, 201, 203, 0.2);
+}
+
+aside h3 {
+    font-size: 1.8rem;
+    color: #417d80;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+}
+
+aside h3::before {
+    content: '→ ';
+    color: #53c9cb;
+    font-weight: 700;
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+aside ul li {
+    font-size: 1.05rem;
+    color: #34495e;
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+aside ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #53c9cb;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+aside ul li:last-child {
+    margin-bottom: 0;
+}
+
+aside ul li strong {
+    color: #417d80;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   SECCIÓN DEL MAPA
+   ======================================== */
+.section-map {
+    border-top: 2px solid #e8f4f8;
+    padding-top: 3rem;
+    margin-top: 2rem;
+}
+
+.section-map iframe {
+    width: calc(100% - 3rem);
+    height: 450px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin-left: 1.5rem;
+    border: 3px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.section-map iframe:hover {
+    border-color: #53c9cb;
+    box-shadow: 0 6px 24px rgba(83, 201, 203, 0.3);
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Aplicar animaciones */
+.page-title {
+    animation: slideInRight 0.8s ease-out;
+}
+
+.location-section article:first-of-type {
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+aside {
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.section-map {
+    animation: fadeInUp 0.8s ease-out 0.6s backwards;
+}
+
+/* ========================================
+   ESTILOS RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 1.5rem;
+        margin: 2rem auto;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        padding: 2.5rem 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    article {
+        padding: 2.5rem 2rem;
+    }
+
+    article::before {
+        left: 2rem;
+    }
+
+    .categoria-titulo {
+        font-size: 2rem;
+        margin-left: 1rem;
+    }
+
+    article > p {
+        font-size: 1.05rem;
+        margin-left: 1rem;
+        padding-left: 1rem;
+    }
+
+    .location-table {
+        width: calc(100% - 2rem);
+        margin-left: 1rem;
+    }
+
+    aside {
+        margin: 2rem 2rem 2.5rem 2rem;
+        padding: 2.5rem;
+    }
+
+    .section-map iframe {
+        width: calc(100% - 2rem);
+        height: 400px;
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: 16px;
+    }
+
+    .page-title::before,
+    .page-title::after {
+        font-size: 4rem;
+    }
+
+    article {
+        padding: 2rem 1.5rem;
+    }
+
+    article::before {
+        display: none;
+    }
+
+    .categoria-titulo {
+        font-size: 1.7rem;
+        margin-left: 0;
+    }
+
+    article > p {
+        font-size: 1rem;
+        margin-left: 0;
+        padding-left: 1rem;
+        text-align: left;
+    }
+
+    article > p:first-of-type::before {
+        font-size: 3rem;
+        top: -10px;
+    }
+
+    .location-table {
+        width: 100%;
+        margin-left: 0;
+        font-size: 0.9rem;
+    }
+
+    .location-table caption {
+        font-size: 1.1rem;
+        padding: 0.8rem;
+    }
+
+    .location-table thead th {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .location-table tbody td {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    aside {
+        margin: 1.5rem 1.5rem 2rem 1.5rem;
+        padding: 2rem;
+        border-left-width: 4px;
+    }
+
+    aside h3 {
+        font-size: 1.5rem;
+    }
+
+    aside ul li {
+        font-size: 1rem;
+        padding-left: 1.5rem;
+    }
+
+    aside ul li strong {
+        font-size: 1.05rem;
+    }
+
+    .section-map {
+        padding-top: 2rem;
+    }
+
+    .section-map iframe {
+        width: 100%;
+        height: 350px;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+
+    .page-title {
+        font-size: 1.7rem;
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .location-section {
+        border-radius: 16px;
+    }
+
+    article {
+        padding: 1.5rem 1rem;
+    }
+
+    .categoria-titulo {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .categoria-titulo::after {
+        width: 80%;
+    }
+
+    article > p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1.2rem;
+    }
+
+    .location-table {
+        font-size: 0.85rem;
+        border-radius: 10px;
+    }
+
+    .location-table caption {
+        font-size: 1rem;
+        padding: 0.7rem;
+    }
+
+    .location-table thead th {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .location-table tbody td {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    aside {
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    aside::after {
+        font-size: 2rem;
+        bottom: 10px;
+        right: 15px;
+    }
+
+    aside h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    aside ul li {
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+        padding-left: 1.3rem;
+    }
+
+    aside ul li::before {
+        font-size: 1.1rem;
+    }
+
+    aside ul li strong {
+        font-size: 1rem;
+    }
+
+    .section-map {
+        padding-top: 1.5rem;
+    }
+
+    .section-map iframe {
+        height: 300px;
+        border-radius: 10px;
+    }
+}
+
+/* ========================================
+   SCROLL SUAVE
+   ======================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   MEJORAS DE ACCESIBILIDAD
+   ======================================== */
+*:focus-visible {
+    outline: 3px solid #53c9cb;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ========================================
+   OPTIMIZACIÓN DE IMPRESIÓN
+   ======================================== */
+@media print {
+    body {
+        background: white;
+    }
+
+    .page-title {
+        background: #417d80;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .location-section {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    aside {
+        page-break-inside: avoid;
+    }
+
+    .location-table {
+        page-break-inside: avoid;
+    }
+
+    .section-map iframe {
+        display: none;
+    }
+}
+
+/* ========================================
+   ANIMACIONES ADICIONALES SUAVES
+   ======================================== */
+@media (prefers-reduced-motion: no-preference) {
+    .location-section {
+        animation: fadeInUp 1s ease-out;
+    }
+}

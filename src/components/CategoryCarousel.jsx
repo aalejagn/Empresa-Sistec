@@ -8,7 +8,7 @@ const CategoryCarousel = () => {
       descripcion: 'Novelas modernas y actuales que reflejan nuestra época',
       count: '4 libros',
       link: '../pages/categorias.html#literatura-contemporanea',
-      imagen: 'https://shop.mtwyouth.org/cdn/shop/files/41aZrnvov1L.jpg?v=1747720614&width=990',
+      imagen: 'https://tse1.mm.bing.net/th/id/OIP.RrGvlYUT4Ur97-m8XTk1vAHaLJ?rs=1&pid=ImgDetMain&o=7&rm=3',
     },
     {
       nombre: 'Literatura Histórica',
@@ -173,3 +173,4 @@ const CategoryCarousel = () => {
 };
 
 export default CategoryCarousel;
+

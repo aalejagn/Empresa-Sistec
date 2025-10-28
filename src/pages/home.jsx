@@ -1,84 +1,18 @@
 import React from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
+import Header from "../components/Header";
 import "../assets/css/style.css";
 import "../assets/css/header.css";
 import "../assets/css/footer.css";
 import "../assets/css/catalago.css";
+import "../assets/css/valores.css";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <div>
       {/* Encabezado */}
-      <header className="main-header">
-        <nav className="main-nav">
-          <div className="nav-container">
-            <div className="logo">
-              <a href="/" className="logo-link">
-                <img
-                  src="/assets/Images/logo.png"
-                  alt="SIS"
-                  className="logo-imagen"
-                />
-                <span className="logo-text">SISTEC</span>
-              </a>
-            </div>
-            <ul className="nav-menu">
-              <li className="nav-item">
-                <a href="/src/pages/acerca_de.html" className="nav-link">
-                  Nosotros
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/src/pages/categorias.html" className="nav-link">
-                  Catálogo
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/src/pages/reseñas.html" className="nav-link">
-                  Reseñas
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/src/pages/ubicacion.html" className="nav-link">
-                  Ubicación
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/src/pages/contactanos.html" className="nav-link">
-                  Contacto
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#footer" className="nav-link">
-                  Futuro
-                </a>
-              </li>
-            </ul>
-            <div className="nav-actions">
-              <div className="search-container">
-                <input
-                  type="search"
-                  placeholder="Buscar Libros"
-                  className="search-input"
-                />
-                <button className="search-btn" aria-label="Buscar">
-                  <i className="fas fa-search"></i>
-                </button>
-              </div>
-              <div className="action-icons">
-                <a href="#" className="icon-link" aria-label="Carrito">
-                  <i className="fas fa-shopping-cart"></i>
-                </a>
-                  <Link to="/login" className="icon-link" aria-label="Iniciar Sesión">
-                  <i className="fas fa-user"></i>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
-
+      <Header />
       <main>
         <div className="container">
           {/* Sección de bienvenida */}
@@ -86,7 +20,7 @@ const Home = () => {
             <div className="welcome-content">
               <div className="welcome-image">
                 <img
-                  src="/assets/Images/fondo-header.jpeg"
+                  src="../assets/Images/fondo-header.jpeg"
                   alt="Imagen de bienvenida"
                   className="hero-image"
                 />
@@ -331,7 +265,7 @@ const Home = () => {
               {/* Agrega más bestseller-cards si quieres */}
             </div>
             <div className="bestsellers-cta">
-              <a href="/categorias" className="btn-ver-mas">
+              <a href="/src/pages/categorias.html" className="btn-ver-mas">
                 Ver Catálogo Completo
                 <i className="fas fa-arrow-right"></i>
               </a>
@@ -348,6 +282,28 @@ const Home = () => {
           </p>
         </div>
         <div className="footer-bottom-bar">
+          <div className="footer-links-row corporate-row">
+            <p className="copyright-text">
+              Promoviendo la lectura y el conocimiento en nuestra comunidad.
+            </p>
+            <ul className="corporate-links">
+              <li>
+                <a href="/src/pages/mision.html">Misión</a>
+              </li>
+              <li>
+                <span>|</span>
+              </li>
+              <li>
+                <a href="/src/pages/vision.html">Visión</a>
+              </li>
+              <li>
+                <span>|</span>
+              </li>
+              <li>
+                <a href="/src/pages/valores.html">Valores</a>
+              </li>
+            </ul>
+          </div>
           <div className="footer-links-row">
             <p className="copyright-text">
               &copy; 2025 <strong>SISTEC READ</strong>. Todos los derechos
@@ -355,47 +311,32 @@ const Home = () => {
             </p>
             <ul className="legal-links">
               <li>
-                <a href="/politicas-privacidad">Políticas de Privacidad</a>
+                <a href="/src/pages/politicas-privacidad.html">
+                  Políticas de Privacidad
+                </a>
               </li>
               <li>
                 <span>|</span>
               </li>
               <li>
-                <a href="/terminos-condiciones">Términos y Condiciones</a>
+                <a href="/src/pages/terminos-condiciones.html">
+                  Términos y Condiciones
+                </a>
               </li>
               <li>
                 <span>|</span>
               </li>
               <li>
-                <a href="/politica-devolucion">Política de Devolución</a>
-              </li>
-            </ul>
-          </div>
-          <div className="footer-links-row corporate-row">
-            <p className="copyright-text">
-              Promoviendo la lectura y el conocimiento en nuestra comunidad.
-            </p>
-            <ul className="corporate-links">
-              <li>
-                <a href="/mision">Misión</a>
-              </li>
-              <li>
-                <span>|</span>
-              </li>
-              <li>
-                <a href="/vision">Visión</a>
-              </li>
-              <li>
-                <span>|</span>
-              </li>
-              <li>
-                <a href="/valores">Valores</a>
+                <a href="/src/pages/politica-devolucion.html">
+                  Política de Devolución
+                </a>
               </li>
             </ul>
           </div>
           <div className="payment-icons"></div>
         </div>
       </footer>
+      <script></script>
     </div>
   );
 };

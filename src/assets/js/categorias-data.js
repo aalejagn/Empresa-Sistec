@@ -56,7 +56,7 @@ const librosData = {
         {
             titulo: '¡Yo!',
             autor: 'Julia Alvarez',
-            imagen: 'https://shop.mtwyouth.org/cdn/shop/files/41aZrnvov1L.jpg?v=1747720614&width=990',
+            imagen: 'https://tse1.mm.bing.net/th/id/OIP.RrGvlYUT4Ur97-m8XTk1vAHaLJ?rs=1&pid=ImgDetMain&o=7&rm=3',
             descripcion: 'La odisea estadounidense de Yo, una escritora dominicana cuya familia llegó a los Estados Unidos como refugiados de una dictadura. La novela sigue su juventud, con su energía y optimismo, y los contratiempos a medida que envejece, incluidos dos divorcios.',
             publicado: '1997-12-01',
             encuadernacion: 'Rústica',
@@ -265,7 +265,7 @@ const librosData = {
         {
             titulo: 'El ojo de la novia Bedlam',
             autor: 'Matt Dinniman',
-            imagen: 'https://shop.mtwyouth.org/cdn/shop/files/51fL95QXWUL.jpg?v=1748033427&width=990',
+            imagen: 'https://tse3.mm.bing.net/th/id/OIP.RdinnXWmOPYszqniVak_qgHaL2?rs=1&pid=ImgDetMain&o=7&rm=3',
             descripcion: 'El doble resultado de More Than Words: cada compra brinda oportunidades prácticas de capacitación laboral y todos los ingresos apoyan a nuestra organización sin fines de lucro para capacitar a los jóvenes para que se hagan cargo de sus vidas.',
             publicado: '2025-05-13',
             editorial: 'Ace',
@@ -298,7 +298,7 @@ const librosData = {
         {
             titulo: '¿Dónde está Waldo ahora?',
             autor: 'Martin Handford',
-            imagen: 'https://shop.mtwyouth.org/cdn/shop/files/61dl_GDE5cL.jpg?v=1758146158&width=990',
+            imagen: 'https://tse4.mm.bing.net/th/id/OIP.JdrHftfGVPEmW5GPomTjkgHaJJ?rs=1&pid=ImgDetMain&o=7&rm=3',
             descripcion: 'Waldo y sus amigos Wenda, Woof, Wizard Whitebeard y Odlaw están apareciendo en escenas a lo largo de la historia, apareciendo junto a hombres de las cavernas, gladiadores, mineros de oro y más. ¡Waldo incluso se pierde en el futuro!',
             publicado: '2019-12-24',
             editorial: 'Candlewick',
@@ -330,7 +330,7 @@ const librosData = {
         {
             titulo: 'El árbol ocupado',
             autor: 'Jennifer Ward',
-            imagen: 'https://shop.mtwyouth.org/cdn/shop/files/51jIHpBv4zL.jpg?v=1751521690&width=990',
+            imagen: 'https://m.media-amazon.com/images/I/A1rWUtKoEnL._SL1500_.jpg',
             descripcion: 'Espectaculares ilustraciones realizadas en pintura al óleo y un texto que rima que describe las actividades de un árbol desde sus raíces hasta sus ramas, presentan a los jóvenes lectores las increíbles actividades que se realizan en un árbol.',
             publicado: '2009-09-01',
             editorial: 'Dos Leones',
@@ -382,7 +382,7 @@ const librosData = {
         {
             titulo: 'El Proyecto 1619',
             autor: 'Sin especificar',
-            imagen: 'https://shop.mtwyouth.org/cdn/shop/files/41Mv0v5FnQL.jpg?v=1736153585&width=990',
+            imagen: 'https://images.justwatch.com/poster/306354628/s718/temporada-1.jpg',
             descripcion: 'El doble resultado de More Than Words: cada compra brinda oportunidades prácticas de capacitación laboral y todos los ingresos apoyan a nuestra organización sin fines de lucro.',
             publicado: '2021-11-16',
             encuadernacion: 'Tapa dura',

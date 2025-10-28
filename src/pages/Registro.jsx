@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Mail, Lock, User, Eye, EyeOff, Sparkles } from 'lucide-react';
-import '../assets/css/registrar.css'; // Asegúrate de que este archivo exista
+import React, { useState, useEffect } from 'react'; // ← Agregar useEffect
+import { Mail, Lock, User, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
+import '../assets/css/registrar.css';
 
 const Registrar = () => {
   const [email, setEmail] = useState('');
@@ -9,58 +9,138 @@ const Registrar = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [nameError, setNameError] = useState('');
+  const [emailValid, setEmailValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [nameValid, setNameValid] = useState(false);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [isFocused, setIsFocused] = useState({ email: false, password: false, name: false });
+  const [touched, setTouched] = useState({ email: false, password: false, name: false });
 
+  // ========== NUEVO: Eliminar padding del body ==========
+  useEffect(() => {
+    document.body.classList.add('login-page');
+    return () => {
+      document.body.classList.remove('login-page');
+    };
+  }, []);
+  // ======================================================
+
+  // Validación de nombre
+  const validateName = (value) => {
+    if (!value) {
+      setNameError('El nombre es requerido');
+      setNameValid(false);
+      return false;
+    } else if (value.length < 2) {
+      setNameError('El nombre debe tener al menos 2 caracteres');
+      setNameValid(false);
+      return false;
+    } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(value)) {
+      setNameError('El nombre solo puede contener letras');
+      setNameValid(false);
+      return false;
+    } else {
+      setNameError('');
+      setNameValid(true);
+      return true;
+    }
+  };
+
+  // Validación de email con regex
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!value) setEmailError('El email es requerido');
-    else if (!regex.test(value)) setEmailError('Formato de email inválido');
-    else setEmailError('');
+    if (!value) {
+      setEmailError('El email es requerido');
+      setEmailValid(false);
+      return false;
+    } else if (!regex.test(value)) {
+      setEmailError('Formato de email inválido (ejemplo: usuario@dominio.com)');
+      setEmailValid(false);
+      return false;
+    } else {
+      setEmailError('');
+      setEmailValid(true);
+      return true;
+    }
   };
 
+  // Validación de contraseña con requisitos
   const validatePassword = (value) => {
-    if (!value) setPasswordError('La contraseña es requerida');
-    else if (value.length < 6) setPasswordError('Mínimo 6 caracteres');
-    else setPasswordError('');
+    if (!value) {
+      setPasswordError('La contraseña es requerida');
+      setPasswordValid(false);
+      return false;
+    } else if (value.length < 6) {
+      setPasswordError('La contraseña debe tener al menos 6 caracteres');
+      setPasswordValid(false);
+      return false;
+    } else if (!/[A-Za-z]/.test(value)) {
+      setPasswordError('La contraseña debe contener al menos una letra');
+      setPasswordValid(false);
+      return false;
+    } else if (!/[0-9]/.test(value)) {
+      setPasswordError('La contraseña debe contener al menos un número');
+      setPasswordValid(false);
+      return false;
+    } else {
+      setPasswordError('');
+      setPasswordValid(true);
+      return true;
+    }
   };
 
-  const validateName = (value) => {
-    if (!value) setNameError('El nombre es requerido');
-    else if (value.length < 2) setNameError('El nombre debe tener al menos 2 caracteres');
-    else setNameError('');
-  };
-
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-    validateEmail(value);
-    checkSubmitEnabled(value, password, name);
-  };
-
-  const handlePasswordChange = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-    validatePassword(value);
-    checkSubmitEnabled(email, value, name);
-  };
-
+  // Manejar cambio de nombre
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
-    validateName(value);
-    checkSubmitEnabled(email, password, value);
+    const isValid = validateName(value);
+    checkSubmitEnabled(isValid, emailValid, passwordValid);
   };
 
-  const checkSubmitEnabled = (emailVal, passwordVal, nameVal) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsSubmitEnabled(regex.test(emailVal) && passwordVal.length >= 6 && nameVal.length >= 2);
+  // Manejar cambio de email
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    const isValid = validateEmail(value);
+    checkSubmitEnabled(nameValid, isValid, passwordValid);
   };
 
+  // Manejar cambio de contraseña
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    const isValid = validatePassword(value);
+    checkSubmitEnabled(nameValid, emailValid, isValid);
+  };
+
+  // Verificar si el botón debe estar habilitado
+  const checkSubmitEnabled = (nameIsValid, emailIsValid, passwordIsValid) => {
+    setIsSubmitEnabled(nameIsValid && emailIsValid && passwordIsValid);
+  };
+
+  // Manejar blur
+  const handleNameBlur = () => {
+    setTouched({ ...touched, name: true });
+    validateName(name);
+  };
+
+  const handleEmailBlur = () => {
+    setTouched({ ...touched, email: true });
+    validateEmail(email);
+  };
+
+  const handlePasswordBlur = () => {
+    setTouched({ ...touched, password: true });
+    validatePassword(password);
+  };
+
+  // Manejar envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('¡Registro exitoso! 🎉');
+    if (isSubmitEnabled) {
+      alert(`¡Bienvenido a SISTEC READ! 🎉\n\nNombre: ${name}\nEmail: ${email}\n\nRegistro completado exitosamente.`);
+      // Aquí iría la lógica de registro real
+    }
   };
 
   return (
@@ -68,109 +148,218 @@ const Registrar = () => {
       <div className="login-decoration"></div>
       <div className="login-decoration" style={{ animationDelay: '1s' }}></div>
       <div className="login-decoration" style={{ animationDelay: '2s' }}></div>
+      
       <div className="login-card">
         <div className="login-header">
-          <div className="icon-wrapper">
-            <Sparkles className="w-8 h-8 text-white" />
+          <div className="login-logo-wrapper">
+            <div className="login-logo-container">
+              <img 
+                src="../assets/Images/logo.png" 
+                alt="SISTEC READ" 
+                className="login-logo-img"
+              />
+            </div>
+            <h2 className="login-logo-text">SISTEC READ</h2>
           </div>
-          <h1>Regístrate</h1>
-          <p>Crea tu cuenta para empezar</p>
+          <h1 className="login-title">Crear Cuenta</h1>
+          <p className="login-subtitle">Regístrate para comenzar tu aventura de lectura</p>
         </div>
+
         <form onSubmit={handleSubmit} className="login-form">
+          {/* Campo de Nombre */}
           <div className="login-input-group">
-            <label htmlFor="name">Nombre</label>
-            <div className="relative">
+            <label htmlFor="name" className="login-label">
+              Nombre Completo <span className="login-required">*</span>
+            </label>
+            <div className="login-input-wrapper">
               <input
                 type="text"
                 id="name"
                 value={name}
                 onChange={handleNameChange}
-                onFocus={() => setIsFocused({ ...isFocused, name: true })}
-                onBlur={() => setIsFocused({ ...isFocused, name: false })}
-                className="login-input"
-                placeholder="Tu nombre"
+                onBlur={handleNameBlur}
+                className={`login-input ${
+                  touched.name ? (nameValid ? 'valid' : nameError ? 'error' : '') : ''
+                }`}
+                placeholder="Ingresa tu nombre completo"
               />
-              <User className="login-input-icon" />
+              <User 
+                className="login-input-icon"
+                style={{ color: nameValid ? '#5fb4b7' : '#999' }}
+              />
+              {touched.name && nameValid && (
+                <CheckCircle 
+                  className="login-valid-icon"
+                  style={{ color: '#5fb4b7' }}
+                />
+              )}
+              {touched.name && nameError && (
+                <AlertCircle 
+                  className="login-error-icon"
+                  style={{ color: '#ef4444' }}
+                />
+              )}
             </div>
-            {nameError && (
-              <p className="error-message">
-                <span className="error-dot"></span>
+            {touched.name && nameError && (
+              <p className="login-error-message">
+                <span className="login-error-dot"></span>
                 {nameError}
               </p>
             )}
+            {touched.name && nameValid && (
+              <p className="login-success-message">
+                <span className="login-success-dot"></span>
+                Nombre válido ✓
+              </p>
+            )}
           </div>
+
+          {/* Campo de Email */}
           <div className="login-input-group">
-            <label htmlFor="email">Email</label>
-            <div className="relative">
+            <label htmlFor="email" className="login-label">
+              Correo Electrónico <span className="login-required">*</span>
+            </label>
+            <div className="login-input-wrapper">
               <input
                 type="email"
                 id="email"
                 value={email}
                 onChange={handleEmailChange}
-                onFocus={() => setIsFocused({ ...isFocused, email: true })}
-                onBlur={() => setIsFocused({ ...isFocused, email: false })}
-                className="login-input"
+                onBlur={handleEmailBlur}
+                className={`login-input ${
+                  touched.email ? (emailValid ? 'valid' : emailError ? 'error' : '') : ''
+                }`}
                 placeholder="usuario@dominio.com"
               />
-              <Mail className="login-input-icon" />
+              <Mail 
+                className="login-input-icon"
+                style={{ color: emailValid ? '#5fb4b7' : '#999' }}
+              />
+              {touched.email && emailValid && (
+                <CheckCircle 
+                  className="login-valid-icon"
+                  style={{ color: '#5fb4b7' }}
+                />
+              )}
+              {touched.email && emailError && (
+                <AlertCircle 
+                  className="login-error-icon"
+                  style={{ color: '#ef4444' }}
+                />
+              )}
             </div>
-            {emailError && (
-              <p className="error-message">
-                <span className="error-dot"></span>
+            {touched.email && emailError && (
+              <p className="login-error-message">
+                <span className="login-error-dot"></span>
                 {emailError}
               </p>
             )}
+            {touched.email && emailValid && (
+              <p className="login-success-message">
+                <span className="login-success-dot"></span>
+                Email válido ✓
+              </p>
+            )}
           </div>
+
+          {/* Campo de Contraseña */}
           <div className="login-input-group">
-            <label htmlFor="password">Contraseña</label>
-            <div className="relative">
+            <label htmlFor="password" className="login-label">
+              Contraseña <span className="login-required">*</span>
+            </label>
+            <div className="login-input-wrapper">
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
                 value={password}
                 onChange={handlePasswordChange}
-                onFocus={() => setIsFocused({ ...isFocused, password: true })}
-                onBlur={() => setIsFocused({ ...isFocused, password: false })}
-                className="login-input"
+                onBlur={handlePasswordBlur}
+                className={`login-input ${
+                  touched.password ? (passwordValid ? 'valid' : passwordError ? 'error' : '') : ''
+                }`}
                 placeholder="••••••••"
               />
-              <Lock className="login-input-icon" />
+              <Lock 
+                className="login-input-icon"
+                style={{ color: passwordValid ? '#5fb4b7' : '#999' }}
+              />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="login-password-toggle"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
+              {touched.password && passwordValid && (
+                <CheckCircle 
+                  className="login-valid-icon-password"
+                  style={{ color: '#5fb4b7' }}
+                />
+              )}
+              {touched.password && passwordError && (
+                <AlertCircle 
+                  className="login-error-icon-password"
+                  style={{ color: '#ef4444' }}
+                />
+              )}
             </div>
-            {passwordError && (
-              <p className="error-message">
-                <span className="error-dot"></span>
+            {touched.password && passwordError && (
+              <p className="login-error-message">
+                <span className="login-error-dot"></span>
                 {passwordError}
               </p>
             )}
+            {touched.password && passwordValid && (
+              <p className="login-success-message">
+                <span className="login-success-dot"></span>
+                Contraseña segura ✓
+              </p>
+            )}
           </div>
+
+          {/* Botón de envío */}
           <button
             type="submit"
             disabled={!isSubmitEnabled}
-            className="login-button"
+            className={`login-button ${isSubmitEnabled ? 'enabled' : 'disabled'}`}
           >
-            {isSubmitEnabled ? 'Registrarse' : 'Completa los campos'}
+            {isSubmitEnabled ? '✓ Crear Cuenta' : '⚠ Completa todos los campos correctamente'}
           </button>
+
+          {/* Indicador de estado */}
+          <div className="login-status-indicator">
+            <div className="login-status-item">
+              <div className={`login-status-dot ${nameValid ? 'active' : ''}`}></div>
+              <span className={`login-status-text ${nameValid ? 'active' : ''}`}>
+                Nombre
+              </span>
+            </div>
+            <div className="login-status-item">
+              <div className={`login-status-dot ${emailValid ? 'active' : ''}`}></div>
+              <span className={`login-status-text ${emailValid ? 'active' : ''}`}>
+                Email
+              </span>
+            </div>
+            <div className="login-status-item">
+              <div className={`login-status-dot ${passwordValid ? 'active' : ''}`}></div>
+              <span className={`login-status-text ${passwordValid ? 'active' : ''}`}>
+                Contraseña
+              </span>
+            </div>
+          </div>
         </form>
+
         <div className="login-separator">
-          <span>o</span>
+          <span className="login-separator-text">o</span>
         </div>
-        <div className="text-center">
-          <p className="text-sm text-gray-600">
+
+        <div className="login-link-container">
+          <p className="login-register-text">
             ¿Ya tienes cuenta?{' '}
             <a href="/login" className="login-link">
               Inicia sesión aquí
             </a>
           </p>
-        </div>
-        <div className="login-footer">
-          Protegemos tu información con encriptación de nivel empresarial 🔒
         </div>
       </div>
     </div>

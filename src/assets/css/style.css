@@ -69,10 +69,10 @@ main {
 
 .categoria-titulo {
     font-size: 2rem;
-    color: #667eea;
+    color: #52b3b9;
     margin-bottom: 2rem;
     padding-bottom: 0.5rem;
-    border-bottom: 3px solid #667eea;
+    border-bottom: 3px solid #52b3b9;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -220,7 +220,7 @@ main {
 .cta-button {
     display: inline-block;
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #2b6163 0%, #177378 100%);
     color: white;
     text-decoration: none;
     border-radius: 25px;
@@ -254,7 +254,6 @@ main {
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
     border-radius: 2px;
 }
 
@@ -344,7 +343,7 @@ main {
 
 .categoria-count {
     display: inline-block;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #427f82 0%, #24afb7 100%);
     color: white;
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
@@ -354,7 +353,7 @@ main {
 
 /* Sección de estadísticas */
 .stats-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #52abaf 0%, #81c8c9 100%);
     color: white;
     padding: 2rem 0;
     border-radius: 15px;
@@ -426,9 +425,10 @@ main {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #ffcf3e, #f1a445);
+    background: linear-gradient(135deg, #2b6163 , #177378);
     color: white;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    border:none
 }
 
 .btn-primary:hover {
@@ -869,7 +869,7 @@ main {
 
 .contact-section aside h3 {
     font-size: 1.3rem;
-    color: #667eea;
+    color: #52b3b9;
     margin-bottom: 1rem;
 }
 
@@ -884,12 +884,13 @@ main {
 }
 
 .contact-section aside ul li a {
-    color: #667eea;
+    color: #4db5b1;
     text-decoration: none;
 }
 
 .contact-section aside ul li a:hover {
-    color: #ff6b6b;
+    color: #00a098;
+    font-weight: bold;
 }
 
 .contact-form {
@@ -1059,13 +1060,14 @@ main {
     background: #f8f9fa;
     padding: 1.5rem;
     border-radius: 10px;
-    border-left: 5px solid #ff6b6b;
+    border-left: 5px solid #29b9b9;
 }
 
 .location-section aside h3 {
     font-size: 1.3rem;
-    color: #667eea;
+    color: #52b3b9;
     margin-bottom: 1rem;
+    text-transform: uppercase;
 }
 
 .location-section aside ul {
@@ -1109,7 +1111,8 @@ main {
 }
 
 .location-table th {
-    background: linear-gradient(135deg, var(--color-sercundario), #764ba2);
+    background: linear-gradient(135deg, #52abaf 0%, #81c8c9 100%);
+
     color: white;
 }
 
@@ -1505,7 +1508,7 @@ iframe {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #2b6163 0%, #177378 100%);
     color: white;
     border: none;
     width: 50px;
@@ -1574,7 +1577,7 @@ iframe {
    ======================================== */
 
 .social-media-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #52abaf 0%, #93e2e4 100%);
     padding: 1.5rem 0;
     margin: 4rem 0;
     border-radius: 15px;
@@ -1858,7 +1861,7 @@ iframe {
     align-items: center;
     gap: 0.8rem;
     padding: 1rem 2.5rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #2b6163 0%, #177378 100%);
     color: white;
     text-decoration: none;
     border-radius: 30px;
@@ -1871,7 +1874,7 @@ iframe {
 .btn-ver-mas:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-    background: linear-gradient(135deg, #764ba2, #667eea);
+    background: linear-gradient(135deg,  #3e8184 0%,#49979a 100%);
 }
 
 .btn-ver-mas i {
