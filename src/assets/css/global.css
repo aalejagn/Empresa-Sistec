@@ -1,0 +1,22 @@
+/* assets/css/global.css */
+
+/* === FOOTER SIEMPRE ABAJO === */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* ¡Esto empuja el footer al fondo! */
+}
+
+/* === Evita conflictos con header fijo === */
+body {
+    padding-top: 8rem; /* Ya lo tienes en header.css, pero no pasa nada si se repite */
+}

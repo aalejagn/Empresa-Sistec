@@ -51,7 +51,7 @@ const Home = () => {
                 <h2 className="social-title">#NosGustaContarHistorias</h2>
                 <div className="social-icons-wrapper">
                   <a
-                    href="https://facebook.com/tupage"
+                    href="https://facebook.com"
                     target="_blank"
                     className="social-icon-link"
                     aria-label="Facebook"
@@ -59,7 +59,7 @@ const Home = () => {
                     <i className="fab fa-facebook-f"></i>
                   </a>
                   <a
-                    href="https://twitter.com/tupage"
+                    href="https://twitter.com"
                     target="_blank"
                     className="social-icon-link"
                     aria-label="Twitter"
@@ -67,7 +67,7 @@ const Home = () => {
                     <i className="fab fa-twitter"></i>
                   </a>
                   <a
-                    href="https://instagram.com/tupage"
+                    href="https://instagram.com"
                     target="_blank"
                     className="social-icon-link"
                     aria-label="Instagram"
@@ -75,7 +75,7 @@ const Home = () => {
                     <i className="fab fa-instagram"></i>
                   </a>
                   <a
-                    href="https://youtube.com/tucanal"
+                    href="https://youtube.com"
                     target="_blank"
                     className="social-icon-link"
                     aria-label="YouTube"
