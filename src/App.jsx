@@ -2,8 +2,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Registrar from './pages/Registro';
 import Header from './components/Header';
-import Home from './pages/home';
-import Login from './pages/Login';
+import Home from './pages/Homee';
+import Login from './pages/Loginn';
 
 const App = () => {
   return (
