@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/home';
-import Login from './pages/Login';
 import Registrar from './pages/Registro';
 import Header from './components/Header';
+import Home from './pages/home';
+import Login from './pages/Login';
 
 const App = () => {
   return (
