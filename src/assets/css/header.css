@@ -216,19 +216,19 @@ body {
   display: none;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  padding: 1rem 2.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 1rem;
   width: 100%;
 }
 
 .mobile-menu-header .logo-link {
-  gap: 0.6rem;
+  gap: 0.2rem;
 }
 
 .mobile-menu-header .logo-imagen {
-  width: 45px;
-  height: 45px;
+  width: 55px;
+  height: 55px;
 }
 
 .mobile-menu-header .logo-text {
@@ -237,14 +237,18 @@ body {
 
 .mobile-menu-icons {
   display: flex;
-  gap: 1rem;
+  gap: 0.3rem;
   align-items: center;
 }
 
 .mobile-menu-icons .icon-link {
-  font-size: 1.3rem;
-  padding: 0.6rem;
+  font-size: 1.2rem;
+  padding: 0.6em;
   background-color: rgba(255, 255, 255, 0.15);
+}
+/* cambios para el posicionamiento de icono de login */
+.icon-link{
+  margin-right: 10px;
 }
 
 .mobile-menu-icons .icon-link:hover {
@@ -442,6 +446,7 @@ body {
     font-size: 1.2rem;
   }
 
+  /*Cambios para el nav, sin el despliegue*/
   .action-icons .icon-link {
     font-size: 1.1rem;
     padding: 0.4rem;
