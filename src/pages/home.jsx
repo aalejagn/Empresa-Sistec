@@ -341,4 +341,4 @@ const Home = () => {
   );
 };
 
-export default Homee;
+export default Home;
