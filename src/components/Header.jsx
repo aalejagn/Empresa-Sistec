@@ -116,9 +116,9 @@ const Header = () => {
 
             {/* Enlaces */}
             <li>
-              <a href="/src/pages/acerca_de.html" class="nav-link">
-                Nosotros
-              </a>
+              <Link to="/acerca_de" className="nav-link">
+                Nosotroa
+              </Link>
             </li>
             <li>
               <a href="/src/pages/categorias.html" class="nav-link">
