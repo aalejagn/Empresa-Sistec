@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../assets/css/catalago.css';
+import '../assets/css/carrusel.css';
 
 const CategoryCarousel = () => {
   const categorias = [

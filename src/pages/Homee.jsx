@@ -1,11 +1,9 @@
 import React from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
 import Header from "../components/Header";
-import "../assets/css/style.css";
-import "../assets/css/header.css";
-import "../assets/css/footer.css";
-import "../assets/css/catalago.css";
-import "../assets/css/valores.css";
+import Footer from "../components/Footer";
+// import "../assets/css/style.css";
+import "../assets/css/home_categorias.css"
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -274,69 +272,8 @@ const Home = () => {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="footer new-design" id="footer">
-        <div className="footer-main-content">
-          <p className="main-info-text">
-            Mantente conectado con SISTEC READ y recibe novedades exclusivas.
-          </p>
-        </div>
-        <div className="footer-bottom-bar">
-          <div className="footer-links-row corporate-row">
-            <p className="copyright-text">
-              Promoviendo la lectura y el conocimiento en nuestra comunidad.
-            </p>
-            <ul className="corporate-links">
-              <li>
-                <a href="/src/pages/mision.html">Misión</a>
-              </li>
-              <li>
-                <span>|</span>
-              </li>
-              <li>
-                <a href="/src/pages/vision.html">Visión</a>
-              </li>
-              <li>
-                <span>|</span>
-              </li>
-              <li>
-                <a href="/src/pages/valores.html">Valores</a>
-              </li>
-            </ul>
-          </div>
-          <div className="footer-links-row">
-            <p className="copyright-text">
-              &copy; 2025 <strong>SISTEC READ</strong>. Todos los derechos
-              reservados.
-            </p>
-            <ul className="legal-links">
-              <li>
-                <a href="/src/pages/politicas-privacidad.html">
-                  Políticas de Privacidad
-                </a>
-              </li>
-              <li>
-                <span>|</span>
-              </li>
-              <li>
-                <a href="/src/pages/terminos-condiciones.html">
-                  Términos y Condiciones
-                </a>
-              </li>
-              <li>
-                <span>|</span>
-              </li>
-              <li>
-                <a href="/src/pages/politica-devolucion.html">
-                  Política de Devolución
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="payment-icons"></div>
-        </div>
-      </footer>
-      <script></script>
+      {/* Footer - Ahora como componente */}
+      <Footer />
     </div>
   );
 };

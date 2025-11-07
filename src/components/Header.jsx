@@ -116,24 +116,24 @@ const Header = () => {
 
             {/* Enlaces */}
             <li>
-              <Link to="/acerca_de" className="nav-link">
-                Nosotroa
+              <Link to="/acercade" className="nav-link">
+                Nosotros
               </Link>
             </li>
             <li>
-              <a href="/src/pages/categorias.html" class="nav-link">
-                Catálogo
-              </a>
+              <Link to="/categorias" className="nav-link">
+                Catalogo
+              </Link>
             </li>
             <li>
-              <a href="/src/pages/ubicacion.html" class="nav-link">
-                Ubicación
-              </a>
+              <Link to="/ubicacion" className="nav-link">
+                Ubicacion
+              </Link>
             </li>
             <li>
-              <a href="/src/pages/contactanos.html" class="nav-link">
-                Contacto
-              </a>
+            <Link to="/contactanos" className="nav-link">
+            Contactanos
+            </Link>
             </li>
             <li>
               <a href="#footer" class="nav-link">
