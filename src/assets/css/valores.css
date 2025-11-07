@@ -1800,9 +1800,8 @@ aside h3 {
 }
 
 aside h3::before {
-    content: '→ ';
-    color: #53c9cb;
-    font-weight: 700;
+    content: none;
+    ist-style: none;
 }
 
 /* ========================================
@@ -1829,23 +1828,10 @@ aside ul li {
     transition: all 0.3s ease;
 }
 
+"aside-nosotros"
 aside ul li::before {
-    content: '✓';
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    background: linear-gradient(135deg, #417d80 0%, #53c9cb 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(65, 125, 128, 0.3);
+  content: none ;
+  display: none ;
 }
 
 aside ul li:hover {

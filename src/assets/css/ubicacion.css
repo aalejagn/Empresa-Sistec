@@ -87,6 +87,7 @@ body {
    ======================================== */
 .section-title {
     background: linear-gradient(135deg, #417d80 0%, #53c9cb 100%);
+
     color: white;
     font-size: 2.2rem;
     font-weight: 600;

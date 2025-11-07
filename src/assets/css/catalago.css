@@ -164,7 +164,7 @@
    SIDEBAR DE CATEGORÍAS
    ======================================== */
 .sidebar-categorias {
-    width: 280px;
+    width: 380px;
     position: sticky;
     top: 20px;
     flex-shrink: 0;
@@ -173,7 +173,7 @@
 .sidebar-section {
     background: white;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding:  1.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 1.5rem;
 }
