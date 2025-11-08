@@ -109,7 +109,7 @@ const Home = () => {
         {/* Sección de más vendidos */}
         <section className="bestsellers-section">
           <div className="container">
-            <h2 className="section-title">Los Más Vendidos</h2>
+            <h2 className="section-title-home">Los Más Vendidos</h2>
             <p className="bestsellers-subtitle">
               Los libros favoritos de nuestros lectores
             </p>

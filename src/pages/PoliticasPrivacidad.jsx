@@ -2,12 +2,10 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
 
 import "../assets/css/global.css";
-// import "../assets/css/style.css";
 import "../assets/css/header.css";
-import "../assets/css/legal-pages.css";
+import "../assets/css/legal-pages.css";  
 import "../assets/css/footer.css";
 
 const PoliticasPrivacidad = () => {
@@ -15,42 +13,30 @@ const PoliticasPrivacidad = () => {
     <>
       <Header />
 
-      {/* Contenido Principal */}
       <main>
         <div className="container">
           <section className="contact-section">
             <h1 className="page-title">Políticas de Privacidad</h1>
 
-            <article>
+            {/* CAMBIO AQUÍ: legal-article → privacy-content */}
+            <div className="privacy-content">
               <h2>1. Información que Recopilamos</h2>
               <p>
                 En SISTEC READ, nos comprometemos a proteger su privacidad.
                 Recopilamos la siguiente información:
               </p>
-              <ul className="list-valores">
-                <li>
-                  <strong>Información Personal:</strong> Nombre, correo
-                  electrónico, dirección, teléfono
-                </li>
-                <li>
-                  <strong>Información de Compra:</strong> Historial de pedidos,
-                  preferencias de lectura
-                </li>
-                <li>
-                  <strong>Información Técnica:</strong> Dirección IP, tipo de
-                  navegador, cookies
-                </li>
+              <ul className="list-valores-politicas">
+                <li><strong>Información Personal:</strong> Nombre, correo electrónico, dirección, teléfono</li>
+                <li><strong>Información de Compra:</strong> Historial de pedidos, preferencias de lectura</li>
+                <li><strong>Información Técnica:</strong> Dirección IP, tipo de navegador, cookies</li>
               </ul>
 
               <h2>2. Uso de la Información</h2>
               <p>Utilizamos su información personal para:</p>
-              <ul className="list-valores">
+              <ul className="list-valores-politicas">
                 <li>Procesar sus pedidos y entregas</li>
                 <li>Mejorar nuestros servicios y experiencia de usuario</li>
-                <li>
-                  Enviar notificaciones sobre promociones y novedades (con su
-                  consentimiento)
-                </li>
+                <li>Enviar notificaciones sobre promociones y novedades (con su consentimiento)</li>
                 <li>Cumplir con obligaciones legales y fiscales</li>
               </ul>
 
@@ -66,11 +52,8 @@ const PoliticasPrivacidad = () => {
                 No vendemos ni compartimos su información personal con terceros,
                 excepto:
               </p>
-              <ul className="list-valores">
-                <li>
-                  Proveedores de servicios necesarios para completar su pedido
-                  (ej. empresas de mensajería)
-                </li>
+              <ul className="list-valores-politicas">
+                <li>Proveedores de servicios necesarios para completar su pedido (ej. empresas de mensajería)</li>
                 <li>Cuando sea requerido por ley</li>
                 <li>Con su consentimiento explícito</li>
               </ul>
@@ -84,7 +67,7 @@ const PoliticasPrivacidad = () => {
 
               <h2>6. Sus Derechos</h2>
               <p>Usted tiene derecho a:</p>
-              <ul className="list-valores">
+              <ul className="list-valores-politicas">
                 <li>Acceder a sus datos personales</li>
                 <li>Rectificar información incorrecta</li>
                 <li>Solicitar la eliminación de sus datos</li>
@@ -106,15 +89,13 @@ const PoliticasPrivacidad = () => {
                 modificaciones serán publicadas en esta página con la fecha de la
                 última actualización.
               </p>
-              <p><strong>Última actualización:</strong> Octubre 2025</p>
-            </article>
+              <p><strong>Última actualización:</strong> Noviembre 2025</p>
+            </div>
           </section>
         </div>
       </main>
 
-      {/* Footer - Ahora como componente */}
       <Footer />
-      
     </>
   );
 };

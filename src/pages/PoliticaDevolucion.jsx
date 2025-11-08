@@ -20,7 +20,7 @@ const PoliticaDevolucion = () => {
           <section className="contact-section">
             <h1 className="page-title">Política de Devolución</h1>
 
-            <article>
+            <article className="legal-article">
               <h2>1. Plazo de Devolución</h2>
               <p>
                 En SISTEC READ, queremos que esté completamente satisfecho con su

@@ -1801,7 +1801,8 @@ aside h3 {
 
 aside h3::before {
     content: none;
-    ist-style: none;
+    color: #53c9cb;
+    font-weight: 700;
 }
 
 /* ========================================
@@ -1828,7 +1829,7 @@ aside ul li {
     transition: all 0.3s ease;
 }
 
-"aside-nosotros"
+/* aside-nosotros*/
 aside ul li::before {
   content: none ;
   display: none ;

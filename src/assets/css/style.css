@@ -235,9 +235,9 @@ main {
 }
 
 /* Título de sección */
-.section-title {
+.section-title-home {
     text-align: center;
-    font-size: 5rem;
+    font-size: 3.5rem;
     color: #333;
     margin-bottom: 3rem;
     position: relative;
@@ -246,7 +246,7 @@ main {
     text-transform: uppercase;
 }
 
-.section-title::after {
+.section--carrusel::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -498,7 +498,7 @@ main {
         font-size: 1.8rem;
     }
 
-    .section-title {
+    .section-title-home {
         font-size: 1.8rem;
     }
 
@@ -842,69 +842,6 @@ main {
 
 
 
-
-/* === ESTILOS PARA UBICACION.HTML === */
-.location-section {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
-    gap: 2rem;
-    margin-bottom: 4rem;
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    animation: fadeInUp 0.6s ease-out;
-}
-
-/* Aqui es lo de la linea naranja*/
-.section-title { /* Estilo para el encabezado de la sección */
-    flex: 0 0 100%; /* Ocupa todo el ancho de la sección */
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 1.5rem; /* Espacio antes del contenido */
-    text-align: center;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    font-weight: bolder;
-}
-
-.location-section article {
-    flex: 2;
-    min-width: 300px;
-}
-/*MODIFICACION DEL MAPA*/
-
-.location-section .section-map{
-    flex: 0 0 100%;
-    margin-top: 2rem;
-}
-
-
-.location-section aside {
-    flex: 1;
-    min-width: 200px;
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 10px;
-    border-left: 5px solid #29b9b9;
-}
-
-.location-section aside h3 {
-    font-size: 1.3rem;
-    color: #52b3b9;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-}
-
-.location-section aside ul {
-    list-style: none;
-}
-
-.location-section aside ul li {
-    margin-bottom: 0.8rem;
-    font-size: 0.95rem;
-    color: #666;
-}
-
 /*Alejandro: uso de variable*/
 
 .location-table {
@@ -1153,128 +1090,6 @@ iframe {
 
 
 
-/*=== Ahora creamos las propiedades para Visión===*/
-
-
-.libro-vision {
-    display: block;
-    width: 80%;                 /* Ocupa todo el ancho del contenedor */
-    max-width: 1000px;           /* Limita el tamaño máximo para pantallas grandes */
-    height: 540px;               /* Altura más equilibrada para imagen panorámica */
-    object-fit: cover;           /* Corta o ajusta la imagen sin distorsión */
-    border-radius: 12px;         /* Bordes más suaves */
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25); /* Sombra más profunda */
-    margin: 2.5rem auto 0;       /* Centrada con buen espaciado arriba */
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Transición más fluida */
-}
-
-
-/* Tablets (≤768px) */
-@media (max-width: 768px) {
-    /* Misión */
-    .libro-mision {
-        width: 100%; /* Ocupa todo el ancho disponible */
-        max-width: 350px; /* Limita el ancho máximo */
-        height: 180px; /* Ajusta la altura para mantener proporciones */
-        margin: 0 auto; /* Centra la imagen */
-    }
-
-    /* Visión */
-    .libro-vision {
-        width: 100%; /* Ocupa todo el ancho disponible */
-        max-width: 400px; /* Limita el ancho máximo */
-        height: 250px; /* Ajusta la altura para mantener proporciones */
-        margin: 10px auto; /* Centra la imagen con margen superior */
-    }
-
-}
-
-/* Móviles (≤480px) */
-@media (max-width: 480px) {
-    /* Misión */
-    .libro-mision {
-        width: 100%; /* Ocupa todo el ancho disponible */
-        max-width: 280px; /* Reduce aún más el ancho máximo */
-        height: 150px; /* Reduce la altura */
-        margin: 0 auto; /* Centra la imagen */
-    }
-
-    /* Visión */
-    .libro-vision {
-        width: 100%; /* Ocupa todo el ancho disponible */
-        max-width: 300px; /* Reduce aún más el ancho máximo */
-        height: 200px; /* Reduce la altura */
-        margin: 8px auto; /* Centra con margen reducido */
-    }
-}
-
-
-/* ==== Crearemos el estilo para valores, manejaremos un contenedor div, para manejar la distribucion de las images===*/
-
-.images-container {
-    margin-top: 20px;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.card-valor{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 250px;
-    transition: transform 0.3s ease;
-}
-.libro-valores {
-    width: 250px;
-    height: 300px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.text-valor{
-    font-family: Tahomaa;
-    font-size: 18px;
-    margin-top: 10px;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.4s ease;
-
-}
-
-.list-valores{
-    font-family: 'Arial', sans-serif;
-    font-size: 18px;
-}
-
-
-/* === Animación hover en la card === */
-.card-valor:hover .libro-valores {
-    transform: scale(1.05);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    border-radius: 5px;
-}
-
-.card-valor:hover .text-valor {
-    opacity: 1;
-    transform: translateY(0);
-    color: #d900ff; /* cambia color al pasar el mouse */
-}
-
-
-/*=== Diseño responsive ===*/
-@media (max-width: 768px) {
-    .images-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .card-valor {
-        max-width: 90%;
-    }
-}
 
 /* Estilos para íconos de redes sociales */
 .social-icon {
@@ -1396,7 +1211,7 @@ iframe {
 }
 
 
-/* ========================================
+/* ==============================s==========
    CSS PARA SECCIÓN DE REDES SOCIALES
    Agregar a tu archivo styles.css
    ======================================== */
@@ -1536,7 +1351,7 @@ iframe {
    ======================================== */
 
 .bestsellers-section {
-    padding: 4rem 0;
+    padding: 0;
     background: #f5f5f5;
     margin: 0;
 

@@ -20,7 +20,7 @@ const Ubicacion = () => {
           <section className="location-section">
             <h2 className="section-title">Detalles de Ubicación</h2>
             {/* Encabezado añadido */}
-            <article>
+            <article className="location-article">
               <h2 className="categoria-titulo">Nuestra librería</h2>
               <p>
                 Visítanos en el corazón de Tuxtla Gutiérrez. Nuestra tienda ofrece
@@ -74,7 +74,7 @@ const Ubicacion = () => {
                 </li>
               </ul>
             </aside>
-            <article className="section-map">
+            <article className="section-map location-article">
               <h2 className="categoria-titulo">Encuéntranos en el mapa</h2>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.706311176253!2d-93.1593683!3d16.760791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ecd98cdd9a8c75%3A0xbba0ef33c7665ea4!2sCasa%20de%20gopar%20Toledo!5e0!3m2!1ses-419!2smx!4v1727463799999!5m2!1ses-419!2smx"

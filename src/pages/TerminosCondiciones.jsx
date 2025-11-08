@@ -21,7 +21,7 @@ const TerminosCondiciones = () => {
           <section className="contact-section">
             <h1 className="page-title">Términos y Condiciones</h1>
 
-            <article>
+            <article className="legal-article">
               <h2>1. Aceptación de Términos</h2>
               <p>
                 Al acceder y utilizar el sitio web de SISTEC READ, usted acepta
