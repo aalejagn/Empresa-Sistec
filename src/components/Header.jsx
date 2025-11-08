@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // ← Añade useLocation
 import "../assets/css/header.css";
 
 const Header = () => {
@@ -10,18 +10,30 @@ const Header = () => {
   const logoRef = useRef(null);
   const navActionsRef = useRef(null);
 
-  // ✅ Abrir/cerrar menú
+  const location = useLocation(); // ← Detecta cambio de ruta
+
+  // === RESET SCROLL + OVERFLOW EN CADA NAVEGACIÓN ===
+  useEffect(() => {
+    // Cierra menú y resetea overflow al cambiar de página
+    setMenuAbierto(false);
+    document.body.style.overflow = "";
+    window.scrollTo(0, 0); // Scroll to top
+  }, [location.pathname]);
+
+  // === ABRIR/CERRAR MENÚ ===
   const openMenu = () => {
     setMenuAbierto(true);
     document.body.style.overflow = "hidden";
   };
+
   const closeMenu = () => {
     setMenuAbierto(false);
     document.body.style.overflow = "";
   };
+
   const toggleMenu = () => (menuAbierto ? closeMenu() : openMenu());
 
-  // ✅ Cerrar con tecla ESC
+  // === CERRAR CON ESC ===
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape" && menuAbierto) closeMenu();
@@ -30,7 +42,7 @@ const Header = () => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [menuAbierto]);
 
-  // ✅ Reubicar buscador (igual que tu adjustSearchPosition)
+  // === REUBICAR BUSCADOR ===
   useEffect(() => {
     const adjustSearchPosition = () => {
       const searchContainer = searchContainerRef.current;
@@ -65,17 +77,27 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // === CIERRE AL HACER CLICK EN LINK (MÓVIL) ===
   const handleLinkClick = () => {
-    if (window.innerWidth <= 768) closeMenu();
+    if (window.innerWidth <= 768) {
+      closeMenu();
+    }
   };
+
+  // === LIMPIEZA AL DESMONTAR (por si acaso) ===
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = ""; // Reset final
+    };
+  }, []);
 
   return (
     <header className="main-header">
       <nav className="main-nav">
         <div className="nav-container">
-          {/* LOGO PRINCIPAL */}
+          {/* LOGO */}
           <div className="logo" ref={logoRef}>
-            <Link to="/" className="logo-link">
+            <Link to="/" className="logo-link" onClick={handleLinkClick}>
               <img
                 src="/assets/Images/logo.png"
                 alt="SISTEC"
@@ -85,14 +107,13 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* MENÚ PRINCIPAL */}
+          {/* MENÚ */}
           <ul
             className={`nav-menu ${menuAbierto ? "active" : ""}`}
             ref={navMenuRef}
           >
-            {/* Header móvil (logo + íconos) */}
             <div className="mobile-menu-header">
-              <Link to="/" className="logo-link">
+              <Link to="/" className="logo-link" onClick={handleLinkClick}>
                 <img
                   src="/assets/Images/logo.png"
                   alt="SISTEC"
@@ -101,91 +122,70 @@ const Header = () => {
                 <span className="logo-text">SISTEC</span>
               </Link>
               <div className="mobile-menu-icons">
-                <Link to="/carrito" className="icon-link" aria-label="Carrito">
+                <Link to="/carrito" className="icon-link" aria-label="Carrito" onClick={handleLinkClick}>
                   <i className="fas fa-shopping-cart"></i>
                 </Link>
                 <Link
                   to="/login"
                   className="icon-link"
                   aria-label="Iniciar Sesión"
+                  onClick={handleLinkClick}
                 >
                   <i className="fas fa-user"></i>
                 </Link>
               </div>
             </div>
 
-            {/* Enlaces */}
             <li>
-              <Link to="/acercade" className="nav-link">
+              <Link to="/acercade" className="nav-link" onClick={handleLinkClick}>
                 Nosotros
               </Link>
             </li>
             <li>
-              <Link to="/categorias" className="nav-link">
-                Catalogo
+              <Link to="/categorias" className="nav-link" onClick={handleLinkClick}>
+                Catálogo
               </Link>
             </li>
             <li>
-              <Link to="/ubicacion" className="nav-link">
-                Ubicacion
+              <Link to="/ubicacion" className="nav-link" onClick={handleLinkClick}>
+                Ubicación
               </Link>
             </li>
             <li>
-            <Link to="/contactanos" className="nav-link">
-            Contactanos
-            </Link>
+              <Link to="/contactanos" className="nav-link" onClick={handleLinkClick}>
+                Contáctanos
+              </Link>
             </li>
             <li>
-              <a href="#footer" class="nav-link">
+              <a href="#footer" className="nav-link" onClick={(e) => {
+                e.preventDefault();
+                handleLinkClick();
+                document.querySelector('#footer')?.scrollIntoView({ behavior: 'smooth' });
+              }}>
                 Futuro
               </a>
             </li>
 
-            {/* Redes sociales en móvil */}
             <div className="mobile-social-media">
               <p className="social-title">Síguenos en:</p>
               <div className="social-icons">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="social-link"
-                  aria-label="Facebook"
-                >
+                <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link">
                   <i className="fab fa-facebook-f"></i>
                 </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="social-link"
-                  aria-label="Twitter"
-                >
+                <a href="https://twitter.com" target="_blank" rel="noreferrer" className="social-link">
                   <i className="fab fa-twitter"></i>
                 </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="social-link"
-                  aria-label="Instagram"
-                >
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link">
                   <i className="fab fa-instagram"></i>
                 </a>
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="social-link"
-                  aria-label="YouTube"
-                >
+                <a href="https://youtube.com" target="_blank" rel="noreferrer" className="social-link">
                   <i className="fab fa-youtube"></i>
                 </a>
               </div>
             </div>
           </ul>
 
-          {/* ACCIONES (versión escritorio) */}
+          {/* ACCIONES */}
           <div className="nav-actions" ref={navActionsRef}>
             <div className="search-container" ref={searchContainerRef}>
               <input
@@ -198,24 +198,29 @@ const Header = () => {
               </button>
             </div>
             <div className="action-icons">
-              <Link to="/carrito" className="icon-link" aria-label="Carrito">
+              <Link to="/carrito" className="icon-link" aria-label="Carrito" onClick={handleLinkClick}>
                 <i className="fas fa-shopping-cart"></i>
               </Link>
               <Link
                 to="/login"
                 className="icon-link"
                 aria-label="Iniciar Sesión"
+                onClick={handleLinkClick}
               >
                 <i className="fas fa-user"></i>
               </Link>
             </div>
           </div>
 
-          {/* MENÚ HAMBURGUESA */}
+          {/* HAMBURGUESA */}
           <div
             ref={hamburgerRef}
             className={`hamburger ${menuAbierto ? "active" : ""}`}
             onClick={toggleMenu}
+            aria-label="Menú"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && toggleMenu()}
           >
             <span></span>
             <span></span>

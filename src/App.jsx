@@ -1,5 +1,6 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+// App.jsx (actualizado completo)
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Homee';
 import Login from './pages/Loginn';
 import Registrar from './pages/Registro';
@@ -15,6 +16,14 @@ import Vision from './pages/Vision';
 import Categorias from './pages/Categorias';
 
 const App = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Reset overflow y scroll to top en cada route change
+    document.body.style.overflow = '';
+    window.scrollTo(0, 0);
+  }, [location.pathname]);  // Ejecuta solo cuando pathname cambia
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
