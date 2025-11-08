@@ -59,26 +59,6 @@ body {
     overflow: hidden;
 }
 
-.contact-section h1::before {
-    content: '✉️';
-    position: absolute;
-    font-size: 8rem;
-    opacity: 0.1;
-    left: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-}
-
-.contact-section h1::after {
-    content: '📞';
-    position: absolute;
-    font-size: 6rem;
-    opacity: 0.1;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(15deg);
-}
-
 /* ========================================
    ARTÍCULO PRINCIPAL (FORMULARIO)
    ======================================== */
@@ -247,15 +227,6 @@ aside::before {
     border-radius: 50%;
 }
 
-aside::after {
-    content: '📱';
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    font-size: 3rem;
-    opacity: 0.1;
-}
-
 aside:hover {
     transform: translateX(5px);
     border-left-width: 8px;
@@ -269,12 +240,6 @@ aside h3 {
     font-weight: 600;
     position: relative;
     display: inline-block;
-}
-
-aside h3::before {
-    content: '→ ';
-    color: #53c9cb;
-    font-weight: 700;
 }
 
 /* ========================================
@@ -432,11 +397,6 @@ aside {
     .contact-section h1 {
         font-size: 2rem;
         padding: 2rem 1rem;
-    }
-
-    .contact-section h1::before,
-    .contact-section h1::after {
-        font-size: 4rem;
     }
 
     article {

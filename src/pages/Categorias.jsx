@@ -704,7 +704,7 @@ const Categorias = () => {
                 </h3>
                 <ul className="categoria-list">
                   <li
-                    className="bestseller-item"
+                    className="bestseller-item top"
                     data-categoria="mas-vendidos"
                     onClick={() => handleCategoriaClick("mas-vendidos")}
                   >

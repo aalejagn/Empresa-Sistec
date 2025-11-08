@@ -1,3 +1,4 @@
+
 /* ========================================
    ESTILOS PARA PÁGINA DE CATEGORÍAS
    ======================================== */
@@ -254,42 +255,175 @@
 }
 
 /* ========================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN - BOTONES COMPACTOS
    ======================================== */
+
+/* Prevenir overflow horizontal en toda la página */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.catalogo-main {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.catalogo-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 100%;
+}
+
 @media (max-width: 1024px) {
     .content-wrapper {
         flex-direction: column-reverse;
+        width: 100%;
     }
 
     .sidebar-categorias {
         width: 100%;
+        max-width: 100%;
         position: static;
+        box-sizing: border-box;
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .sidebar-section {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+        border-bottom: none; /* Quitar línea divisoria */
     }
 
-    .categoria-list {
+    .sidebar-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .sidebar-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: #2c3e50;
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
         gap: 0.5rem;
+    }
+
+    /* Grid de botones compactos - 3 columnas en tablet */
+    .categoria-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.6rem;
+        width: 100%;
+        max-width: 800px; /* Limitar ancho máximo */
+        margin: 0 auto; /* Centrar el grid */
     }
 
     .categoria-item,
     .bestseller-item {
-        flex: 1 1 calc(50% - 0.5rem);
-        min-width: 200px;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+        text-align: center;
+        border-radius: 8px;
+        background: white;
+        border: 2px solid #e0e0e0;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+    }
+
+    .bestseller-item,.top{
+        background-color: rgb(224, 44, 44);
+    }
+
+    .categoria-item i,
+    .bestseller-item i {
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+
+    .categoria-item:hover,
+    .bestseller-item:hover {
+        background: #f0f0f0;
+        border-color: #2b6163;
+        transform: translateY(-2px);
+    }
+
+        .bestseller-item:hover,.top:hover{
+        background: #cd1717;
+        border-color: rgb(224, 44, 44);
+    }
+
+    .categoria-item.active {
+        background: linear-gradient(135deg, #2b6163 0%, #177378 100%);
+        color: white;
+        border-color: #2b6163;
+    }
+
+    .libros-content {
+        width: 100%;
+        max-width: 100%;
     }
 }
 
 @media (max-width: 768px) {
     .page-title {
         font-size: 2rem;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Grid de 2 columnas en tablet pequeño */
+    .categoria-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        max-width: 600px; /* Limitar ancho máximo */
+        margin: 0 auto; /* Centrar el grid */
+    }
+
+    .categoria-item,
+    .bestseller-item {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.8rem;
+    }
+
+    .sidebar-categorias {
+        padding: 1.2rem;
+    }
+
+    .sidebar-title {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
     }
 
     .libro-header {
         flex-direction: column;
+        width: 100%;
+    }
+
+    .libro-card-compacto {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .libro-imagen-compacta {
@@ -302,11 +436,6 @@
         font-size: 1.2rem;
     }
 
-    .categoria-item,
-    .bestseller-item {
-        flex: 1 1 100%;
-    }
-
     .toggle-icon {
         position: absolute;
         right: 1rem;
@@ -317,28 +446,93 @@
 @media (max-width: 480px) {
     .catalogo-main {
         padding: 1rem 0.5rem;
+        width: 100%;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Grid de 2 columnas en móvil */
+    .categoria-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.4rem;
+        max-width: 500px; /* Limitar ancho máximo */
+        margin: 0 auto; /* Centrar el grid */
+    }
+
+    .categoria-item,
+    .bestseller-item {
+        padding: 0.6rem 0.5rem;
+        font-size: 0.75rem;
+        border-radius: 6px;
+        gap: 0.2rem;
+    }
+
+    .categoria-item i,
+    .bestseller-item i {
+        font-size: 0.8rem;
+    }
+
+    .sidebar-categorias {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .sidebar-section {
+        margin-bottom: 1rem;
+    }
+
+    .sidebar-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.6rem;
     }
 
     .content-wrapper {
-        gap: 1rem;
+        gap: 0;
+        width: 100%;
+        padding: 0;
     }
 
     .libro-card-compacto {
         margin-bottom: 0.8rem;
+        width: 100%;
+        max-width: 100%;
     }
 
     .libro-header {
         padding: 1rem;
         position: relative;
+        width: 100%;
+    }
+
+    .libro-info-compacta {
+        width: 100%;
     }
 
     .libro-detalles-compactos {
         flex-direction: column;
         gap: 0.5rem;
+        width: 100%;
     }
 
     .libro-precio-compacto {
         font-size: 1.2rem;
+    }
+}
+
+/* Para pantallas muy pequeñas - mantener 2 columnas pero más compacto */
+@media (max-width: 360px) {
+    .categoria-item,
+    .bestseller-item {
+        padding: 0.5rem 0.4rem;
+        font-size: 0.7rem;
+    }
+
+    .categoria-item i,
+    .bestseller-item i {
+        display: none; /* Ocultar iconos en pantallas muy pequeñas */
     }
 }
 
@@ -370,8 +564,6 @@
 .libro-card-compacto:nth-child(7) { animation-delay: 0.35s; }
 .libro-card-compacto:nth-child(8) { animation-delay: 0.4s; }
 
-
-
 /* Animación suave para el sidebar */
 @keyframes slideInRight {
     from {
@@ -388,18 +580,49 @@
     animation: slideInRight 0.5s ease-out;
 }
 
-/* Efecto de pulso en el botón de más vendidos */
+/* Animación suave para los botones de categoría */
+@keyframes buttonPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.categoria-item,
+.bestseller-item {
+    animation: buttonPop 0.3s ease-out forwards;
+}
+
+/* Retraso escalonado para botones */
+.categoria-item:nth-child(1),
+.bestseller-item:nth-child(1) { animation-delay: 0.05s; }
+.categoria-item:nth-child(2),
+.bestseller-item:nth-child(2) { animation-delay: 0.08s; }
+.categoria-item:nth-child(3),
+.bestseller-item:nth-child(3) { animation-delay: 0.11s; }
+.categoria-item:nth-child(4),
+.bestseller-item:nth-child(4) { animation-delay: 0.14s; }
+.categoria-item:nth-child(5),
+.bestseller-item:nth-child(5) { animation-delay: 0.17s; }
+.categoria-item:nth-child(6),
+.bestseller-item:nth-child(6) { animation-delay: 0.20s; }
+
+/* Efecto de pulso suave en el botón activo */
 @keyframes pulse {
     0%, 100% {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.05);
+        transform: scale(1.03);
     }
 }
 
 .bestseller-item {
-    animation: pulse 2s infinite;
+    animation: pulse 2s infinite ease-in-out;
 }
 
 .bestseller-item:hover {
@@ -435,7 +658,7 @@
 .no-books-message {
     text-align: center;
     padding: 3rem;
-    background: #f8f9fa;
+    background: #faf8f8;
     border-radius: 12px;
     color: #7f8c8d;
 }
@@ -464,5 +687,3 @@
 .sidebar-categorias::-webkit-scrollbar-thumb:hover {
     background: #2eb8c2;
 }
-
-

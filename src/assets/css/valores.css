@@ -59,26 +59,6 @@ body {
     overflow: hidden;
 }
 
-.page-title::before {
-    content: '📖';
-    position: absolute;
-    font-size: 8rem;
-    opacity: 0.1;
-    left: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-}
-
-.page-title::after {
-    content: '✨';
-    position: absolute;
-    font-size: 6rem;
-    opacity: 0.1;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(15deg);
-}
-
 /* ========================================
    ARTÍCULO PRINCIPAL
    ======================================== */
@@ -176,15 +156,6 @@ aside::before {
     height: 200px;
     background: radial-gradient(circle, rgba(83, 201, 203, 0.15) 0%, transparent 70%);
     border-radius: 50%;
-}
-
-aside::after {
-    content: '🚀';
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    font-size: 3rem;
-    opacity: 0.1;
 }
 
 aside:hover {
@@ -576,27 +547,6 @@ body {
     overflow: hidden;
 }
 
-.page-title::before {
-    content: '⭐';
-    position: absolute;
-    font-size: 8rem;
-    opacity: 0.1;
-    left: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-    animation: twinkle 3s ease-in-out infinite;
-}
-
-.page-title::after {
-    content: '💎';
-    position: absolute;
-    font-size: 6rem;
-    opacity: 0.1;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(15deg);
-    animation: twinkle 3s ease-in-out infinite 1.5s;
-}
 
 /* ========================================
    ARTÍCULO PRINCIPAL
@@ -874,11 +824,6 @@ article {
         padding: 2rem 1rem;
     }
 
-    .page-title::before,
-    .page-title::after {
-        font-size: 4rem;
-    }
-
     article {
         padding: 2rem 1.5rem;
     }
@@ -1150,26 +1095,6 @@ body {
     overflow: hidden;
 }
 
-.page-title::before {
-    content: '🎯';
-    position: absolute;
-    font-size: 8rem;
-    opacity: 0.1;
-    left: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-}
-
-.page-title::after {
-    content: '📚';
-    position: absolute;
-    font-size: 6rem;
-    opacity: 0.1;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(15deg);
-}
-
 /* ========================================
    ARTÍCULO PRINCIPAL
    ======================================== */
@@ -1269,15 +1194,6 @@ aside::before {
     border-radius: 50%;
 }
 
-aside::after {
-    content: '💡';
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    font-size: 3rem;
-    opacity: 0.1;
-}
-
 aside:hover {
     transform: translateX(5px);
     border-left-width: 8px;
@@ -1293,11 +1209,6 @@ aside h3 {
     display: inline-block;
 }
 
-aside h3::before {
-    content: '→ ';
-    color: #53c9cb;
-    font-weight: 700;
-}
 
 aside p {
     font-size: 1.05rem;
@@ -1412,11 +1323,6 @@ aside {
     .page-title {
         font-size: 2rem;
         padding: 2rem 1rem;
-    }
-
-    .page-title::before,
-    .page-title::after {
-        font-size: 4rem;
     }
 
     article {
@@ -1657,25 +1563,6 @@ body {
     overflow: hidden;
 }
 
-.page-title::before {
-    content: '📖';
-    position: absolute;
-    font-size: 8rem;
-    opacity: 0.1;
-    left: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-}
-
-.page-title::after {
-    content: '🏛️';
-    position: absolute;
-    font-size: 6rem;
-    opacity: 0.1;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(15deg);
-}
 
 /* ========================================
    ARTÍCULO PRINCIPAL
@@ -1775,14 +1662,7 @@ aside::before {
     border-radius: 50%;
 }
 
-aside::after {
-    content: '✨';
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    font-size: 3rem;
-    opacity: 0.1;
-}
+
 
 aside:hover {
     transform: translateX(5px);
@@ -1797,12 +1677,6 @@ aside h3 {
     font-weight: 600;
     position: relative;
     display: inline-block;
-}
-
-aside h3::before {
-    content: none;
-    color: #53c9cb;
-    font-weight: 700;
 }
 
 /* ========================================
@@ -1948,11 +1822,6 @@ aside {
     .page-title {
         font-size: 2rem;
         padding: 2rem 1rem;
-    }
-
-    .page-title::before,
-    .page-title::after {
-        font-size: 4rem;
     }
 
     article {

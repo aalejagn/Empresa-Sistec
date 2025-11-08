@@ -46,25 +46,6 @@ body {
     overflow: hidden;
 }
 
-.page-title::before {
-    content: 'location';
-    position: absolute;
-    font-size: 8rem;
-    opacity: 0.1;
-    left: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-}
-
-.page-title::after {
-    content: 'map';
-    position: absolute;
-    font-size: 6rem;
-    opacity: 0.1;
-    right: 10%;
-    top: 50%;
-    transform: translateY(-50%) rotate(15deg);
-}
 
 /* ========================================
    SECCIÓN DE UBICACIÓN
@@ -260,15 +241,6 @@ aside::before {
     border-radius: 50%;
 }
 
-aside::after {
-    content: 'car';
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    font-size: 3rem;
-    opacity: 0.1;
-}
-
 aside:hover {
     transform: translateX(5px);
     border-left-width: 8px;
@@ -282,12 +254,6 @@ aside h3 {
     font-weight: 600;
     position: relative;
     display: inline-block;
-}
-
-aside h3::before {
-    content: '→ ';
-    color: #53c9cb;
-    font-weight: 700;
 }
 
 aside ul {
@@ -304,15 +270,6 @@ aside ul li {
     margin-bottom: 1.5rem;
     padding-left: 2rem;
     position: relative;
-}
-
-aside ul li::before {
-    content: 'check';
-    position: absolute;
-    left: 0;
-    color: #53c9cb;
-    font-weight: 700;
-    font-size: 1.3rem;
 }
 
 aside ul li:last-child {

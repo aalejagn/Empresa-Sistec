@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import "../assets/css/global.css";
 import "../assets/css/header.css";
 import "../assets/css/legal-pages.css";
+import "../assets/css/legal-pages-responsive.css"; // ← NUEVO
 import "../assets/css/footer.css";
 
 const TerminosCondiciones = () => {
