@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 
 import "../assets/css/global.css";
-// import "../assets/css/style.css";
 import "../assets/css/header.css";
 import "../assets/css/legal-pages.css";
 import "../assets/css/footer.css";
@@ -21,7 +20,7 @@ const TerminosCondiciones = () => {
           <section className="contact-section">
             <h1 className="page-title">Términos y Condiciones</h1>
 
-            <article className="legal-article">
+            <article className="privacy-content">
               <h2>1. Aceptación de Términos</h2>
               <p>
                 Al acceder y utilizar el sitio web de SISTEC READ, usted acepta
@@ -35,7 +34,7 @@ const TerminosCondiciones = () => {
                 El contenido de este sitio es únicamente para su información
                 general y uso personal. Está sujeto a cambios sin previo aviso.
               </p>
-              <ul className="list-valores">
+              <ul className="list-valores-politicas">
                 <li>
                   No debe usar el sitio de manera que cause daño al sitio o
                   interfiera con su disponibilidad
@@ -52,7 +51,7 @@ const TerminosCondiciones = () => {
 
               <h2>3. Productos y Servicios</h2>
               <p>SISTEC READ se reserva el derecho de:</p>
-              <ul className="list-valores">
+              <ul className="list-valores-politicas">
                 <li>
                   Modificar o descontinuar cualquier producto sin previo aviso
                 </li>
@@ -66,7 +65,7 @@ const TerminosCondiciones = () => {
                 Todos los precios están en pesos mexicanos (MXN) e incluyen IVA
                 cuando aplique.
               </p>
-              <ul className="list-valores">
+              <ul className="list-valores-politicas">
                 <li>Los precios pueden cambiar sin previo aviso</li>
                 <li>
                   Aceptamos tarjetas de crédito, débito y otros métodos de pago
@@ -81,7 +80,7 @@ const TerminosCondiciones = () => {
 
               <h2>5. Envíos y Entregas</h2>
               <p>Los tiempos de entrega son estimados y pueden variar según:</p>
-              <ul className="list-valores">
+              <ul className="list-valores-politicas">
                 <li>Disponibilidad del producto</li>
                 <li>Ubicación de entrega</li>
                 <li>

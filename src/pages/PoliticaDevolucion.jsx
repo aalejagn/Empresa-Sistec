@@ -20,13 +20,13 @@ const PoliticaDevolucion = () => {
           <section className="contact-section">
             <h1 className="page-title">Política de Devolución</h1>
 
-            <article className="legal-article">
+            <article className="privacy-content">
               <h2>1. Plazo de Devolución</h2>
               <p>
                 En SISTEC READ, queremos que esté completamente satisfecho con su
                 compra. Aceptamos devoluciones dentro de los siguientes plazos:
               </p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li>
                   <strong>30 días naturales</strong> a partir de la fecha de
                   recepción del producto
@@ -46,7 +46,7 @@ const PoliticaDevolucion = () => {
                 Para procesar su devolución, el producto debe cumplir con las
                 siguientes condiciones:
               </p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li>El libro no debe tener marcas, subrayados o daños</li>
                 <li>La envoltura original (si aplica) debe estar intacta</li>
                 <li>Debe conservar el comprobante de compra o factura</li>
@@ -58,7 +58,7 @@ const PoliticaDevolucion = () => {
 
               <h2>3. Productos No Retornables</h2>
               <p>Los siguientes productos NO son elegibles para devolución:</p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li>Libros digitales o descargas electrónicas</li>
                 <li>
                   Libros con envoltura plástica sellada que haya sido removida
@@ -70,7 +70,7 @@ const PoliticaDevolucion = () => {
 
               <h2>4. Proceso de Devolución</h2>
               <p>Para iniciar una devolución, siga estos pasos:</p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li>
                   <strong>Paso 1:</strong> Contacte nuestro servicio al cliente en
                   devoluciones@sistecread.com o al +52 961 123 4567
@@ -95,7 +95,7 @@ const PoliticaDevolucion = () => {
 
               <h2>5. Reembolsos</h2>
               <p>Una vez recibida y verificada su devolución:</p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li>El reembolso se procesará dentro de 5-10 días hábiles</li>
                 <li>El monto será devuelto al método de pago original</li>
                 <li>Los costos de envío original NO son reembolsables</li>
@@ -107,7 +107,7 @@ const PoliticaDevolucion = () => {
 
               <h2>6. Cambios</h2>
               <p>Si desea cambiar un producto por otro:</p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li>El producto debe cumplir las condiciones de devolución</li>
                 <li>
                   Solo se permiten cambios por productos de igual o mayor valor
@@ -123,7 +123,7 @@ const PoliticaDevolucion = () => {
 
               <h2>7. Productos Defectuosos o Dañados</h2>
               <p>Si recibe un producto defectuoso o dañado:</p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li>
                   Notifíquenos dentro de las 48 horas posteriores a la recepción
                 </li>
@@ -137,7 +137,7 @@ const PoliticaDevolucion = () => {
 
               <h2>8. Excepciones y Casos Especiales</h2>
               <p>En caso de circunstancias especiales:</p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li>
                   Pedidos incorrectos enviados por error serán reemplazados sin
                   costo
@@ -151,7 +151,7 @@ const PoliticaDevolucion = () => {
 
               <h2>9. Tiempos de Procesamiento</h2>
               <p>Plazos aproximados del proceso:</p>
-              <ul className="list-valores">
+              <ul className="lista-valores-politicas">
                 <li><strong>Autorización RMA:</strong> 1-2 días hábiles</li>
                 <li>
                   <strong>Inspección del producto devuelto:</strong> 3-5 días
