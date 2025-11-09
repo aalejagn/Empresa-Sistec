@@ -1,13 +1,15 @@
 /* ===== VARIABLES DE COLOR SISTEC READ ===== */
 :root {
-  --color-primario: #5fb4b7;
-  --color-secundario: #3e8184;
-  --color-oscuro: #2a5d5f;
-  --color-texto: #333333;
-  --color-borde: #e0e0e0;
-  --color-error: #eb0d0d;
-  --color-fondo-claro: #f0f9fa;
-  --color-borde-claro: #e0f2f3;
+  --color-primario: #4A90E2;
+  --color-secundario: #2E5C8A;
+  --color-oscuro: #1B3A57;
+  --color-acento: #7B68EE;
+  --color-texto: #2C3E50;
+  --color-borde: #E8EEF5;
+  --color-error: #E74C3C;
+  --color-fondo-claro: #F8FBFF;
+  --color-borde-claro: #D6E4F0;
+  --color-libro: #8B7355;
 }
 
 /* ===== RESET PARA PÁGINAS DE AUTH (SIN HEADER) ===== */
@@ -145,12 +147,28 @@ body.login-page {
 }
 
 .login-logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-primario);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
   margin: 0;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.login-logo-text::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4A90E2, transparent);
+  opacity: 0.5;
 }
 
 .login-title {
@@ -449,45 +467,75 @@ body.login-page {
 }
 
 /* ===== RESPONSIVIDAD (COMBINADA) ===== */
+
+/* Soporte para zoom 90% - 110% */
+@media (min-resolution: 0.9dppx) and (max-resolution: 1.1dppx) {
+  .login-card {
+    min-height: auto;
+    max-height: none;
+  }
+  
+  .login-container {
+    min-height: 100vh;
+    align-items: center;
+  }
+}
+
+/* Corrección específica para zoom 90% */
+@media (min-resolution: 0.85dppx) and (max-resolution: 0.95dppx) {
+  .login-card {
+    padding: 2rem 2.25rem;
+    max-width: 26rem;
+  }
+  
+  .login-form {
+    gap: 1rem;
+  }
+  
+  .login-input {
+    padding: 0.75rem 0.875rem 0.75rem 2.75rem;
+  }
+}
+
 @media (max-width: 480px) {
   .login-card {
-    padding: 1.5rem;
-    border-radius: 1rem;
+    padding: 1.75rem;
+    border-radius: 1.25rem;
   }
 
   .login-logo-container {
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
   }
 
   .login-logo-text {
-    font-size: 1.25rem;
-  }
-
-  .login-title {
     font-size: 1.5rem;
   }
 
-  .login-subtitle {
-    font-size: 0.75rem;
+  .login-title {
+    font-size: 1.625rem;
   }
 
-  .login-input {
-    padding: 0.75rem 2.75rem;
+  .login-subtitle {
     font-size: 0.875rem;
   }
 
+  .login-input {
+    padding: 0.75rem 0.875rem 0.75rem 2.75rem;
+    font-size: 0.9375rem;
+  }
+
   .login-input-icon {
-    left: 0.75rem;
+    left: 0.875rem;
   }
 
   .login-password-toggle {
-    right: 0.75rem;
+    right: 0.875rem;
   }
 
   .login-button {
     padding: 0.875rem;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 
   .login-decoration {
@@ -512,7 +560,7 @@ body.login-page {
   }
 }
 
-/* Ajustes adicionales para pantallas altas/bajas (de login.css) */
+/* Ajustes adicionales para pantallas altas/bajas */
 @media (min-height: 900px) {
   .login-card {
     padding: 2rem 2.25rem;
@@ -586,7 +634,7 @@ body.login-page {
   }
 }
 
-/* Landscape móvil (de login.css) */
+/* Landscape móvil */
 @media (max-height: 500px) and (orientation: landscape) {
   .login-container {
     padding: 0.5rem;
@@ -657,4 +705,4 @@ body.login-page {
   .login-decoration {
     display: none;
   }
-} 
+}

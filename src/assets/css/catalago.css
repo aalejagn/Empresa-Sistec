@@ -1,258 +1,257 @@
-
 /* ========================================
    ESTILOS PARA PÁGINA DE CATEGORÍAS
    ======================================== */
 
 /* Contenedor principal del catálogo */
 .catalogo-main {
-    padding: 2rem 1rem;
-    min-height: auto; /* ← CAMBIA DE calc(100vh - 200px) A auto */
+  padding: 2rem 1rem;
+  min-height: auto; /* ← CAMBIA DE calc(100vh - 200px) A auto */
 }
 
 .catalogo-container {
-    max-width: 1400px;
-    margin: 0 auto;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .page-title {
-    font-size: 2.5rem;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 2rem;
-    font-weight: 700;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
 }
 
 /* Wrapper de contenido con sidebar */
 .content-wrapper {
-    display: flex;
-    gap: 2rem;
-    margin-top: 3rem;
-    align-items: flex-start;
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  align-items: flex-start;
 }
 
 /* ========================================
    CONTENIDO PRINCIPAL DE LIBROS
    ======================================== */
 .libros-content {
-    flex: 1;
-    min-width: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .categoria-titulo-actual {
-    font-size: 2rem;
-    color: #34495e;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 3px solid #26bbbb;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  font-size: 2rem;
+  color: #34495e;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid #26bbbb;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .categoria-titulo-actual i {
-    color: #1ea5b1;
+  color: #1ea5b1;
 }
 
 /* Tarjetas de libros - Vista compacta */
 .libro-card-compacto {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-    overflow: hidden;
-    transition: all 0.3s ease;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .libro-card-compacto:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
 .libro-header {
-    display: flex;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    cursor: pointer;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  cursor: pointer;
 }
 
 .libro-imagen-compacta {
-    width: 120px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .libro-info-compacta {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .libro-titulo-compacto {
-    font-size: 1.3rem;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    line-height: 1.3;
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .libro-autor-compacto {
-    font-size: 0.95rem;
-    color: #7f8c8d;
-    margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  margin-bottom: 0.8rem;
 }
 
 .libro-detalles-compactos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    font-size: 0.9rem;
-    color: #555;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .libro-detalles-compactos p {
-    margin: 0;
-    padding: 0.3rem 0.8rem;
-    background: #f8f9fa;
-    border-radius: 6px;
+  margin: 0;
+  padding: 0.3rem 0.8rem;
+  background: #f8f9fa;
+  border-radius: 6px;
 }
 
 .libro-precio-compacto {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.2rem;
-    color: #27ae60;
-    font-weight: 700;
-    margin-top: 0.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1.2rem;
+  color: #27ae60;
+  font-weight: 700;
+  margin-top: 0.5rem;
 }
 
 /* Indicador de toggle */
 .toggle-icon {
-    margin-left: auto;
-    font-size: 1.2rem;
-    color: #057177;
-    transition: transform 0.3s ease;
-    align-self: flex-start;
-    padding-top: 0.5rem;
+  margin-left: auto;
+  font-size: 1.2rem;
+  color: #057177;
+  transition: transform 0.3s ease;
+  align-self: flex-start;
+  padding-top: 0.5rem;
 }
 
 .libro-card-compacto.active .toggle-icon {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 /* Descripción expandible */
 .libro-descripcion-expandible {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-    padding: 0 1.5rem;
-    background: #f8f9fa;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 1.5rem;
+  background: #f8f9fa;
 }
 
 .libro-card-compacto.active .libro-descripcion-expandible {
-    max-height: 500px;
-    padding: 1.5rem;
+  max-height: 500px;
+  padding: 1.5rem;
 }
 
 .libro-descripcion-texto {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #34495e;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #34495e;
 }
 
 /* ========================================
    SIDEBAR DE CATEGORÍAS
    ======================================== */
 .sidebar-categorias {
-    width: 380px;
-    position: sticky;
-    top: 20px;
-    flex-shrink: 0;
+  width: 380px;
+  position: sticky;
+  top: 20px;
+  flex-shrink: 0;
 }
 
 .sidebar-section {
-    background: white;
-    border-radius: 12px;
-    padding:  1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
 }
 
 .sidebar-title {
-    font-size: 1.2rem;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 2px solid #ecf0f1;
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid #ecf0f1;
 }
 
 .sidebar-title i {
-    color:#7cc2c6;
+  color: #7cc2c6;
 }
 
 .categoria-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .categoria-item,
 .bestseller-item {
-    padding: 0.8rem 1rem;
-    margin-bottom: 0.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    font-size: 0.95rem;
-    color: #555;
-    background: #f8f9fa;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  color: #555;
+  background: #f8f9fa;
 }
 
 .categoria-item:hover,
 .bestseller-item:hover {
-    background: #e8f4f8;
-    color: #4ba2a7;
-    transform: translateX(5px);
-    font-weight: bold;
+  background: #e8f4f8;
+  color: #4ba2a7;
+  transform: translateX(5px);
+  font-weight: bold;
 }
 
 .categoria-item.active {
-    background: linear-gradient(135deg, #417d80 0%, #3e8184 100%);
-    color: white;
-    font-weight: 600;
+  background: linear-gradient(135deg, #417d80 0%, #3e8184 100%);
+  color: white;
+  font-weight: 600;
 }
 
 .categoria-item.active i {
-    color: white;
+  color: white;
 }
 
 .bestseller-item {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-    color: white;
-    font-weight: 600;
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+  font-weight: 600;
 }
 
 .bestseller-item:hover {
-    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
-    color: white;
+  background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+  color: white;
 }
 
 .bestseller-item i {
-    color: #ffd700;
+  color: #ffd700;
 }
 
 .categoria-item i {
-    font-size: 1rem;
-    color: #53c9cb;
+  font-size: 1rem;
+  color: #53c9cb;
 }
 
 /* ========================================
@@ -261,373 +260,412 @@
 
 /* Prevenir overflow horizontal en toda la página */
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .catalogo-main {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .catalogo-container {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .content-wrapper {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 @media (max-width: 1024px) {
-    .content-wrapper {
-        flex-direction: column-reverse;
-        width: 100%;
-    }
+  .content-wrapper {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
 
-    .sidebar-categorias {
-        width: 100%;
-        max-width: 100%;
-        position: static;
-        box-sizing: border-box;
-        background: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 8rem;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .sidebar-categorias {
+    width: 100%;
+    max-width: 100%;
+    position: static;
+    box-sizing: border-box;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 8rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .sidebar-section {
-        margin-bottom: 1.5rem;
-        border-bottom: none; /* Quitar línea divisoria */
-    }
+  .sidebar-section {
+    margin-bottom: 1.5rem;
+    border-bottom: none; /* Quitar línea divisoria */
+  }
 
-    .sidebar-section:last-child {
-        margin-bottom: 0;
-    }
+  .sidebar-section:last-child {
+    margin-bottom: 0;
+  }
 
-    .sidebar-title {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-        color: #2c3e50;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
+  .sidebar-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-    /* Grid de botones compactos - 3 columnas en tablet */
-    .categoria-list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.6rem;
-        width: 100%;
-        max-width: 800px; /* Limitar ancho máximo */
-        margin: 0 auto; /* Centrar el grid */
-    }
+  /* Grid de botones compactos - 3 columnas en tablet */
+  .categoria-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 800px; /* Limitar ancho máximo */
+    margin: 0 auto; /* Centrar el grid */
+  }
 
-    .categoria-item,
-    .bestseller-item {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.85rem;
-        text-align: center;
-        border-radius: 8px;
-        background: white;
-        border: 2px solid #e0e0e0;
-        transition: all 0.2s ease;
-        cursor: pointer;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.3rem;
-    }
+  .categoria-item,
+  .bestseller-item {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    text-align: center;
+    border-radius: 8px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
 
-    .bestseller-item,.top{
-        background-color: rgb(224, 44, 44);
-    }
+  .bestseller-item,
+  .top {
+    background-color: rgb(224, 44, 44);
+  }
 
-    .categoria-item i,
-    .bestseller-item i {
-        font-size: 0.9rem;
-        flex-shrink: 0;
-    }
+  .categoria-item i,
+  .bestseller-item i {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
 
-    .categoria-item:hover,
-    .bestseller-item:hover {
-        background: #f0f0f0;
-        border-color: #2b6163;
-        transform: translateY(-2px);
-    }
+  .categoria-item:hover,
+  .bestseller-item:hover {
+    background: #f0f0f0;
+    border-color: #2b6163;
+    transform: translateY(-2px);
+  }
 
-        .bestseller-item:hover,.top:hover{
-        background: #cd1717;
-        border-color: rgb(224, 44, 44);
-    }
+  .bestseller-item:hover,
+  .top:hover {
+    background: #cd1717;
+    border-color: rgb(224, 44, 44);
+  }
 
-    .categoria-item.active {
-        background: linear-gradient(135deg, #2b6163 0%, #177378 100%);
-        color: white;
-        border-color: #2b6163;
-    }
+  .categoria-item.active {
+    background: linear-gradient(135deg, #2b6163 0%, #177378 100%);
+    color: white;
+    border-color: #2b6163;
+  }
 
-    .libros-content {
-        width: 100%;
-        max-width: 100%;
-    }
+  .libros-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .catalogo-container {
+    margin-top: 3rem;
+  }
 }
 
 @media (max-width: 768px) {
-    .page-title {
-        font-size: 2rem;
-        width: 100%;
-        box-sizing: border-box;
-        margin-bottom: 1.5rem;
-    }
+  .page-title {
+    font-size: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+    margin-top: 3rem;
+  }
 
-    /* Grid de 2 columnas en tablet pequeño */
-    .categoria-list {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
-        max-width: 600px; /* Limitar ancho máximo */
-        margin: 0 auto; /* Centrar el grid */
-    }
+  /* Grid de 2 columnas en tablet pequeño */
+  .categoria-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    max-width: 600px; /* Limitar ancho máximo */
+    margin: 0 auto; /* Centrar el grid */
+  }
 
-    .categoria-item,
-    .bestseller-item {
-        padding: 0.7rem 0.9rem;
-        font-size: 0.8rem;
-    }
+  .categoria-item,
+  .bestseller-item {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8rem;
+  }
 
-    .sidebar-categorias {
-        padding: 1.2rem;
-    }
+  .sidebar-categorias {
+    padding: 1.2rem;
+    margin-bottom: 8rem;
+  }
 
-    .sidebar-title {
-        font-size: 1rem;
-        margin-bottom: 0.8rem;
-    }
+  .sidebar-title {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
 
-    .libro-header {
-        flex-direction: column;
-        width: 100%;
-    }
+  .libro-header {
+    flex-direction: column;
+    width: 100%;
+  }
 
-    .libro-card-compacto {
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
+  .libro-card-compacto {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 
-    .libro-imagen-compacta {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
+  .libro-imagen-compacta {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
 
-    .libro-titulo-compacto {
-        font-size: 1.2rem;
-    }
+  .libro-titulo-compacto {
+    font-size: 1.2rem;
+  }
 
-    .toggle-icon {
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-    }
+  .toggle-icon {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .catalogo-main {
-        padding: 1rem 0.5rem;
-        width: 100%;
-    }
+  .catalogo-main {
+    padding: 1rem 0.5rem;
+    width: 100%;
+  }
 
-    .page-title {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-    }
+  .page-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+  }
 
-    /* Grid de 2 columnas en móvil */
-    .categoria-list {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.4rem;
-        max-width: 500px; /* Limitar ancho máximo */
-        margin: 0 auto; /* Centrar el grid */
-    }
+  /* Grid de 2 columnas en móvil */
+  .categoria-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+    max-width: 500px; /* Limitar ancho máximo */
+    margin: 0 auto; /* Centrar el grid */
+  }
 
-    .categoria-item,
-    .bestseller-item {
-        padding: 0.6rem 0.5rem;
-        font-size: 0.75rem;
-        border-radius: 6px;
-        gap: 0.2rem;
-    }
+  .categoria-item,
+  .bestseller-item {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    gap: 0.2rem;
+  }
 
-    .categoria-item i,
-    .bestseller-item i {
-        font-size: 0.8rem;
-    }
+  .categoria-item i,
+  .bestseller-item i {
+    font-size: 0.8rem;
+  }
 
-    .sidebar-categorias {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-    }
+  .sidebar-categorias {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    margin-bottom: 8rem;
+  }
 
-    .sidebar-section {
-        margin-bottom: 1rem;
-    }
+  .sidebar-section {
+    margin-bottom: 1rem;
+  }
 
-    .sidebar-title {
-        font-size: 0.95rem;
-        margin-bottom: 0.6rem;
-    }
+  .sidebar-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
 
-    .content-wrapper {
-        gap: 0;
-        width: 100%;
-        padding: 0;
-    }
+  .content-wrapper {
+    gap: 0;
+    width: 100%;
+    padding: 0;
+  }
 
-    .libro-card-compacto {
-        margin-bottom: 0.8rem;
-        width: 100%;
-        max-width: 100%;
-    }
+  .libro-card-compacto {
+    margin-bottom: 0.8rem;
+    width: 100%;
+    max-width: 100%;
+  }
 
-    .libro-header {
-        padding: 1rem;
-        position: relative;
-        width: 100%;
-    }
+  .libro-header {
+    padding: 1rem;
+    position: relative;
+    width: 100%;
+  }
 
-    .libro-info-compacta {
-        width: 100%;
-    }
+  .libro-info-compacta {
+    width: 100%;
+  }
 
-    .libro-detalles-compactos {
-        flex-direction: column;
-        gap: 0.5rem;
-        width: 100%;
-    }
+  .libro-detalles-compactos {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
 
-    .libro-precio-compacto {
-        font-size: 1.2rem;
-    }
+  .libro-precio-compacto {
+    font-size: 1.2rem;
+  }
 }
 
 /* Para pantallas muy pequeñas - mantener 2 columnas pero más compacto */
 @media (max-width: 360px) {
-    .categoria-item,
-    .bestseller-item {
-        padding: 0.5rem 0.4rem;
-        font-size: 0.7rem;
-    }
+  .categoria-item,
+  .bestseller-item {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.7rem;
+  }
 
-    .categoria-item i,
-    .bestseller-item i {
-        display: none; /* Ocultar iconos en pantallas muy pequeñas */
-    }
+  .categoria-item i,
+  .bestseller-item i {
+    display: none; /* Ocultar iconos en pantallas muy pequeñas */
+  }
 }
 
 /* ========================================
    ANIMACIONES
    ======================================== */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .libro-card-compacto {
-    animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
 /* Retraso escalonado para cada tarjeta */
-.libro-card-compacto:nth-child(1) { animation-delay: 0.05s; }
-.libro-card-compacto:nth-child(2) { animation-delay: 0.1s; }
-.libro-card-compacto:nth-child(3) { animation-delay: 0.15s; }
-.libro-card-compacto:nth-child(4) { animation-delay: 0.2s; }
-.libro-card-compacto:nth-child(5) { animation-delay: 0.25s; }
-.libro-card-compacto:nth-child(6) { animation-delay: 0.3s; }
-.libro-card-compacto:nth-child(7) { animation-delay: 0.35s; }
-.libro-card-compacto:nth-child(8) { animation-delay: 0.4s; }
+.libro-card-compacto:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.libro-card-compacto:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.libro-card-compacto:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.libro-card-compacto:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.libro-card-compacto:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.libro-card-compacto:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.libro-card-compacto:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.libro-card-compacto:nth-child(8) {
+  animation-delay: 0.4s;
+}
 
 /* Animación suave para el sidebar */
 @keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .sidebar-categorias {
-    animation: slideInRight 0.5s ease-out;
+  animation: slideInRight 0.5s ease-out;
 }
 
 /* Animación suave para los botones de categoría */
 @keyframes buttonPop {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .categoria-item,
 .bestseller-item {
-    animation: buttonPop 0.3s ease-out forwards;
+  animation: buttonPop 0.3s ease-out forwards;
 }
 
 /* Retraso escalonado para botones */
 .categoria-item:nth-child(1),
-.bestseller-item:nth-child(1) { animation-delay: 0.05s; }
+.bestseller-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
 .categoria-item:nth-child(2),
-.bestseller-item:nth-child(2) { animation-delay: 0.08s; }
+.bestseller-item:nth-child(2) {
+  animation-delay: 0.08s;
+}
 .categoria-item:nth-child(3),
-.bestseller-item:nth-child(3) { animation-delay: 0.11s; }
+.bestseller-item:nth-child(3) {
+  animation-delay: 0.11s;
+}
 .categoria-item:nth-child(4),
-.bestseller-item:nth-child(4) { animation-delay: 0.14s; }
+.bestseller-item:nth-child(4) {
+  animation-delay: 0.14s;
+}
 .categoria-item:nth-child(5),
-.bestseller-item:nth-child(5) { animation-delay: 0.17s; }
+.bestseller-item:nth-child(5) {
+  animation-delay: 0.17s;
+}
 .categoria-item:nth-child(6),
-.bestseller-item:nth-child(6) { animation-delay: 0.20s; }
+.bestseller-item:nth-child(6) {
+  animation-delay: 0.2s;
+}
 
 /* Efecto de pulso suave en el botón activo */
 @keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.03);
-    }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
 }
 
 .bestseller-item {
-    animation: pulse 2s infinite ease-in-out;
+  animation: pulse 2s infinite ease-in-out;
 }
 
 .bestseller-item:hover {
-    animation: none;
+  animation: none;
 }
 
 /* ========================================
@@ -636,55 +674,55 @@ body {
 
 /* Efecto de carga */
 .loading {
-    text-align: center;
-    padding: 3rem;
-    color: #7f8c8d;
-    font-size: 1.2rem;
+  text-align: center;
+  padding: 3rem;
+  color: #7f8c8d;
+  font-size: 1.2rem;
 }
 
 .loading i {
-    animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Mensaje cuando no hay libros */
 .no-books-message {
-    text-align: center;
-    padding: 3rem;
-    background: #faf8f8;
-    border-radius: 12px;
-    color: #7f8c8d;
+  text-align: center;
+  padding: 3rem;
+  background: #faf8f8;
+  border-radius: 12px;
+  color: #7f8c8d;
 }
 
 .no-books-message i {
-    font-size: 3rem;
-    color: #bdc3c7;
-    margin-bottom: 1rem;
+  font-size: 3rem;
+  color: #bdc3c7;
+  margin-bottom: 1rem;
 }
 
 /* Scrollbar personalizado para el sidebar */
 .sidebar-categorias::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 .sidebar-categorias::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
 .sidebar-categorias::-webkit-scrollbar-thumb {
-    background: #4acedc;
-    border-radius: 10px;
+  background: #4acedc;
+  border-radius: 10px;
 }
 
 .sidebar-categorias::-webkit-scrollbar-thumb:hover {
-    background: #2eb8c2;
+  background: #2eb8c2;
 }
