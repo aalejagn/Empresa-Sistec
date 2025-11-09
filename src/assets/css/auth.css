@@ -5,7 +5,7 @@
   --color-oscuro: #2a5d5f;
   --color-texto: #333333;
   --color-borde: #e0e0e0;
-  --color-error: #ef4444;
+  --color-error: #eb0d0d;
   --color-fondo-claro: #f0f9fa;
   --color-borde-claro: #e0f2f3;
 }
@@ -16,7 +16,7 @@ body.login-page {
   padding: 0 !important;
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: tahoma;
 }
 
 /* ===== CONTENEDOR PRINCIPAL (COMÚN) ===== */
@@ -657,4 +657,4 @@ body.login-page {
   .login-decoration {
     display: none;
   }
-}
+} 

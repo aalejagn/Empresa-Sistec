@@ -997,7 +997,7 @@ iframe {
 .review-form input,
 .review-form select,
 .review-form textarea {
-    font-family: 'Arial', sans-serif;
+    font-family: tahoma;
     width: 100%;
     padding: 0.8rem;
     border: 1px solid #e0e0e0;
@@ -1217,7 +1217,7 @@ iframe {
 }
 
 .social-title {
-    font-family: 'Arial', sans-serif;
+    font-family: tahoma;
     font-size: 2.5rem;
     font-weight: bold;
     color: white;

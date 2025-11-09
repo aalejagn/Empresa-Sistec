@@ -10,7 +10,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: tahoma;
     background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
     color: #2c3e50;
     line-height: 1.6;
@@ -109,7 +109,7 @@ article p::before {
     font-size: 4rem;
     color: #53c9cb;
     opacity: 0.3;
-    font-family: Georgia, serif;
+    font-family: tahoma;
     line-height: 1;
 }
 
@@ -498,7 +498,7 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: tahoma;
     background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
     color: #2c3e50;
     line-height: 1.6;
@@ -1046,7 +1046,7 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: tahoma;
     background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
     color: #2c3e50;
     line-height: 1.6;
@@ -1145,7 +1145,7 @@ article p::before {
     font-size: 4rem;
     color: #53c9cb;
     opacity: 0.3;
-    font-family: Georgia, serif;
+    font-family: tahoma;
     line-height: 1;
 }
 
@@ -1514,7 +1514,7 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: tahoma;
     background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
     color: #2c3e50;
     line-height: 1.6;
@@ -1613,7 +1613,7 @@ article p::before {
     font-size: 4rem;
     color: #53c9cb;
     opacity: 0.3;
-    font-family: Georgia, serif;
+    font-family: tahoma;
     line-height: 1;
 }
 
