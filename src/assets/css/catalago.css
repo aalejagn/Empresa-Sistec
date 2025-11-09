@@ -40,7 +40,7 @@
 .categoria-titulo-actual {
   font-size: 2rem;
   color: #34495e;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 3px solid #26bbbb;
   display: flex;
@@ -63,8 +63,8 @@
 }
 
 .libro-card-compacto:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  /* Quita el transform para evitar superposición */
 }
 
 .libro-header {
@@ -141,19 +141,20 @@
   transform: rotate(180deg);
 }
 
-/* Descripción expandible */
 .libro-descripcion-expandible {
-  max-height: 0;
+  height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease;
   padding: 0 1.5rem;
   background: #f8f9fa;
+  transition: height 0.4s ease, padding 0.4s ease;
 }
 
 .libro-card-compacto.active .libro-descripcion-expandible {
-  max-height: 500px;
+  height: auto;
   padding: 1.5rem;
+  max-height: 600px; /* límite por si el texto es muy largo */
 }
+
 
 .libro-descripcion-texto {
   font-size: 1rem;

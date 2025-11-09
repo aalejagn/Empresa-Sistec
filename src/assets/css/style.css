@@ -307,11 +307,13 @@ h2{
 }
 
 .categoria-info {
-    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .categoria-name {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #333;
     margin-bottom: 0.8rem;
     font-weight: 600;
@@ -321,17 +323,27 @@ h2{
     color: #666;
     font-size: 0.95rem;
     line-height: 1.5;
+    margin: 0 0.5rem;
     margin-bottom: 1rem;
+    
 }
 
 .categoria-count {
+    position: absolute;
+    bottom: 20px; /* Distancia desde el fondo */
+    left: 50%;
+    transform: translateX(-50%); /* Centrado horizontal perfecto */
+    
     display: inline-block;
     background: linear-gradient(135deg, #427f82 0%, #24afb7 100%);
     color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
     font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(66, 127, 130, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Sección de estadísticas */
@@ -482,7 +494,11 @@ h2{
     }
 
     .section-title-home {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .categorias-home h2{
+        font-size: 1.8rem;
     }
 
     .stat-number {
@@ -493,6 +509,11 @@ h2{
         height: 150px;
     }
 }
+
+
+
+
+
 
 /* === CARRITO FLOTANTE === */
 .carrito-flotante {
@@ -802,8 +823,7 @@ h2{
         text-align: center;
     }
 }
-
-/* Scrollbar personalizada
+/* 
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -1100,6 +1120,15 @@ iframe {
 
 /* Modificar la sección de categorías existente */
 .categorias-home {
+    margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #222;
+}
+
+.categorias-home h2{
     text-align: center;
     font-size: 3.5rem;
     color: #333;
@@ -1109,10 +1138,6 @@ iframe {
     font-weight: bolder;
     text-transform: uppercase;
 }
-
-.categorias-home {
-        font-size: 1.4rem;
-    }
 
 /* Wrapper del carrusel */
 .categorias-carousel-wrapper {
@@ -1130,9 +1155,11 @@ iframe {
 
 /* Modificar .categoria-card existente - AGREGAR estas propiedades */
 .categoria-card {
-    min-width: calc(25% - 1.5rem);  /* 4 categorías en PC */
-    flex-shrink: 0;
-    /* Mantener todas las demás propiedades existentes */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px; /* Ajusta según tu diseño */
+    padding-bottom: 60px; /* Espacio para el botón */
 }
 
 /* Botones de navegación del carrusel */
@@ -1199,6 +1226,14 @@ iframe {
         width: 35px;
         height: 35px;
         font-size: 1rem;
+    }
+
+    .section-title-home {
+        font-size: 1.8rem;
+    }
+
+    .categorias-home h2{
+        font-size: 1.8rem;
     }
 }
 
@@ -1653,5 +1688,47 @@ iframe {
         padding: 0.4rem 0.8rem;
         top: 10px;
         right: 10px;
+    }
+}
+
+/* Responsive Carrusel*/
+@media (max-width: 1024px) {
+    .categoria-card {
+        min-height: 380px;
+        padding-bottom: 55px;
+    }
+    
+    .categoria-count {
+        bottom: 18px;
+        font-size: 0.85rem;
+        padding: 0.45rem 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .categoria-card {
+        min-height: 360px;
+        padding-bottom: 50px;
+    }
+    
+    .categoria-count {
+        bottom: 15px;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.85rem;
+        border-radius: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categoria-card {
+        min-height: 340px;
+        padding-bottom: 45px;
+    }
+    
+    .categoria-count {
+        bottom: 12px;
+        font-size: 0.75rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 15px;
     }
 }

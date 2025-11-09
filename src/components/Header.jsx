@@ -12,19 +12,13 @@ const Header = () => {
 
   const location = useLocation();
 
-  // === SCROLL TO TOP Y CERRAR MENÚ AL CAMBIAR DE PÁGINA ===
+  // === CERRAR MENÚ AL CAMBIAR DE PÁGINA ===
   useEffect(() => {
     // Cerrar menú
     setMenuAbierto(false);
     document.body.style.overflow = "";
-    
-    // Scroll to top INMEDIATO
-    window.scrollTo(0, 0);
-    
-    // Backup: forzar scroll después de un momento
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
+    // Eliminamos scrollTo, lo maneja ScrollRestoration en App.jsx
+    window.scrollTo(0,0);
   }, [location.pathname]);
 
   // === ABRIR/CERRAR MENÚ ===
@@ -84,13 +78,12 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // === CIERRE AL HACER CLICK EN LINK (MÓVIL) + SCROLL TO TOP ===
+  // === CIERRE AL HACER CLICK EN LINK (MÓVIL) ===
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       closeMenu();
     }
-    // Forzar scroll to top
-    window.scrollTo(0, 0);
+    // Eliminamos scrollTo, lo maneja ScrollRestoration
   };
 
   // === LIMPIEZA AL DESMONTAR ===
@@ -122,18 +115,15 @@ const Header = () => {
             ref={navMenuRef}
           >
             <div className="mobile-menu-header">
-              <Link to="/" className="logo-link" onClick={handleLinkClick}>
-                <img
-                  src="/assets/Images/logo.png"
-                  alt="SISTEC"
-                  className="logo-imagen"
-                />
-                <span className="logo-text">SISTEC</span>
-              </Link>
-              <div className="mobile-menu-icons">
-                <Link to="/carrito" className="icon-link" aria-label="Carrito" onClick={handleLinkClick}>
-                  <i className="fas fa-shopping-cart"></i>
-                </Link>
+              <button
+                id="closeMenu"
+                className="close-btn"
+                onClick={closeMenu}
+                aria-label="Cerrar menú"
+              >
+                <i className="fas fa-times"></i>
+              </button>
+              <div className="mobile-login">
                 <Link
                   to="/login"
                   className="icon-link"

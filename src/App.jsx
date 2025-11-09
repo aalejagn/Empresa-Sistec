@@ -15,15 +15,9 @@ import Valores from './pages/Valores';
 import Vision from './pages/Vision';
 import Categorias from './pages/Categorias';
 
+
+
 const App = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    // Reset overflow y scroll to top en cada route change
-    document.body.style.overflow = '';
-    window.scrollTo(0, 0);
-  }, [location.pathname]);  // Ejecuta solo cuando pathname cambia
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
