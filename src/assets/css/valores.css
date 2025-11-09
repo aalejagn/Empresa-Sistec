@@ -1561,6 +1561,7 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
+    font-family: tahoma;
 }
 
 
@@ -1574,6 +1575,7 @@ article {
 
 
 .categoria-titulo {
+    font-family: tahoma;
     font-size: 2.2rem;
     color: #417d80;
     margin-bottom: 1.5rem;

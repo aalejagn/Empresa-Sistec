@@ -140,7 +140,7 @@ const CategoryCarousel = () => {
 
   return (
     <section className="categorias-home" id="categorias">
-      <h2 className="section-title-home">Buscar por Tema</h2>
+      <h2 className="Buscar por Tema">Buscar por Tema</h2>
       
       <div 
         className="categorias-carousel-wrapper" 

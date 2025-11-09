@@ -630,7 +630,7 @@ const Categorias = () => {
   const librosActuales = librosData[categoriaActual] || [];
 
   return (
-    <div>
+    <>
       {/* Encabezado */}
       <Header />
       <main className="catalogo-main">
@@ -838,7 +838,7 @@ const Categorias = () => {
       </main>
       {/* Footer - Ahora como componente */}
       <Footer />
-    </div>
+    </>
   );
 };
 

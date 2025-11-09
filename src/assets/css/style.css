@@ -222,7 +222,7 @@ h2{
     text-align: center;
     font-size: 3.5rem;
     color: #333;
-    margin-bottom: 0;
+    margin-bottom: 2rem;
     position: relative;
     letter-spacing: 1.2;
     font-weight: bolder;
@@ -482,7 +482,7 @@ h2{
     }
 
     .section-title-home {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     .stat-number {
@@ -803,7 +803,7 @@ h2{
     }
 }
 
-/* Scrollbar personalizada */
+/* Scrollbar personalizada
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -821,7 +821,7 @@ h2{
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
+} */
 
 
 
@@ -1100,10 +1100,19 @@ iframe {
 
 /* Modificar la sección de categorías existente */
 .categorias-home {
-    margin-bottom: 4rem;
+    text-align: center;
+    font-size: 3.5rem;
+    color: #333;
+    margin-bottom: 2rem;
     position: relative;
-    overflow: hidden;
+    letter-spacing: 1.2;
+    font-weight: bolder;
+    text-transform: uppercase;
 }
+
+.categorias-home {
+        font-size: 1.4rem;
+    }
 
 /* Wrapper del carrusel */
 .categorias-carousel-wrapper {

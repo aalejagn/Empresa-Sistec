@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom"; // ← Añade useLocation
+import { Link, useLocation } from "react-router-dom";
 import "../assets/css/header.css";
 
 const Header = () => {
@@ -10,14 +10,21 @@ const Header = () => {
   const logoRef = useRef(null);
   const navActionsRef = useRef(null);
 
-  const location = useLocation(); // ← Detecta cambio de ruta
+  const location = useLocation();
 
-  // === RESET SCROLL + OVERFLOW EN CADA NAVEGACIÓN ===
+  // === SCROLL TO TOP Y CERRAR MENÚ AL CAMBIAR DE PÁGINA ===
   useEffect(() => {
-    // Cierra menú y resetea overflow al cambiar de página
+    // Cerrar menú
     setMenuAbierto(false);
     document.body.style.overflow = "";
-    window.scrollTo(0, 0); // Scroll to top
+    
+    // Scroll to top INMEDIATO
+    window.scrollTo(0, 0);
+    
+    // Backup: forzar scroll después de un momento
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
   }, [location.pathname]);
 
   // === ABRIR/CERRAR MENÚ ===
@@ -77,17 +84,19 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // === CIERRE AL HACER CLICK EN LINK (MÓVIL) ===
+  // === CIERRE AL HACER CLICK EN LINK (MÓVIL) + SCROLL TO TOP ===
   const handleLinkClick = () => {
     if (window.innerWidth <= 768) {
       closeMenu();
     }
+    // Forzar scroll to top
+    window.scrollTo(0, 0);
   };
 
-  // === LIMPIEZA AL DESMONTAR (por si acaso) ===
+  // === LIMPIEZA AL DESMONTAR ===
   useEffect(() => {
     return () => {
-      document.body.style.overflow = ""; // Reset final
+      document.body.style.overflow = "";
     };
   }, []);
 
