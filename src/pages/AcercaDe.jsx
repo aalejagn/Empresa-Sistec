@@ -4,10 +4,6 @@
   import Footer from "../components/Footer";
   import { Link } from "react-router-dom";
 
-  import "../assets/css/global.css";
-  import "../assets/css/header.css";
-  import "../assets/css/footer.css";
-  import "../assets/css/valores.css"; // ESTE ES EL CLAVE
 
   const AcercaDe = () => {
     return (

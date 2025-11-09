@@ -7,7 +7,7 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
-import "../assets/css/login.css";
+import "../assets/css/auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");

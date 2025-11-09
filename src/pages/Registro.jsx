@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; // ← Agregar useEffect
 import { Mail, Lock, User, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
-import '../assets/css/registrar.css';
+import '../assets/css/auth.css'
 
 const Registrar = () => {
   const [email, setEmail] = useState('');

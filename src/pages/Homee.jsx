@@ -2,8 +2,7 @@ import React from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import "../assets/css/style.css";
-// import "../assets/css/home_categorias.css"
+
 import { Link } from "react-router-dom";
 
 const Home = () => {

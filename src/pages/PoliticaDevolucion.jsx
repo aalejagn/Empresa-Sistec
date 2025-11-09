@@ -4,11 +4,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 
-// import "../assets/css/style.css";
-import "../assets/css/header.css";
-import "../assets/css/footer.css";
-import "../assets/css/legal-pages.css";
-import "../assets/css/legal-pages-responsive.css"; // ← NUEVO
 
 const PoliticaDevolucion = () => {
   return (

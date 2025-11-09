@@ -1,22 +1,61 @@
-/* assets/css/global.css */
+/* assets/css/global.css - SOLUCIÓN COMPLETA FOOTER PEGADO */
 
-/* === FOOTER SIEMPRE ABAJO === */
-html, body {
-    height: 100%;
-    margin: 0;
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 8rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
 }
 
+/* IMPORTANTE: Main debe ocupar todo el espacio disponible */
 main {
-    flex: 1; /* ¡Esto empuja el footer al fondo! */
+  flex: 1 0 auto;
+  width: 100%;
+  padding: 2rem 0;
 }
 
-/* === Evita conflictos con header fijo === */
-body {
-    padding-top: 8rem; /* Ya lo tienes en header.css, pero no pasa nada si se repite */
+/* ESPACIO PARA HEADER FIJO */
+.page-content {
+  padding-top: 8rem; /* 128px */
+}
+
+/* Aseguramos que el footer siempre esté al fondo */
+footer {
+  flex-shrink: 0;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Para páginas con poco contenido */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* IMPORTANTE: Para React Router o SPA */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Si usas un wrapper adicional */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
