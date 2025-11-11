@@ -14,11 +14,8 @@ const Header = () => {
 
   // === CERRAR MENÚ AL CAMBIAR DE PÁGINA ===
   useEffect(() => {
-    // Cerrar menú
     setMenuAbierto(false);
     document.body.style.overflow = "";
-    // Eliminamos scrollTo, lo maneja ScrollRestoration en App.jsx
-    window.scrollTo(0,0);
   }, [location.pathname]);
 
   // === ABRIR/CERRAR MENÚ ===
@@ -83,7 +80,6 @@ const Header = () => {
     if (window.innerWidth <= 768) {
       closeMenu();
     }
-    // Eliminamos scrollTo, lo maneja ScrollRestoration
   };
 
   // === LIMPIEZA AL DESMONTAR ===
@@ -97,7 +93,7 @@ const Header = () => {
     <header className="main-header">
       <nav className="main-nav">
         <div className="nav-container">
-          {/* LOGO */}
+          {/* LOGO (OCULTO EN MÓVIL) */}
           <div className="logo" ref={logoRef}>
             <Link to="/" className="logo-link" onClick={handleLinkClick}>
               <img
@@ -114,16 +110,28 @@ const Header = () => {
             className={`nav-menu ${menuAbierto ? "active" : ""}`}
             ref={navMenuRef}
           >
+            {/* HEADER DENTRO DEL MENÚ MÓVIL */}
             <div className="mobile-menu-header">
-              <button
-                id="closeMenu"
-                className="close-btn"
-                onClick={closeMenu}
-                aria-label="Cerrar menú"
-              >
-                <i className="fas fa-times"></i>
-              </button>
-              <div className="mobile-login">
+              {/* LOGO + TEXTO */}
+              <Link to="/" className="logo-link" onClick={handleLinkClick}>
+                <img
+                  src="/assets/Images/logo.png"
+                  alt="SISTEC"
+                  className="logo-imagen"
+                />
+                <span className="logo-text">SISTEC READ</span>
+              </Link>
+
+              {/* ÍCONOS + BOTÓN CERRAR */}
+              <div className="mobile-menu-icons">
+                <Link
+                  to="/carrito"
+                  className="icon-link"
+                  aria-label="Carrito"
+                  onClick={handleLinkClick}
+                >
+                  <i className="fas fa-shopping-cart"></i>
+                </Link>
                 <Link
                   to="/login"
                   className="icon-link"
@@ -132,9 +140,11 @@ const Header = () => {
                 >
                   <i className="fas fa-user"></i>
                 </Link>
+
               </div>
             </div>
 
+            {/* ENLACES */}
             <li>
               <Link to="/acercade" className="nav-link" onClick={handleLinkClick}>
                 Nosotros
@@ -156,15 +166,20 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <a href="#footer" className="nav-link" onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick();
-                document.querySelector('#footer')?.scrollIntoView({ behavior: 'smooth' });
-              }}>
+              <a
+                href="#footer"
+                className="nav-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick();
+                  document.querySelector("#footer")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
                 Futuro
               </a>
             </li>
 
+            {/* REDES */}
             <div className="mobile-social-media">
               <p className="social-title">Síguenos en:</p>
               <div className="social-icons">
@@ -184,7 +199,7 @@ const Header = () => {
             </div>
           </ul>
 
-          {/* ACCIONES */}
+          {/* ACCIONES (DESKTOP) */}
           <div className="nav-actions" ref={navActionsRef}>
             <div className="search-container" ref={searchContainerRef}>
               <input
@@ -219,7 +234,7 @@ const Header = () => {
             aria-label="Menú"
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && toggleMenu()}
+            onKeyDown={(e) => e.key === "Enter" && toggleMenu()}
           >
             <span></span>
             <span></span>

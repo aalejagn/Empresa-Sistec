@@ -76,7 +76,7 @@ const Contactanos = () => {
                 <li>
                   <strong>Correo:</strong>
                   <a href="mailto:infosistecread@gmail.com">
-                    <i className="fas fa-envelope"></i> infosistecread@gmail.com
+                    <i className="fas fa-envelope"></i>sistecread.info@gmail.com
                   </a>
                 </li>
                 <li>

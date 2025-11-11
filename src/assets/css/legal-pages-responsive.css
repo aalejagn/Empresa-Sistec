@@ -176,10 +176,7 @@
    MEJORAS ADICIONALES
    =================================== */
 
-/* Scroll suave en todas las páginas */
-html {
-  scroll-behavior: smooth;
-}
+
 
 /* Evitar desbordamiento horizontal */
 .privacy-content,

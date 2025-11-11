@@ -17,7 +17,6 @@ import './assets/css/style.css'
 import './assets/css/ubicacion.css'
 import './assets/css/valores.css'
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

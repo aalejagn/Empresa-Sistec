@@ -779,6 +779,7 @@ aside {
 
     aside ul li a {
         gap: 0.4rem;
+        font-size: 0.6rem;
     }
 
     aside ul li a:hover {
@@ -842,5 +843,8 @@ aside {
 
     aside > ul > li strong {
         font-size: 0.95rem;
+    }
+    aside > ul >li a{
+        font-size: 0.55rem;
     }
 }
