@@ -2030,3 +2030,227 @@ html {
 .container{
     border-left: none;
 }
+
+/* ========================================
+   ESTILOS PARA CARRITO DE COMPRAS
+   ======================================== */
+
+/* Reset base (inspirado en valores.css) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.carrito-main {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e8f4f8 100%);
+  min-height: 80vh;
+  padding: 3rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Título (como page-title en valores.css) */
+.page-title {
+  background: linear-gradient(135deg, #417d80 0%, #53c9cb 100%);
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 20px 20px 0 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Carrito vacío */
+.empty-cart {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.empty-cart p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+/* Items del carrito */
+.cart-items {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s ease;
+}
+
+.cart-item:hover {
+  background: #f8f9fa;
+}
+
+.item-info {
+  flex: 2;
+}
+
+.item-info h3 {
+  font-size: 1.2rem;
+  color: #417d80;
+  margin-bottom: 0.5rem;
+}
+
+.item-info p {
+  font-size: 0.9rem;
+  color: #2c3e50;
+}
+
+.item-quantity {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item-quantity button {
+  background: #53c9cb;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.item-quantity button:hover {
+  background: #417d80;
+}
+
+.item-quantity button:disabled {
+  background: #ddd;
+  cursor: not-allowed;
+}
+
+.item-quantity span {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.item-subtotal {
+  flex: 1;
+  text-align: right;
+  font-weight: bold;
+  color: #417d80;
+}
+
+.btn-remove {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.btn-remove:hover {
+  background: #dc2626;
+}
+
+/* Resumen */
+.cart-summary {
+  margin-top: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: right;
+}
+
+.cart-summary h2 {
+  font-size: 1.8rem;
+  color: #417d80;
+  margin-bottom: 1rem;
+}
+
+.cart-summary button,
+.cart-summary a {
+  margin-left: 1rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: #53c9cb;
+}
+
+.btn-primary:hover {
+  background: #417d80;
+}
+
+.btn-secondary {
+  background: #6b7280;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+.btn-tertiary {
+  background: #10b981;
+}
+
+.btn-tertiary:hover {
+  background: #059669;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .item-subtotal,
+  .item-quantity {
+    width: 100%;
+    text-align: left;
+  }
+
+  .btn-remove {
+    width: 100%;
+  }
+
+  .cart-summary {
+    text-align: center;
+  }
+
+  .cart-summary button,
+  .cart-summary a {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
+

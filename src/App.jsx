@@ -14,6 +14,7 @@ import Valores from "./pages/Valores";
 import Vision from "./pages/Vision";
 import Categorias from "./pages/Categorias";
 import ScrollToTop from "./components/ScrollToTop";
+import Carrito from "./pages/Carrito";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/valores" element={<Valores />} />
         <Route path="/vision" element={<Vision />} />
         <Route path="/categorias" element={<Categorias />} />
+        <Route path = "/carrito" element = {<Carrito />} />
       </Routes>
     </>
   );

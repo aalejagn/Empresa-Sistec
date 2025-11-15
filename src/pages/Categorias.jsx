@@ -2,12 +2,15 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import {useCart} from "../components/CartContext"
 
 const Categorias = () => {
   const [categoriaActual, setCategoriaActual] = useState(
     "literatura-contemporanea"
   );
   const [libroExpandido, setLibroExpandido] = useState(null);
+
+  const {addToCart} = useCart()
 
   // Títulos de categorías
   const titulosCategorias = {
@@ -694,6 +697,17 @@ const Categorias = () => {
                       {libro.descripcion}
                     </p>
                   </div>
+                  {/* AQUÍ VA EL BOTÓN */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      addToCart(libro);
+                      alert("¡Añadido al carrito!");
+                    }}
+                    className="btn-add-cart"
+                  >
+                    Añadir al Carrito
+                  </button>
                 </div>
               ))}
             </section>
