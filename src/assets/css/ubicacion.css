@@ -136,7 +136,7 @@ body {
 }
 
 .location-article > p:first-of-type::before {
-    content: '"';
+    content: '';
     position: absolute;
     left: 0;
     top: -15px;

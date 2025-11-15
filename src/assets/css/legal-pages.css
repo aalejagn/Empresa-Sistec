@@ -59,7 +59,7 @@
 }
 
 .privacy-content ul.list-valores-politicas li::before {
-    content: "✓";
+    content: '\2713';
     position: absolute;
     left: 0;
     color: #53c9cb;

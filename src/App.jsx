@@ -15,13 +15,12 @@ import Vision from "./pages/Vision";
 import Categorias from "./pages/Categorias";
 import ScrollToTop from "./components/ScrollToTop";
 import Carrito from "./pages/Carrito";
+import { SearchProvider } from "./components/SearchContext";
 
 const App = () => {
   return (
-    <>
-      {/* Este componente se encarga de hacer scroll al inicio en cada cambio de ruta */}
+    <SearchProvider>
       <ScrollToTop />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -36,9 +35,9 @@ const App = () => {
         <Route path="/valores" element={<Valores />} />
         <Route path="/vision" element={<Vision />} />
         <Route path="/categorias" element={<Categorias />} />
-        <Route path = "/carrito" element = {<Carrito />} />
+        <Route path="/carrito" element={<Carrito />} />
       </Routes>
-    </>
+    </SearchProvider>
   );
 };
 

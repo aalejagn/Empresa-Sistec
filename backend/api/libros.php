@@ -1,10 +1,9 @@
 <?php
-require '../../config/database.php';
-require '../../includes/cors.php';
+require '../config/database.php';
+require '../includes/cors.php';
 
-$method = $_SERVER['REQUEST_METHOD'];
 
-if ($method === 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $categoria = $_GET['cat'] ?? null;
   $sql = "SELECT * FROM libros";
   if ($categoria) $sql .= " WHERE categoria = :cat";

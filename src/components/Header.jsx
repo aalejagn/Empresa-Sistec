@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSearch } from "./SearchContext";
 import "../assets/css/header.css";
+import { useCart } from "./CartContext";
 
 const Header = () => {
   const [menuAbierto, setMenuAbierto] = useState(false);
@@ -11,6 +13,11 @@ const Header = () => {
   const navActionsRef = useRef(null);
 
   const location = useLocation();
+  const navigate = useNavigate();
+  const { searchTerm, setSearchTerm } = useSearch();
+  const { cart } = useCart(); // ← PARA SABER CUÁNTOS LIBROS HAY EN EL CARRITO
+  const [cartAnimated, setCartAnimated] = useState(false);
+  const prevCartCountRef = useRef(0);
 
   // === CERRAR MENÚ AL CAMBIAR DE PÁGINA ===
   useEffect(() => {
@@ -39,6 +46,24 @@ const Header = () => {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [menuAbierto]);
+
+  // === MANEJAR BÚSQUEDA EN TIEMPO REAL ===
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    // Si hay texto, navegar a categorías automáticamente
+    if (value.trim() !== "" && location.pathname !== "/categorias") {
+      navigate("/categorias");
+    }
+  };
+
+  // === LIMPIAR BÚSQUEDA AL SALIR DE CATEGORÍAS ===
+  useEffect(() => {
+    if (location.pathname !== "/categorias") {
+      setSearchTerm("");
+    }
+  }, [location.pathname, setSearchTerm]);
 
   // === REUBICAR BUSCADOR ===
   useEffect(() => {
@@ -89,6 +114,22 @@ const Header = () => {
     };
   }, []);
 
+  // Contador de libros en el carrito
+  const cartCount = cart.reduce((total, item) => total + item.cantidad, 0);
+
+  // Detectar cuando se agrega un item al carrito
+  useEffect(() => {
+    const currentCount = cart.reduce((total, item) => total + item.cantidad, 0);
+
+    if (currentCount > prevCartCountRef.current) {
+      // Se agregó un item, activar animación
+      setCartAnimated(true);
+      setTimeout(() => setCartAnimated(false), 600);
+    }
+
+    prevCartCountRef.current = currentCount;
+  }, [cart]);
+
   return (
     <header className="main-header">
       <nav className="main-nav">
@@ -126,11 +167,20 @@ const Header = () => {
               <div className="mobile-menu-icons">
                 <Link
                   to="/carrito"
-                  className="icon-link"
+                  className={`icon-link ${cartAnimated ? "cart-added" : ""}`}
                   aria-label="Carrito"
                   onClick={handleLinkClick}
                 >
                   <i className="fas fa-shopping-cart"></i>
+                  {cartCount > 0 && (
+                    <span
+                      className={`cart-badge ${
+                        cartAnimated ? "item-added" : ""
+                      }`}
+                    >
+                      {cartCount}
+                    </span>
+                  )}
                 </Link>
                 <Link
                   to="/login"
@@ -140,28 +190,43 @@ const Header = () => {
                 >
                   <i className="fas fa-user"></i>
                 </Link>
-
               </div>
             </div>
 
             {/* ENLACES */}
             <li>
-              <Link to="/acercade" className="nav-link" onClick={handleLinkClick}>
+              <Link
+                to="/acercade"
+                className="nav-link"
+                onClick={handleLinkClick}
+              >
                 Nosotros
               </Link>
             </li>
             <li>
-              <Link to="/categorias" className="nav-link" onClick={handleLinkClick}>
+              <Link
+                to="/categorias"
+                className="nav-link"
+                onClick={handleLinkClick}
+              >
                 Catálogo
               </Link>
             </li>
             <li>
-              <Link to="/ubicacion" className="nav-link" onClick={handleLinkClick}>
+              <Link
+                to="/ubicacion"
+                className="nav-link"
+                onClick={handleLinkClick}
+              >
                 Ubicación
               </Link>
             </li>
             <li>
-              <Link to="/contactanos" className="nav-link" onClick={handleLinkClick}>
+              <Link
+                to="/contactanos"
+                className="nav-link"
+                onClick={handleLinkClick}
+              >
                 Contáctanos
               </Link>
             </li>
@@ -172,7 +237,9 @@ const Header = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   handleLinkClick();
-                  document.querySelector("#footer")?.scrollIntoView({ behavior: "smooth" });
+                  document
+                    .querySelector("#footer")
+                    ?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 Futuro
@@ -183,16 +250,36 @@ const Header = () => {
             <div className="mobile-social-media">
               <p className="social-title">Síguenos en:</p>
               <div className="social-icons">
-                <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-link">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-link"
+                >
                   <i className="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noreferrer" className="social-link">
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-link"
+                >
                   <i className="fab fa-twitter"></i>
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-link">
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-link"
+                >
                   <i className="fab fa-instagram"></i>
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noreferrer" className="social-link">
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-link"
+                >
                   <i className="fab fa-youtube"></i>
                 </a>
               </div>
@@ -206,14 +293,28 @@ const Header = () => {
                 type="search"
                 placeholder="Buscar Libros"
                 className="search-input"
+                value={searchTerm}
+                onChange={handleSearchChange}
               />
               <button className="search-btn" aria-label="Buscar">
                 <i className="fas fa-search"></i>
               </button>
             </div>
             <div className="action-icons">
-              <Link to="/carrito" className="icon-link" aria-label="Carrito" onClick={handleLinkClick}>
+              <Link
+                to="/carrito"
+                className={`icon-link ${cartAnimated ? "cart-added" : ""}`}
+                aria-label="Carrito"
+                onClick={handleLinkClick}
+              >
                 <i className="fas fa-shopping-cart"></i>
+                {cartCount > 0 && (
+                  <span
+                    className={`cart-badge ${cartAnimated ? "item-added" : ""}`}
+                  >
+                    {cartCount}
+                  </span>
+                )}
               </Link>
               <Link
                 to="/login"

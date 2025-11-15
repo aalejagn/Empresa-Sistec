@@ -128,6 +128,9 @@ header.main-header {
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.search-container::hove{
+  color: none;
+}
 
 .search-input {
   padding: 0.5rem 1rem 0.5rem 2.5rem;
@@ -146,7 +149,7 @@ header.main-header {
 }
 
 .search-input:focus {
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 0 0 3px rgba(53, 178, 130, 0.3);
 }
 
 .search-btn {
@@ -542,5 +545,206 @@ header.main-header {
   .mobile-social-media {
     margin-top: 1.5rem;
     padding-top: 1rem;
+  }
+}
+
+/* ========================================
+   ESTILOS PARA BADGE DEL CARRITO
+   Agregar esto a tu archivo header.css
+   ======================================== */
+
+/* Badge del contador del carrito */
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: linear-gradient(135deg, #ff1744 0%, #f50057 100%);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-shadow: 0 2px 8px rgba(255, 23, 68, 0.5);
+  border: 2px solid white;
+  animation: badgePulse 2s ease-in-out infinite;
+  z-index: 10;
+}
+
+/* Animación de pulso para el badge */
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(255, 23, 68, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 23, 68, 0.8);
+  }
+}
+
+/* Hacer que el contenedor del ícono sea relativo */
+.icon-link {
+  position: relative; /* Ya existe, pero asegúrate de tenerlo */
+}
+
+/* Efecto hover mejorado para el ícono del carrito */
+.icon-link:hover .cart-badge {
+  animation: none;
+  transform: scale(1.15);
+  box-shadow: 0 4px 15px rgba(255, 23, 68, 0.7);
+}
+
+/* ========================================
+   NOTIFICACIÓN AL AGREGAR AL CARRITO
+   ======================================== */
+
+.notificacion-carrito {
+  position: fixed;
+  top: 100px;
+  right: -400px;
+  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  max-width: 350px;
+  border-left: 4px solid #2e7d32;
+}
+
+.notificacion-carrito.show {
+  right: 30px;
+}
+
+.notificacion-carrito i {
+  font-size: 1.3rem;
+  animation: checkMark 0.5s ease;
+}
+
+@keyframes checkMark {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   RESPONSIVE PARA BADGE Y NOTIFICACIÓN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .cart-badge {
+    font-size: 0.65rem;
+    min-width: 16px;
+    height: 16px;
+    top: -3px;
+    right: -3px;
+    border-width: 1.5px;
+  }
+
+  /* Badge en los iconos móviles del menú */
+  .mobile-menu-icons .icon-link {
+    position: relative;
+  }
+
+  .mobile-menu-icons .cart-badge {
+    top: 2px;
+    right: 2px;
+  }
+
+  .notificacion-carrito {
+    max-width: 280px;
+    font-size: 0.9rem;
+    padding: 0.9rem 1.2rem;
+    top: 90px;
+  }
+
+  .notificacion-carrito.show {
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-badge {
+    font-size: 0.6rem;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+  }
+
+  .notificacion-carrito {
+    max-width: calc(100vw - 30px);
+    font-size: 0.85rem;
+    padding: 0.8rem 1rem;
+    top: 80px;
+    right: -100%;
+  }
+
+  .notificacion-carrito.show {
+    right: 10px;
+  }
+
+  .notificacion-carrito i {
+    font-size: 1.1rem;
+  }
+}
+
+/* ========================================
+   ANIMACIÓN CUANDO SE AGREGA UN ITEM
+   ======================================== */
+
+@keyframes cartBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  75% {
+    transform: scale(1.15);
+  }
+}
+
+/* Clase para animar el ícono cuando se agrega algo */
+.icon-link.cart-added {
+  animation: cartBounce 0.6s ease;
+}
+
+/* Badge con efecto especial al agregar */
+.cart-badge.item-added {
+  animation: badgePop 0.5s ease;
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+    background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+  }
+  100% {
+    transform: scale(1);
   }
 }

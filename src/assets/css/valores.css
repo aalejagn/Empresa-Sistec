@@ -102,7 +102,7 @@ article p {
 }
 
 article p::before {
-    content: '"';
+    content: '';
     position: absolute;
     left: 0;
     top: -15px;
@@ -118,12 +118,13 @@ article p::before {
    ======================================== */
 .libro-vision {
     width: 100%;
+    max-width: 1000px;
     height: 450px;
     object-fit: cover;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(65, 125, 128, 0.3);
     transition: all 0.5s ease;
-    margin-left: 1.5rem;
+    margin: 2rem auto;
     display: block;
 }
 
@@ -1138,7 +1139,7 @@ article p {
 }
 
 article p::before {
-    content: '"';
+    content: '';
     position: absolute;
     left: 0;
     top: -15px;
@@ -1154,12 +1155,13 @@ article p::before {
    ======================================== */
 .libro-mision {
     width: 100%;
+    max-width: 1000px;     /* ← NUEVO: ancho máximo */
     height: 450px;
     object-fit: cover;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(65, 125, 128, 0.3);
     transition: all 0.5s ease;
-    margin-left: 1.5rem;
+    margin: 2rem auto;     /* ← CAMBIO: centrado perfecto (era margin-left: 1.5rem) */
     display: block;
 }
 
@@ -1602,13 +1604,15 @@ article p {
     color: #34495e;
     text-align: justify;
     margin-bottom: 2.5rem;
-    margin-left: 1.5rem;
+    margin-left: 0;        /* ← CAMBIO: era 1.5rem */
+    margin-right: 0;       /* ← NUEVO: centrar */
+    padding-left: 0;       /* ← CAMBIO: era 1.5rem */
     position: relative;
-    padding-left: 1.5rem;
+    max-width: 100%;       /* ← NUEVO */
 }
 
 article p::before {
-    content: '"';
+    content: '';
     position: absolute;
     left: 0;
     top: -15px;
@@ -1629,7 +1633,8 @@ article p::before {
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(65, 125, 128, 0.3);
     transition: all 0.5s ease;
-    margin-left: 1.5rem;
+    margin-left: auto;    /* ← CAMBIO */
+    margin-right: auto;   /* ← CAMBIO */
     display: block;
 }
 
