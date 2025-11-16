@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'; // ← Agregar useEffect
+import React, { useState, useEffect } from 'react';
 import { Mail, Lock, User, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
-import '../assets/css/auth.css'
+import '../assets/css/auth.css';
+import { useAuth } from '../components/AuthContext';  // ← AÑADIDO
 
 const Registrar = () => {
   const [email, setEmail] = useState('');
@@ -16,16 +17,15 @@ const Registrar = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [touched, setTouched] = useState({ email: false, password: false, name: false });
 
-  // ========== NUEVO: Eliminar padding del body ==========
+  const { register } = useAuth();  // ← AÑADIDO para usar el contexto
+
   useEffect(() => {
     document.body.classList.add('login-page');
     return () => {
       document.body.classList.remove('login-page');
     };
   }, []);
-  // ======================================================
 
-  // Validación de nombre
   const validateName = (value) => {
     if (!value) {
       setNameError('El nombre es requerido');
@@ -46,7 +46,6 @@ const Registrar = () => {
     }
   };
 
-  // Validación de email con regex
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!value) {
@@ -64,7 +63,6 @@ const Registrar = () => {
     }
   };
 
-  // Validación de contraseña con requisitos
   const validatePassword = (value) => {
     if (!value) {
       setPasswordError('La contraseña es requerida');
@@ -89,7 +87,6 @@ const Registrar = () => {
     }
   };
 
-  // Manejar cambio de nombre
   const handleNameChange = (e) => {
     const value = e.target.value;
     setName(value);
@@ -97,7 +94,6 @@ const Registrar = () => {
     checkSubmitEnabled(isValid, emailValid, passwordValid);
   };
 
-  // Manejar cambio de email
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -105,7 +101,6 @@ const Registrar = () => {
     checkSubmitEnabled(nameValid, isValid, passwordValid);
   };
 
-  // Manejar cambio de contraseña
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
@@ -113,12 +108,10 @@ const Registrar = () => {
     checkSubmitEnabled(nameValid, emailValid, isValid);
   };
 
-  // Verificar si el botón debe estar habilitado
   const checkSubmitEnabled = (nameIsValid, emailIsValid, passwordIsValid) => {
     setIsSubmitEnabled(nameIsValid && emailIsValid && passwordIsValid);
   };
 
-  // Manejar blur
   const handleNameBlur = () => {
     setTouched({ ...touched, name: true });
     validateName(name);
@@ -134,12 +127,10 @@ const Registrar = () => {
     validatePassword(password);
   };
 
-  // Manejar envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitEnabled) {
-      alert(`¡Bienvenido a SISTEC READ! 🎉\n\nNombre: ${name}\nEmail: ${email}\n\nRegistro completado exitosamente.`);
-      // Aquí iría la lógica de registro real
+      await register(name, email, password);  // ← CAMBIO: Usa fetch real desde contexto
     }
   };
 

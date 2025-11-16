@@ -1,19 +1,22 @@
 // src/pages/Carrito.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import React from "react";
+import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { useCart } from "../components/CartContext";
-
-
+import { useNavigate } from 'react-router-dom';
 
 const Carrito = () => {
   const { cart, updateQuantity, removeItem, clearCart } = useCart();
+  const navigate = useNavigate();
 
   // Cálculos
-  const IVA_RATE = 0.16;  // 16% para México
+  const IVA_RATE = 0.16; // 16% para México
   const calculateSubtotal = () => {
-    return cart.reduce((total, item) => total + (parseFloat(item.precio) * item.cantidad), 0);
+    return cart.reduce(
+      (total, item) => total + parseFloat(item.precio) * item.cantidad,
+      0
+    );
   };
 
   const subtotal = calculateSubtotal();
@@ -32,9 +35,10 @@ const Carrito = () => {
     <>
       <Header />
       <main className="carrito-main">
-        <div className="container"> {/* Usa .container de style.css */}
+        <div className="container">
+          {" "}
+          {/* Usa .container de style.css */}
           <h1 className="page-title">Tu Carrito de Compras</h1>
-
           {cart.length === 0 ? (
             <div className="empty-cart">
               <i className="fas fa-shopping-cart"></i>
@@ -56,7 +60,7 @@ const Carrito = () => {
                 </div>
 
                 <div className="cart-items">
-                  {cart.map(item => (
+                  {cart.map((item) => (
                     <div key={item.id} className="cart-item">
                       <div className="item-image">
                         <img src={item.imagen} alt={item.titulo} />
@@ -86,7 +90,9 @@ const Carrito = () => {
                         <div className="quantity-controls">
                           <button
                             className="qty-btn"
-                            onClick={() => updateQuantity(item.id, item.cantidad - 1)}
+                            onClick={() =>
+                              updateQuantity(item.id, item.cantidad - 1)
+                            }
                             disabled={item.cantidad <= 1}
                           >
                             <i className="fas fa-minus"></i>
@@ -94,7 +100,9 @@ const Carrito = () => {
                           <span className="quantity">{item.cantidad}</span>
                           <button
                             className="qty-btn"
-                            onClick={() => updateQuantity(item.id, item.cantidad + 1)}
+                            onClick={() =>
+                              updateQuantity(item.id, item.cantidad + 1)
+                            }
                           >
                             <i className="fas fa-plus"></i>
                           </button>
@@ -103,7 +111,10 @@ const Carrito = () => {
                         <div className="item-subtotal">
                           <span className="subtotal-label">Subtotal:</span>
                           <span className="subtotal-amount">
-                            ${(parseFloat(item.precio) * item.cantidad).toFixed(2)}
+                            $
+                            {(parseFloat(item.precio) * item.cantidad).toFixed(
+                              2
+                            )}
                           </span>
                         </div>
 
@@ -123,10 +134,13 @@ const Carrito = () => {
               {/* RESUMEN DE COMPRA */}
               <div className="cart-summary">
                 <h2 className="summary-title">Resumen de Compra</h2>
-
                 <div className="summary-details">
                   <div className="summary-row">
-                    <span>Subtotal ({cart.reduce((acc, item) => acc + item.cantidad, 0)} artículos):</span>
+                    <span>
+                      Subtotal (
+                      {cart.reduce((acc, item) => acc + item.cantidad, 0)}{" "}
+                      artículos):
+                    </span>
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
                   <div className="summary-row">
@@ -139,15 +153,15 @@ const Carrito = () => {
                     <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
-
-                <button className="btn btn-checkout" onClick={handleCheckout}>
+                <button
+                  className="btn btn-checkout"
+                  onClick={() => navigate("/checkout")}
+                >
                   <i className="fas fa-credit-card"></i> Proceder al Pago
                 </button>
-
                 <Link to="/categorias" className="btn btn-continue">
                   <i className="fas fa-arrow-left"></i> Seguir Comprando
                 </Link>
-
                 <div className="security-badges">
                   <i className="fas fa-lock"></i>
                   <span>Compra 100% segura</span>

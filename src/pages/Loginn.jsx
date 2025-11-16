@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import "../assets/css/auth.css";
 import LoginFooter from "../components/LoginFooter";
+import { useAuth } from "../components/AuthContext";  // ← AÑADIDO
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +24,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [touched, setTouched] = useState({ email: false, password: false });
 
-  // Eliminar padding del body cuando se monta el componente
+  const { login } = useAuth();  // ← AÑADIDO para usar el contexto
+
   useEffect(() => {
     document.body.classList.add("login-page");
     return () => {
@@ -31,7 +33,6 @@ const Login = () => {
     };
   }, []);
 
-  // Validación de email con regex
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
     if (!value) {
@@ -49,7 +50,6 @@ const Login = () => {
     }
   };
 
-  // Validación de contraseña con requisitos
   const validatePassword = (value) => {
     if (!value) {
       setPasswordError("La contraseña es requerida");
@@ -70,7 +70,6 @@ const Login = () => {
     }
   };
 
-  // Manejar cambio de email
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -78,7 +77,6 @@ const Login = () => {
     checkSubmitEnabled(isValid, passwordValid);
   };
 
-  // Manejar cambio de contraseña
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
@@ -86,12 +84,10 @@ const Login = () => {
     checkSubmitEnabled(emailValid, isValid);
   };
 
-  // Verificar si el botón debe estar habilitado
   const checkSubmitEnabled = (emailIsValid, passwordIsValid) => {
     setIsSubmitEnabled(emailIsValid && passwordIsValid);
   };
 
-  // Manejar blur (cuando el usuario sale del campo)
   const handleEmailBlur = () => {
     setTouched({ ...touched, email: true });
     validateEmail(email);
@@ -102,21 +98,16 @@ const Login = () => {
     validatePassword(password);
   };
 
-  // Manejar envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitEnabled) {
-      alert(
-        `¡Bienvenido a SISTEC READ! 🎉\n\nEmail: ${email}\n\nIniciando sesión...`
-      );
-      // Aquí iría la lógica de autenticación real
+      await login(email, password);  // ← CAMBIO: Usa fetch real desde contexto
     }
   };
 
-  // Manejar inicio de sesión social
   const handleSocialLogin = (provider) => {
     alert(`Iniciando sesión con ${provider}...`);
-    // Aquí iría la lógica de autenticación con redes sociales
+    // Lógica social (puedes integrar OAuth aquí)
   };
 
   return (

@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSearch } from "./SearchContext";
 import "../assets/css/header.css";
 import { useCart } from "./CartContext";
+import { useAuth } from "./AuthContext";
 
 const Header = () => {
   const [menuAbierto, setMenuAbierto] = useState(false);
@@ -18,6 +19,8 @@ const Header = () => {
   const { cart } = useCart(); // ← PARA SABER CUÁNTOS LIBROS HAY EN EL CARRITO
   const [cartAnimated, setCartAnimated] = useState(false);
   const prevCartCountRef = useRef(0);
+
+  const { user, logout } = useAuth(); // ← AÑADE ESTO
 
   // === CERRAR MENÚ AL CAMBIAR DE PÁGINA ===
   useEffect(() => {
@@ -244,6 +247,17 @@ const Header = () => {
               >
                 Futuro
               </a>
+            </li>
+            <li>
+              {user && (
+                <Link
+                  to="/perfil"
+                  className="nav-link"
+                  onClick={handleLinkClick}
+                >
+                  <i class="fa-solid fa-address-card"></i>
+                </Link>
+              )}
             </li>
 
             {/* REDES */}

@@ -16,6 +16,9 @@ import Categorias from "./pages/Categorias";
 import ScrollToTop from "./components/ScrollToTop";
 import Carrito from "./pages/Carrito";
 import { SearchProvider } from "./components/SearchContext";
+import Checkout from "./pages/FormularioCarrito";
+import MetodoPago from "./pages/MetodoPago";
+import Perfil from "./pages/Perfil";
 
 const App = () => {
   return (
@@ -36,6 +39,9 @@ const App = () => {
         <Route path="/vision" element={<Vision />} />
         <Route path="/categorias" element={<Categorias />} />
         <Route path="/carrito" element={<Carrito />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/metodo-pago" element={<MetodoPago />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </SearchProvider>
   );

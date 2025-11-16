@@ -1,6 +1,6 @@
 <?php
-require '../../config/database.php';
-require '../../includes/cors.php';
+require '../config/database.php';
+require '../includes/cors.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 

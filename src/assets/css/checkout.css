@@ -1,0 +1,468 @@
+/* src/assets/css/checkout.css */
+.checkout-main {
+  padding: 3rem 1rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.checkout-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #aaa;
+  font-weight: 600;
+}
+
+.step.active {
+  color: #52b3b9;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.step.active .step-number {
+  background: #52b3b9;
+  color: white;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: #ddd;
+  margin: 0 1rem;
+}
+
+.step.active ~ .step-line {
+  background: #52b3b9;
+}
+
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.checkout-summary {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.summary-items {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.summary-total {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 2px solid #52b3b9;
+}
+
+.checkout-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-section h2 {
+  color: #52b3b9;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select {
+  width: 100%;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.tarjeta-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.tarjeta-row input {
+  flex: 1;
+}
+
+.nota {
+  font-size: 0.85rem;
+  color: #e74c3c;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.btn-next, .btn-back {
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-next {
+  background: #2b6163;
+  color: white;
+}
+
+.btn-back {
+  background: #eee;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .checkout-content {
+    grid-template-columns: 1fr;
+  }
+  .checkout-summary {
+    order: 2;
+  }
+}
+
+/* === FORMULARIO MEJORADO === */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.entrega-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f0f8f8;
+  border-radius: 10px;
+  border: 1px solid #d0e8e8;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.radio-label:hover {
+  background: #e0f0f0;
+}
+
+.radio-label input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #52b3b9;
+}
+
+.retiro-info {
+  background: #e8f5f8;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 5px solid #52b3b9;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.retiro-info i {
+  font-size: 2rem;
+  color: #52b3b9;
+  margin-top: 0.2rem;
+}
+
+.retiro-info strong {
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.retiro-info p {
+  margin: 0.3rem 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.nota-retiro {
+  font-style: italic;
+  color: #27ae60 !important;
+  font-weight: 600;
+  margin-top: 0.8rem !important;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+/* Resumen de envío */
+.envio-resumen {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f0f8f8;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.envio-resumen h3 {
+  margin: 0 0 0.5rem;
+  color: #52b3b9;
+  font-size: 1.1rem;
+}
+
+.envio-resumen p {
+  margin: 0.3rem 0;
+  color: #555;
+}
+
+/* === VALIDACIONES EN TIEMPO REAL === */
+.form-field {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-error {
+  border: 2px solid #e74c3c !important;
+  background-color: #fee;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  font-weight: 500;
+  animation: slideDown 0.3s ease;
+}
+
+.error-message i {
+  font-size: 0.9rem;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === BANNERS DE ÉXITO Y ERROR === */
+.success-banner,
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  animation: slideIn 0.5s ease;
+}
+
+.success-banner {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border-left: 5px solid #28a745;
+  color: #155724;
+}
+
+.error-banner {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  border-left: 5px solid #e74c3c;
+  color: #721c24;
+}
+
+.success-banner i,
+.error-banner i {
+  font-size: 1.5rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* === BOTÓN DESHABILITADO === */
+.btn-next:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-next:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* === SPINNER === */
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === MEJORAS TARJETA FORM === */
+.tarjeta-form {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  margin-top: 1rem;
+}
+
+.tarjeta-form .nota {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #52b3b9;
+  font-style: normal;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #52b3b9;
+}
+
+.tarjeta-form .nota i {
+  font-size: 1rem;
+}
+
+/* === OXXO INFO === */
+.oxxo-info {
+  background: #fff3cd;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 5px solid #ffc107;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.oxxo-info i {
+  font-size: 2rem;
+  color: #ffc107;
+  margin-top: 0.2rem;
+}
+
+.oxxo-info p {
+  margin: 0.5rem 0;
+  color: #856404;
+}
+
+.oxxo-info .nota {
+  font-weight: 600;
+  color: #856404;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .error-message {
+    font-size: 0.8rem;
+  }
+
+  .success-banner,
+  .error-banner {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .tarjeta-form {
+    padding: 1rem;
+  }
+
+  .oxxo-info {
+    padding: 1rem;
+  }
+
+  .oxxo-info i {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-field {
+    margin-bottom: 1.2rem;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+  }
+
+  .success-banner i,
+  .error-banner i {
+    font-size: 1.2rem;
+  }
+}

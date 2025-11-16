@@ -17,14 +17,19 @@ import "./assets/css/ubicacion.css";
 import "./assets/css/valores.css";
 import "./components/CartContext";
 import { CartProvider } from "./components/CartContext";
-import "./assets/css/carrito.css"
+import "./assets/css/carrito.css";
+import "./assets/css/checkout.css";
+import "./assets/css/perfil.css"
+import { AuthProvider } from "./components/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CartProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </CartProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
