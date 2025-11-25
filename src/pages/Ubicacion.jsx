@@ -12,18 +12,18 @@ const Ubicacion = () => {
 
       <main>
         <div className="container">
-          <h1 className="page-title">Ubicación de SISTEC READ</h1>
+          <h1 className="page-title-ubicacion">Ubicación de SISTEC READ</h1>
           <section className="location-section">
             <h2 className="section-title">Detalles de Ubicación</h2>
             {/* Encabezado añadido */}
             <article className="location-article">
               <h2 className="categoria-titulo">Nuestra librería</h2>
-              <p>
+              <p className="contenido-ubicacion">
                 Visítanos en el corazón de Tuxtla Gutiérrez. Nuestra tienda ofrece
                 un ambiente acogedor y una amplia selección de libros para todas
                 las edades.
               </p>
-              <p>
+              <p className="contenido-ubicacion">
                 <strong>Dirección:</strong> Av. Central Poniente 123, Centro,
                 Tuxtla Gutiérrez, Chiapas, CP 29000
               </p>

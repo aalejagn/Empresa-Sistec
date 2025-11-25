@@ -36,7 +36,7 @@ const PerfilSidebar = ({ activeSection, setActiveSection }) => {
               }`}
             >
               <Icon size={20} />
-              <span>{item.label}</span>
+              <span className='informacion-general'>{item.label}</span>
             </button>
           );
         })}

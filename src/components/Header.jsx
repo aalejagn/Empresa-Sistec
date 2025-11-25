@@ -15,6 +15,7 @@ const Header = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+
   const { searchTerm, setSearchTerm } = useSearch();
   const { cart } = useCart(); // ← PARA SABER CUÁNTOS LIBROS HAY EN EL CARRITO
   const [cartAnimated, setCartAnimated] = useState(false);
@@ -54,10 +55,14 @@ const Header = () => {
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
+  };
 
-    // Si hay texto, navegar a categorías automáticamente
-    if (value.trim() !== "" && location.pathname !== "/categorias") {
-      navigate("/categorias");
+  // === NUEVA FUNCIÓN: Buscar al presionar Enter ===
+  const handleSearchSubmit = (e) => {
+    if (e.key === 'Enter' && searchTerm.trim() !== "") {
+      if (location.pathname !== "/categorias") {
+        navigate("/categorias");
+      }
     }
   };
 
@@ -309,6 +314,7 @@ const Header = () => {
                 className="search-input"
                 value={searchTerm}
                 onChange={handleSearchChange}
+                onKeyDown={handleSearchSubmit}  // ← AÑADE ESTO
               />
               <button className="search-btn" aria-label="Buscar">
                 <i className="fas fa-search"></i>

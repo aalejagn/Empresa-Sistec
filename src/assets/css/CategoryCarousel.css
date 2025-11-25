@@ -1,0 +1,328 @@
+/* ============================================
+   SECCIÓN DE CATEGORÍAS - CARRUSEL
+   ============================================ */
+
+.categorias-home {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.categorias-home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4db8ab, #5bc0be, #3a9188);
+}
+
+.categorias-home h2 {
+  text-align: center;
+  font-size: 3.3rem;
+  color: #000000;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  position: relative;
+  width: 100%;
+}
+
+.categorias-home h2::after {
+
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #4db8ab, #5bc0be);
+  border-radius: 2px;
+}
+
+/* ============================================
+   CONTENEDOR DEL CARRUSEL
+   ============================================ */
+
+.categorias-carousel-wrapper {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   GRID DE CATEGORÍAS
+   ============================================ */
+
+.categorias-grid {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.4s ease-in-out;
+  width: 100%;
+}
+
+/* ============================================
+   TARJETAS DE CATEGORÍAS
+   ============================================ */
+
+.categoria-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  min-width: 0;
+}
+
+.categoria-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(77, 184, 171, 0.15);
+}
+
+.categoria-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4db8ab, #5bc0be);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.categoria-card:hover::before {
+  transform: scaleX(1);
+}
+
+.categoria-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+/* ============================================
+   IMAGEN DE CATEGORÍA
+   ============================================ */
+
+.categoria-image {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+}
+
+.categoria-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.categoria-card:hover .categoria-img {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   INFORMACIÓN DE CATEGORÍA
+   ============================================ */
+
+.categoria-info {
+  padding: 1.5rem;
+  background: white;
+}
+
+.categoria-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.categoria-card:hover .categoria-name {
+  color: #4db8ab;
+}
+
+.categoria-desc {
+  font-size: 0.9rem;
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  min-height: 3rem;
+}
+
+.categoria-count {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(135deg, #4db8ab, #5bc0be);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.categoria-card:hover .categoria-count {
+  background: linear-gradient(135deg, #3a9188, #4db8ab);
+}
+
+/* ============================================
+   BOTONES DE NAVEGACIÓN
+   ============================================ */
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: 2px solid #4db8ab;
+  color: #4db8ab;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+}
+
+.carousel-btn:hover {
+  background: linear-gradient(135deg, #4db8ab, #5bc0be);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(77, 184, 171, 0.3);
+}
+
+.carousel-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-btn-prev {
+  left: 0;
+}
+
+.carousel-btn-next {
+  right: 0;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1200px) {
+  .categorias-carousel-wrapper {
+    padding: 0 50px;
+  }
+  
+  .categoria-image {
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .categorias-home {
+    padding: 3rem 1rem;
+  }
+  
+  .categorias-home h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .categorias-carousel-wrapper {
+    padding: 0 45px;
+  }
+  
+  .categorias-grid {
+    gap: 1.5rem;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .categoria-image {
+    height: 180px;
+  }
+  
+  .categoria-info {
+    padding: 1.25rem;
+  }
+  
+  .categoria-name {
+    font-size: 1.1rem;
+  }
+  
+  .categoria-desc {
+    font-size: 0.85rem;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .categorias-home {
+    padding: 2rem 0.5rem;
+  }
+  
+  .categorias-home h2 {
+    font-size: 1.75rem;
+  }
+  
+  .categorias-carousel-wrapper {
+    padding: 0 40px;
+  }
+  
+  .categorias-grid {
+    gap: 1rem;
+  }
+  
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.25rem;
+  }
+  
+  .categoria-image {
+    height: 160px;
+  }
+  
+  .categoria-info {
+    padding: 1rem;
+  }
+  
+  .categoria-name {
+    font-size: 1rem;
+  }
+  
+  .categoria-desc {
+    font-size: 0.8rem;
+  }
+  
+  .categoria-count {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+
+.categoria-card {
+  opacity: 1;
+}

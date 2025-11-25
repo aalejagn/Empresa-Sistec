@@ -135,8 +135,8 @@ header.main-header {
 .search-input {
   padding: 0.5rem 1rem 0.5rem 2.5rem;
   width: 180px;
-  border: none;
-  border-radius: 25px;
+  border: 2px solid transparent; /* Borde transparente inicial */
+  border-radius: 25px; /* Mantiene la forma redondeada */
   font-size: 0.95rem;
   outline: none;
   color: #424242;
@@ -149,8 +149,21 @@ header.main-header {
 }
 
 .search-input:focus {
-  box-shadow: 0 0 0 3px rgba(53, 178, 130, 0.3);
+  outline: none;
+  border: 2px solid rgb(77, 208, 210); /* Borde turquesa */
+  border-radius: 25px; /* Mantiene la forma */
+  box-shadow: 
+    0 0 0 3px rgba(62, 218, 221, 0.15),
+    0 2px 8px rgba(62, 218, 221, 0.3);
+  transform: scale(1.02); /* Crece ligeramente */
+
 }
+.search-input:hover {
+  border: 2px solid rgb(77, 208, 210);
+  box-shadow: 0 2px 8px rgba(62, 218, 221, 0.2);
+  transform: scale(1.02);
+}
+
 
 .search-btn {
   position: absolute;

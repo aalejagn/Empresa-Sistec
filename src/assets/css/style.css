@@ -4,7 +4,7 @@
     --color-sercundario: #667eea; /*Color secundario azul morado*/
     --color-acento: #f1c40f; /*Color de acento amarillo*/
     --color-fondo: #f5f5f5; /*Fondo general*/
-    --color-texto: #333; /*Texto Principal*/
+    --color-texto: #111; /*Texto Principal*/
     --color-texto-secundario: #666; /* Texto secundario*/
     --color-fondo-secundario: #f8f9fa; /*Fondo Secundario*/
 }
@@ -234,10 +234,7 @@ h2{
     border-radius: 2px;
 }
 
-/* Grid de categorías */
-.categorias-home {
-    margin-bottom: 4rem;
-}
+
 
 .categorias-grid {
     display: grid;
@@ -348,7 +345,7 @@ h2{
     padding: 2rem 0;
     border-radius: 15px;
     margin-bottom: 0rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .stats-container {
@@ -364,14 +361,17 @@ h2{
 .stat-number {
     font-size: 3rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: #fff;
 }
 
 .stat-label {
     font-size: 1.1rem;
     opacity: 0.9;
     font-weight: 500;
+    color: #fff;
+
 }
 
 /* Sección de llamada a la acción final */
@@ -1117,7 +1117,6 @@ iframe {
 
 /* Modificar la sección de categorías existente */
 .categorias-home {
-    margin-bottom: 4rem;
     position: relative;
     overflow: hidden;
     font-size: 2.9rem;
@@ -1234,10 +1233,8 @@ iframe {
     }
 }
 
-
-/* ==============================s==========
-   CSS PARA SECCIÓN DE REDES SOCIALES
-   Agregar a tu archivo styles.css
+/* ========================================
+   CSS PARA SECCIÓN DE REDES SOCIALES - RESPONSIVE MEJORADO
    ======================================== */
 
 .social-media-section {
@@ -1247,11 +1244,12 @@ iframe {
     margin-top: 0;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-
+    width: 100%;
 }
 
 .social-content {
     text-align: center;
+    padding: 0 1rem;
 }
 
 .social-title {
@@ -1259,7 +1257,7 @@ iframe {
     font-size: 2.5rem;
     font-weight: bold;
     color: white;
-    margin-bottom: 2rem;
+    margin-bottom: 1.4rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     letter-spacing: 1px;
 }
@@ -1270,6 +1268,7 @@ iframe {
     align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
 .social-icon-link {
@@ -1332,14 +1331,29 @@ iframe {
     animation: pulse 1.5s infinite;
 }
 
-/* === RESPONSIVE === */
+/* === RESPONSIVE MEJORADO === */
+
+/* Tablets (≤768px) */
 @media (max-width: 768px) {
+    .social-media-section {
+        padding: 2rem 0;
+        margin: 2rem 0;
+        border-radius: 12px;
+    }
+
+    .social-content {
+        padding: 0 1.5rem;
+    }
+
     .social-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+        letter-spacing: 0.5px;
     }
 
     .social-icons-wrapper {
         gap: 1.5rem;
+        padding: 0 1rem;
     }
 
     .social-icon-link {
@@ -1349,19 +1363,33 @@ iframe {
     }
 }
 
+/* Móviles (≤480px) */
 @media (max-width: 480px) {
     .social-media-section {
-        padding: 2rem 0;
-        margin: 2rem 0;
+        padding: 1.5rem 0;
+        margin: 1.5rem 0.5rem;
+        border-radius: 10px;
+    }
+
+    .social-content {
+        padding: 0 1rem;
     }
 
     .social-title {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        line-height: 1.3;
+        padding: 0 0.5rem;
+        word-wrap: break-word;
+        /* Si el hashtag es muy largo, permite que se divida */
+        word-break: break-word;
     }
 
     .social-icons-wrapper {
-        gap: 1rem;
+        gap: 1.2rem;
+        padding: 0 0.5rem;
+        justify-content: center;
     }
 
     .social-icon-link {
@@ -1369,17 +1397,52 @@ iframe {
         height: 50px;
         font-size: 1.4rem;
     }
+
+    /* Reduce la animación en móviles para mejor rendimiento */
+    .social-icon-link:hover {
+        animation: none;
+        transform: scale(1.05);
+    }
+}
+
+/* Móviles muy pequeños (≤360px) */
+@media (max-width: 360px) {
+    .social-media-section {
+        padding: 1.2rem 0;
+        margin: 1rem 0.3rem;
+    }
+
+    .social-content {
+        padding: 0 0.5rem;
+    }
+
+    .social-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+        letter-spacing: 0.3px;
+    }
+
+    .social-icons-wrapper {
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .social-icon-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
 }
 
 
-/* ========================================
+/* ====================================
    CSS PARA SECCIÓN DE MÁS VENDIDOS
    ======================================== */
 
 .bestsellers-section {
     padding: 0;
     background: #f5f5f5;
-    margin-top: 3rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
 
 }
@@ -1387,7 +1450,7 @@ iframe {
 .bestsellers-subtitle {
     text-align: center;
     font-size: 1.2rem;
-    color: var(--color-texto-secundario);
+    color:#666;
     margin-bottom: 3rem;
     font-style: italic;
 }
@@ -1714,19 +1777,5 @@ iframe {
         font-size: 0.8rem;
         padding: 0.4rem 0.85rem;
         border-radius: 18px;
-    }
-}
-
-@media (max-width: 480px) {
-    .categoria-card {
-        min-height: 340px;
-        padding-bottom: 45px;
-    }
-    
-    .categoria-count {
-        bottom: 12px;
-        font-size: 0.75rem;
-        padding: 0.35rem 0.75rem;
-        border-radius: 15px;
     }
 }

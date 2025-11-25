@@ -262,7 +262,7 @@ const Home = () => {
               {/* Agrega más bestseller-cards si quieres */}
             </div>
             <div className="bestsellers-cta">
-              <a href="/src/pages/categorias.html" className="btn-ver-mas">
+              <a href="/categorias" className="btn-ver-mas">
                 Ver Catálogo Completo
                 <i className="fas fa-arrow-right"></i>
               </a>

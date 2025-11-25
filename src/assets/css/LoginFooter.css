@@ -1,4 +1,4 @@
-/* ===== ESTILOS PARA FOOTER EN LOGIN ===== */
+/* ===== ESTILOS PARA FOOTER EN LOGIN CON DEGRADADO ===== */
 #login-footer {
   width: 100vw;
   position: fixed;
@@ -7,10 +7,13 @@
   z-index: 10;
   margin: 0;
   padding: 0;
+  /* DEGRADADO NEGRO DE ABAJO HACIA ARRIBA */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 80%);
+  backdrop-filter: none;
 }
 
 #login-footer .footer-bottom-bar {
-  background-color: #0e0e0e;
+  background-color: transparent !important;
   backdrop-filter: none;
   padding: 1rem 1.5rem;
   border: none;
@@ -32,7 +35,7 @@
 #login-footer .copyright-text {
   font-size: 0.85rem;
   margin: 0 15px 0 0;
-  color: #999;
+  color: #e0e0e0; /* Más claro para contraste con el fondo oscuro */
 }
 
 #login-footer .copyright-text strong {
@@ -50,13 +53,13 @@
 
 #login-footer .legal-links li {
   font-size: 0.85rem;
-  color: #666;
+  color: #b0b0b0; /* Más claro */
   margin: 0 5px;
 }
 
 #login-footer .legal-links a {
   font-size: 0.85rem;
-  color: #999;
+  color: #d0d0d0; /* Más claro */
   text-decoration: none;
   transition: color 0.3s ease;
   white-space: nowrap;

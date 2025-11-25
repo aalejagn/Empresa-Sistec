@@ -120,13 +120,7 @@ const Login = () => {
         <div className="login-card">
           <div className="login-header">
             <div className="login-logo-wrapper">
-              <div className="login-logo-container">
-                <img
-                  src="../assets/Images/logo.png"
-                  alt="SISTEC READ"
-                  className="login-logo-img"
-                />
-              </div>
+
               <h2 className="login-logo-text">SISTEC READ</h2>
             </div>
             <h1 className="login-title">Iniciar Sesión</h1>

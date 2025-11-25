@@ -567,6 +567,12 @@
   animation: spin 1s linear infinite;
 }
 
+.informacion-general{
+  text-align: left;  
+}
+
+
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Lock, User, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
 import '../assets/css/auth.css';
 import { useAuth } from '../components/AuthContext';  // ← AÑADIDO
+import LoginFooter from '../components/LoginFooter'; 
 
 const Registrar = () => {
   const [email, setEmail] = useState('');
@@ -143,13 +144,6 @@ const Registrar = () => {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo-wrapper">
-            <div className="login-logo-container">
-              <img 
-                src="../assets/Images/logo.png" 
-                alt="SISTEC READ" 
-                className="login-logo-img"
-              />
-            </div>
             <h2 className="login-logo-text">SISTEC READ</h2>
           </div>
           <h1 className="login-title">Crear Cuenta</h1>
@@ -353,6 +347,7 @@ const Registrar = () => {
           </p>
         </div>
       </div>
+      <LoginFooter />
     </div>
   );
 };
