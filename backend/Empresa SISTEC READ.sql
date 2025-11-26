@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS sistecread;
 USE sistecread;
 
--- Tabla de libros (ya la tenías, pero la completo)
+-- Tabla de libros (completa con stock)
 CREATE TABLE IF NOT EXISTS libros (
   id INT AUTO_INCREMENT PRIMARY KEY,
   titulo VARCHAR(255) NOT NULL,
@@ -14,17 +14,20 @@ CREATE TABLE IF NOT EXISTS libros (
   encuadernacion VARCHAR(50),
   precio DECIMAL(10,2) NOT NULL,
   categoria VARCHAR(100) NOT NULL DEFAULT 'general',
+  stock INT(11) DEFAULT 100,
   creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabla de usuarios (para login y registro)
+-- Tabla de usuarios (completa con campos de reset password)
 CREATE TABLE IF NOT EXISTS usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL,  -- Hash con password_hash()
+  password VARCHAR(255) NOT NULL,
   rol ENUM('user', 'admin') DEFAULT 'user',
-  creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  reset_token VARCHAR(255) DEFAULT NULL,
+  reset_expires DATETIME DEFAULT NULL
 );
 
 -- Tabla de mensajes de contacto
@@ -37,17 +40,26 @@ CREATE TABLE IF NOT EXISTS contactos (
   enviado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabla de ventas (para carrito checkout)
+-- Tabla de ventas (completa con información de envío)
 CREATE TABLE IF NOT EXISTS ventas (
   id INT AUTO_INCREMENT PRIMARY KEY,
   usuario_id INT,
   total DECIMAL(10,2) NOT NULL,
-  estado ENUM('pendiente', 'pagado', 'enviado') DEFAULT 'pendiente',
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  telefono VARCHAR(15) NOT NULL,
+  cp VARCHAR(5) NOT NULL,
+  tipo_entrega ENUM('domicilio', 'retiro') NOT NULL,
+  direccion TEXT,
+  descripcion_casa TEXT,
+  ciudad VARCHAR(100),
+  estado ENUM('pendiente', 'pagado', 'enviado', 'completado') DEFAULT 'pendiente',
+  metodo_pago VARCHAR(20),
   creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
 );
 
--- Tabla de detalles de ventas (por item)
+-- Tabla de detalles de ventas
 CREATE TABLE IF NOT EXISTS venta_detalles (
   id INT AUTO_INCREMENT PRIMARY KEY,
   venta_id INT,
@@ -62,9 +74,11 @@ CREATE TABLE IF NOT EXISTS venta_detalles (
 INSERT INTO usuarios (nombre, email, password, rol) VALUES (
   'Admin',
   'admin@sistecread.com',
-  '$2y$10$o6dK6wG2g2wZ0fC0z3y1meY1wZ0fC0z3y1meY1wZ0fC0z3y1me',  -- Usa password_hash('admin123', PASSWORD_DEFAULT) en PHP
+  '$2y$10$o6dK6wG2g2wZ0fC0z3y1meY1wZ0fC0z3y1meY1wZ0fC0z3y1me',
   'admin'
 );
+
+-- Tus INSERTs de libros aquí (se mantienen igual)...
 
 -- Inserta todos los libros
 INSERT INTO libros (titulo, autor, imagen, descripcion, publicado, editorial, encuadernacion, precio, categoria) VALUES

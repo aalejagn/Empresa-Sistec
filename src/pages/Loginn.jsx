@@ -322,7 +322,7 @@ const Login = () => {
           </div>
 
           <div className="login-link-container">
-            <a href="#recuperar" className="login-link">
+            <a href="/recuperar-contraseña" className="login-link">
               ¿Olvidaste tu contraseña?
             </a>
           </div>

@@ -1,9 +1,9 @@
 <?php
-$host = 'sql206.infinityfree.com';
-$port = 3306;
-$db   = 'if0_40528911_sistecread';  // Tu base de datos exacta
-$user = 'if0_40528911';
-$pass = 'aQ81oxR8jk7'; // cONTRASEÑA 
+$host = 'localhost';
+$port = 3308;           // Cambia a 3307 si 
+$db   = 'sistecread';
+$user = 'root';
+$pass = '';
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
 

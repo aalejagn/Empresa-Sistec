@@ -19,6 +19,7 @@ import { SearchProvider } from "./components/SearchContext";
 import Checkout from "./pages/FormularioCarrito";
 import MetodoPago from "./pages/MetodoPago";
 import Perfil from "./pages/Perfil";
+import Recuperacion_Contraseña from "./pages/RecuperacionContraseña";
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/metodo-pago" element={<MetodoPago />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path='/recuperar-contraseña' element = {<Recuperacion_Contraseña />} />
       </Routes>
     </SearchProvider>
   );
