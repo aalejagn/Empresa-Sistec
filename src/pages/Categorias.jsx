@@ -87,46 +87,53 @@ const Categorias = () => {
   };
 
   // Fetch libros por categoría
-  useEffect(() => {
-    setIsLoading(true);
-    setError(null);
-    setLibroExpandido(null);
-    
-    fetch(`https://sistec-read.rf.gd/backend/api/libros.php?cat=${categoriaActual}`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`Error ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        const decodedData = data.map((libro) => ({
-          ...libro,
-          descripcion: decodeUnicode(libro.descripcion),
-          encuadernacion: decodeUnicode(libro.encuadernacion),
-        }));
-        setLibros(decodedData);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching libros:", err);
-        setError("No se pudieron cargar los libros. Verifica el servidor.");
-        setIsLoading(false);
-      });
-  }, [categoriaActual]);
+useEffect(() => {
+  setIsLoading(true);
+  setError(null);
+  setLibroExpandido(null);
 
-  // Cargar TODOS los libros al montar (para búsqueda global)
-  useEffect(() => {
-    fetch(`https://sistec-read.rf.gd/backend/api/libros.php`)
-      .then((res) => res.json())
-      .then((data) => {
-        const decodedData = data.map((libro) => ({
-          ...libro,
-          descripcion: decodeUnicode(libro.descripcion),
-          encuadernacion: decodeUnicode(libro.encuadernacion),
-        }));
-        setTodosLosLibros(decodedData);
-      })
-      .catch((err) => console.error("Error cargando todos los libros:", err));
-  }, []);
+  const fetchLibros = async () => {
+    try {
+      const response = await fetch('http://sistec-read.rf.gd/backend/api/libros.php?cat=' + categoriaActual, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        // SIN credentials: 'include'
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const data = await response.json();
+      setLibros(data);
+    } catch (err) {
+      setError('Error al cargar libros: ' + err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  fetchLibros();
+}, [categoriaActual]);
+
+// Para todosLosLibros, haz lo mismo
+useEffect(() => {
+  const fetchTodos = async () => {
+    try {
+      const response = await fetch('http://sistec-read.rf.gd/backend/api/libros.php', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const data = await response.json();
+      setTodosLosLibros(data);
+    } catch (err) {
+      console.error('Error cargando todos los libros:', err);
+    }
+  };
+
+  fetchTodos();
+}, []);
 
   // Filtrar libros según el término de búsqueda
   const librosFiltrados = searchTerm.trim() === ""

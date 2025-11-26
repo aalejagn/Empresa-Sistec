@@ -17,21 +17,26 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // 🔧 IMPORTANTE: Usando PHP Built-in Server en puerto 8000
-  const API_URL = 'https://sistec-read.rf.gd/backend/api/auth.php';
+  const API_URL = 'http://sistec-read.rf.gd/backend/api/auth.php';  // CAMBIO: HTTP para evitar bloqueos
 
-  // Verificar sesión al cargar la app
   useEffect(() => {
     checkSession();
   }, []);
 
-  // Verificar si hay sesión activa
   const checkSession = async () => {
+    // Primero intenta de localStorage
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        // SIN credentials: 'include' → esto arregla el CORS
         body: JSON.stringify({ action: 'check_session' })
       });
 
@@ -39,6 +44,7 @@ export const AuthProvider = ({ children }) => {
       
       if (data.success && data.user) {
         setUser(data.user);
+        localStorage.setItem('user', JSON.stringify(data.user));  // Guarda para recargas
       }
     } catch (error) {
       console.error('Error al verificar sesión:', error);
@@ -47,31 +53,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ============== REGISTRO ==============
+  // REGISTRO
   const register = async (nombre, email, password) => {
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          action: 'register',
-          nombre,
-          email,
-          password
-        })
+        // SIN credentials
+        body: JSON.stringify({ action: 'register', nombre, email, password })
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const data = await response.json();
 
       if (data.success) {
         setUser(data.user);
+        localStorage.setItem('user', JSON.stringify(data.user));  // Guarda
         alert('✅ ' + data.message);
-        navigate('/categorias'); // O la ruta que prefieras después del registro
+        navigate('/categorias');
         return { success: true };
       } else {
         alert('❌ ' + data.error);
@@ -79,35 +79,30 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error en registro:', error);
-      alert('❌ Error de conexión: ' + error.message + '\n\nVerifica que el servidor PHP esté corriendo en: ' + API_URL);
+      alert('❌ Error: ' + error.message + '\nVerifica PHP en: ' + API_URL);
       return { success: false, error: 'Error de conexión' };
     }
   };
 
-  // ============== LOGIN ==============
+  // LOGIN
   const login = async (email, password) => {
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({
-          action: 'login',
-          email,
-          password
-        })
+        // SIN credentials
+        body: JSON.stringify({ action: 'login', email, password })
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const data = await response.json();
 
       if (data.success) {
         setUser(data.user);
+        localStorage.setItem('user', JSON.stringify(data.user));  // Guarda
         alert('✅ ' + data.message);
-        navigate('/categorias'); // O la ruta que prefieras después del login
+        navigate('/categorias');
         return { success: true };
       } else {
         alert('❌ ' + data.error);
@@ -115,22 +110,23 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error en login:', error);
-      alert('❌ Error de conexión: ' + error.message + '\n\nVerifica que el servidor PHP esté corriendo en: ' + API_URL);
+      alert('❌ Error: ' + error.message + '\nVerifica PHP en: ' + API_URL);
       return { success: false, error: 'Error de conexión' };
     }
   };
 
-  // ============== LOGOUT ==============
+  // LOGOUT
   const logout = async () => {
     try {
       await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        // SIN credentials
         body: JSON.stringify({ action: 'logout' })
       });
 
       setUser(null);
+      localStorage.removeItem('user');  // Limpia
       navigate('/login');
     } catch (error) {
       console.error('Error en logout:', error);
@@ -144,7 +140,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     checkSession,
-    API_URL  // Exportamos la URL para usarla en otros componentes
+    API_URL
   };
 
   if (loading) {
@@ -178,9 +174,5 @@ export const AuthProvider = ({ children }) => {
     );
   }
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
