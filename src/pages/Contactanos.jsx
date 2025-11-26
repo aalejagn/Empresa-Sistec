@@ -32,7 +32,7 @@ const Contactanos = () => {
     console.log("Enviando datos: ", formData);
 
     try {
-      const response = await fetch("http://localhost:8000/contacto.php", {
+      const response = await fetch("https://sistec-read.rf.gd/backend/api/contacto.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

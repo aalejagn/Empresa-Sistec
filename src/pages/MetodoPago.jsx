@@ -235,7 +235,7 @@ const MetodoPago = () => {
       total: parseFloat(total.toFixed(2)),
     };
 
-    fetch("http://localhost:8000/ventas.php", {
+    fetch("https://sistec-read.rf.gd/backend/api/ventas.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(ventaData),

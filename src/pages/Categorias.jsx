@@ -92,7 +92,7 @@ const Categorias = () => {
     setError(null);
     setLibroExpandido(null);
     
-    fetch(`http://localhost:8000/libros.php?cat=${categoriaActual}`)
+    fetch(`https://sistec-read.rf.gd/backend/api/libros.php?cat=${categoriaActual}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Error ${res.status}`);
         return res.json();
@@ -115,7 +115,7 @@ const Categorias = () => {
 
   // Cargar TODOS los libros al montar (para búsqueda global)
   useEffect(() => {
-    fetch(`http://localhost:8000/libros.php`)
+    fetch(`https://sistec-read.rf.gd/backend/api/libros.php`)
       .then((res) => res.json())
       .then((data) => {
         const decodedData = data.map((libro) => ({
