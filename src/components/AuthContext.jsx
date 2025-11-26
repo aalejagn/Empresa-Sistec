@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // 🔧 IMPORTANTE: Usando PHP Built-in Server en puerto 8000
-  const API_URL = 'http://localhost:8000/auth.php';
+  const API_URL = 'https://sistec-read.rf.gd/backend/api/auth.php';
 
   // Verificar sesión al cargar la app
   useEffect(() => {

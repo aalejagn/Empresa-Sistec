@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Responde rápido a las peticiones OPTIONS (preflight)
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+# CORS exacto para tu frontend en Vercel
+Header always set Access-Control-Allow-Origin "https://empresa-sistec-t5fv.vercel.app"
+Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+Header always set Access-Control-Allow-Headers "Content-Type"
+Header always set Access-Control-Allow-Credentials "true"
+
+# Necesario para que las cookies de sesión viajen
+php_value session.cookie_samesite "None"
+php_value session.cookie_secure "0"
