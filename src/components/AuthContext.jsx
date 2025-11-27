@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // BIEN (URL que sí funciona desde internet)
-  const BASE_API = "/api/proxy"; // ← SIN NADA MÁS, SIN .js, SIN corchetes
+  const API_URL = "/sistec-read.atwebpages.com/public_html/backend/api/auth.php";
   useEffect(() => {
     checkSession();
   }, []);

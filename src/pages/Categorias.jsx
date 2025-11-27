@@ -92,8 +92,8 @@ const Categorias = () => {
     setIsLoading(true);
     setError(null);
     setLibroExpandido(null);
-
-    fetch(`${BASE_API}/libros.php?cat=${categoriaActual}`)
+    
+    fetch(`/home/www/public_html/backend/api/libros.php?cat=${categoriaActual}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Error ${res.status}`);
         return res.json();

@@ -1,11 +1,11 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "http://sistec-read.atwebpages.com/backend/api/:path*"
+      "source": "/api/(.*)",
+      "destination": "http://sistec-read.atwebpages.com/backend/api/$1"
     },
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
