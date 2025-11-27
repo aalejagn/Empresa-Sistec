@@ -85,15 +85,14 @@ const Categorias = () => {
       String.fromCharCode(parseInt(hex, 16))
     );
   };
-  const BASE_API = "/api/proxy";
 
   // Fetch libros por categoría
   useEffect(() => {
     setIsLoading(true);
     setError(null);
     setLibroExpandido(null);
-    
-    fetch(`/home/www/public_html/backend/api/libros.php?cat=${categoriaActual}`)
+
+    fetch(`/api/libros.php?cat=${categoriaActual}`) // <- CAMBIO: Usa /api/
       .then((res) => {
         if (!res.ok) throw new Error(`Error ${res.status}`);
         return res.json();
@@ -116,7 +115,7 @@ const Categorias = () => {
 
   // Cargar TODOS los libros al montar (para búsqueda global)
   useEffect(() => {
-    fetch(`/public_html/backend/api/libros.php`)
+    fetch(`/api/libros.php?cat=${categoriaActual}`) // <- CAMBIO: Usa /api/
       .then((res) => res.json())
       .then((data) => {
         const decodedData = data.map((libro) => ({

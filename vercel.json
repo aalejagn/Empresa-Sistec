@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "http://sistec-read.atwebpages.com/backend/api/$1"
+      "destination": "https://sistec-read.atwebpages.com/public_html/backend/api/$1"
     },
     {
       "source": "/(.*)",

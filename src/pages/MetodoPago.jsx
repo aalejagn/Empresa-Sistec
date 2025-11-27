@@ -145,7 +145,10 @@ const MetodoPago = () => {
 
     // Formatear número de tarjeta con espacios
     if (name === "numero") {
-      value = value.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ").trim();
+      value = value
+        .replace(/\s/g, "")
+        .replace(/(\d{4})/g, "$1 ")
+        .trim();
     }
 
     // Formatear fecha de expiración
@@ -235,7 +238,7 @@ const MetodoPago = () => {
       total: parseFloat(total.toFixed(2)),
     };
 
-    fetch("/public_html/backend/api/ventas.php", {
+    fetch("/api/ventas.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(ventaData),
@@ -351,7 +354,11 @@ const MetodoPago = () => {
                     value={formData.metodoPago}
                     onChange={handleInputChange}
                     onBlur={handleBlur}
-                    className={errors.metodoPago && touched.metodoPago ? "input-error" : ""}
+                    className={
+                      errors.metodoPago && touched.metodoPago
+                        ? "input-error"
+                        : ""
+                    }
                   >
                     <option value="">Selecciona un método</option>
                     <option value="debito">Tarjeta de Débito</option>
@@ -361,7 +368,8 @@ const MetodoPago = () => {
                   </select>
                   {errors.metodoPago && touched.metodoPago && (
                     <span className="error-message">
-                      <i className="fas fa-exclamation-circle"></i> {errors.metodoPago}
+                      <i className="fas fa-exclamation-circle"></i>{" "}
+                      {errors.metodoPago}
                     </span>
                   )}
                 </div>
@@ -376,11 +384,14 @@ const MetodoPago = () => {
                         value={formData.tarjeta.nombre}
                         onChange={handleTarjetaChange}
                         onBlur={handleBlur}
-                        className={errors.nombre && touched.nombre ? "input-error" : ""}
+                        className={
+                          errors.nombre && touched.nombre ? "input-error" : ""
+                        }
                       />
                       {errors.nombre && touched.nombre && (
                         <span className="error-message">
-                          <i className="fas fa-exclamation-circle"></i> {errors.nombre}
+                          <i className="fas fa-exclamation-circle"></i>{" "}
+                          {errors.nombre}
                         </span>
                       )}
                     </div>
@@ -394,11 +405,14 @@ const MetodoPago = () => {
                         value={formData.tarjeta.numero}
                         onChange={handleTarjetaChange}
                         onBlur={handleBlur}
-                        className={errors.numero && touched.numero ? "input-error" : ""}
+                        className={
+                          errors.numero && touched.numero ? "input-error" : ""
+                        }
                       />
                       {errors.numero && touched.numero && (
                         <span className="error-message">
-                          <i className="fas fa-exclamation-circle"></i> {errors.numero}
+                          <i className="fas fa-exclamation-circle"></i>{" "}
+                          {errors.numero}
                         </span>
                       )}
                     </div>
@@ -413,11 +427,14 @@ const MetodoPago = () => {
                           value={formData.tarjeta.expiry}
                           onChange={handleTarjetaChange}
                           onBlur={handleBlur}
-                          className={errors.expiry && touched.expiry ? "input-error" : ""}
+                          className={
+                            errors.expiry && touched.expiry ? "input-error" : ""
+                          }
                         />
                         {errors.expiry && touched.expiry && (
                           <span className="error-message">
-                            <i className="fas fa-exclamation-circle"></i> {errors.expiry}
+                            <i className="fas fa-exclamation-circle"></i>{" "}
+                            {errors.expiry}
                           </span>
                         )}
                       </div>
@@ -430,23 +447,27 @@ const MetodoPago = () => {
                           value={formData.tarjeta.cvv}
                           onChange={handleTarjetaChange}
                           onBlur={handleBlur}
-                          className={errors.cvv && touched.cvv ? "input-error" : ""}
+                          className={
+                            errors.cvv && touched.cvv ? "input-error" : ""
+                          }
                         />
                         {errors.cvv && touched.cvv && (
                           <span className="error-message">
-                            <i className="fas fa-exclamation-circle"></i> {errors.cvv}
+                            <i className="fas fa-exclamation-circle"></i>{" "}
+                            {errors.cvv}
                           </span>
                         )}
                       </div>
                     </div>
                     <p className="nota">
-                      <i className="fas fa-lock"></i> Simulación: no se procesan pagos reales
+                      <i className="fas fa-lock"></i> Simulación: no se procesan
+                      pagos reales
                     </p>
                   </div>
                 )}
 
                 {formData.metodoPago === "paypal" && (
-<div className="form-field">
+                  <div className="form-field">
                     <input
                       type="email"
                       name="paypalEmail"
@@ -454,11 +475,16 @@ const MetodoPago = () => {
                       value={formData.paypalEmail}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
-                      className={errors.paypalEmail && touched.paypalEmail ? "input-error" : ""}
+                      className={
+                        errors.paypalEmail && touched.paypalEmail
+                          ? "input-error"
+                          : ""
+                      }
                     />
                     {errors.paypalEmail && touched.paypalEmail && (
                       <span className="error-message">
-                        <i className="fas fa-exclamation-circle"></i> {errors.paypalEmail}
+                        <i className="fas fa-exclamation-circle"></i>{" "}
+                        {errors.paypalEmail}
                       </span>
                     )}
                   </div>
@@ -481,8 +507,8 @@ const MetodoPago = () => {
                 <Link to="/checkout" className="btn btn-back">
                   Atrás
                 </Link>
-                <button 
-                  className="btn btn-next" 
+                <button
+                  className="btn btn-next"
                   onClick={handleSubmit}
                   disabled={isProcessing}
                 >

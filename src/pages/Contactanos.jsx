@@ -31,8 +31,6 @@ const Contactanos = () => {
     setStatus("");
     console.log("Enviando datos: ", formData);
 
-    const BASE_API = "/api/proxy";
-
     try {
       const response = await fetch("/api/contacto.php", {
         method: "POST",
