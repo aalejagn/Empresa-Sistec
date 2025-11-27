@@ -24,7 +24,7 @@ const Perfil = () => {
   const cargarHistorial = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`https://sistec-read.rf.gd/backend/api/historial.php?usuario_id=${user.id}`);
+      const res = await fetch(`/home/www/public_html/backend/api/historial.php?usuario_id=${user.id}`);
       const data = await res.json();
       if (data.success) {
         setCompras(data.ventas);

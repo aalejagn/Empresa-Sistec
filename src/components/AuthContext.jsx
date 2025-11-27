@@ -17,7 +17,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const API_URL = 'http://sistec-read.rf.gd/backend/api/auth.php';  // CAMBIO: HTTP para evitar bloqueos
+  // 🔧 IMPORTANTE: Usando PHP Built-in Server en puerto 8000
+  const API_URL = '/home/www/public_html/backend/api/auth.php';
 
   useEffect(() => {
     checkSession();
