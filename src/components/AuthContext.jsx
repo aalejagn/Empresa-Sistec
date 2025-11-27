@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 
   // BIEN (URL que sí funciona desde internet)
   const API_URL =
-    "https://4711571sistecread.awardspace.net/backend/api/auth.php";
+    "http://sistec-read.atwebpages.com/public_html/backend/api/auth.php";
 
   useEffect(() => {
     checkSession();
