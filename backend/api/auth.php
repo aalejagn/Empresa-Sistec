@@ -1,7 +1,7 @@
 <?php
 // backend/api/auth.php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: https://empresa-sistec-t5fv.vercel.app');
+header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
@@ -143,7 +143,7 @@ if ($action === 'forgot_password') {
         $upd->execute([$token, $expires, $user['id']]);
 
         // Generar link de recuperación
-        $link = "https://empresa-sistec-t5fv.vercel.app/recuperar-contraseña?token={$token}";
+        $link = "http://localhost:5173/recuperar-contraseña?token={$token}";
 
         // ============== ENVIAR CORREO DE RECUPERACIÓN ==============
         $htmlRecuperacion = renderTemplate('email_recuperacion.html', [
@@ -304,7 +304,7 @@ if ($action === 'forgot_password') {
         $upd->execute([$token, $expires, $user['id']]);
 
         // Crear enlace de recuperación
-        $link = "https://empresa-sistec-t5fv.vercel.app/recuperar-contraseña?token=$token";
+        $link = "http://localhost:5173/recuperar-contraseña?token=$token";
 
         // ============== ENVIAR CORREO DE RECUPERACIÓN ==============
         $htmlRecuperacion = renderTemplate('email_recuperacion.html', [

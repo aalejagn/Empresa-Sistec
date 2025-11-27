@@ -1,18 +1,15 @@
 <?php
-$host = 'sql206.infinityfree.com';
-$port = 3306;
-$db   = 'if0_40528911_sistecread';  // Tu base de datos exacta
-$user = 'if0_40528911';
-$pass = 'aQ81oxR8jk7'; // cONTRASEÑA 
 
-$dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
+$host = "hopper.proxy.rlwy.net";
+$port = 43445;
+$dbname = "railway";
+$username = "root";
+$password = "TU_PASSWORD_REAL"; // la de Railway
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
+    $conn = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die(json_encode(['error' => 'DB: ' . $e->getMessage()]));
+    die("Error de conexión: " . $e->getMessage());
 }
 ?>
