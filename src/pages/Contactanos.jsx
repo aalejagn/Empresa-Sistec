@@ -32,7 +32,7 @@ const Contactanos = () => {
     console.log("Enviando datos: ", formData);
 
     try {
-      const response = await fetch("/home/www/public_html/backend/api/contacto.php", {
+      const response = await fetch("/api/contacto.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
