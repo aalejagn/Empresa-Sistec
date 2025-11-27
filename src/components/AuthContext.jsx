@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // BIEN (URL que sí funciona desde internet)
-  const API_URL = "/api/auth.php";
+  const BASE_API = "/api/proxy"; // ← SIN NADA MÁS, SIN .js, SIN corchetes
   useEffect(() => {
     checkSession();
   }, []);
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(BASE_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // SIN credentials: 'include' → esto arregla el CORS
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
   // REGISTRO
   const register = async (nombre, email, password) => {
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(BASE_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // SIN credentials
@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
   // LOGIN
   const login = async (email, password) => {
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(BASE_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // SIN credentials
@@ -118,7 +118,7 @@ export const AuthProvider = ({ children }) => {
   // LOGOUT
   const logout = async () => {
     try {
-      await fetch(API_URL, {
+      await fetch(BASE_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // SIN credentials

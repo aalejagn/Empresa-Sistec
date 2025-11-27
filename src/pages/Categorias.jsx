@@ -85,14 +85,15 @@ const Categorias = () => {
       String.fromCharCode(parseInt(hex, 16))
     );
   };
+  const BASE_API = "/api/proxy";
 
   // Fetch libros por categoría
   useEffect(() => {
     setIsLoading(true);
     setError(null);
     setLibroExpandido(null);
-    
-    fetch(`/api/libros.php?cat=${categoriaActual}`)
+
+    fetch(`${BASE_API}/libros.php?cat=${categoriaActual}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Error ${res.status}`);
         return res.json();
@@ -129,12 +130,14 @@ const Categorias = () => {
   }, []);
 
   // Filtrar libros según el término de búsqueda
-  const librosFiltrados = searchTerm.trim() === ""
-    ? libros
-    : todosLosLibros.filter((libro) =>
-        libro.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        libro.autor.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+  const librosFiltrados =
+    searchTerm.trim() === ""
+      ? libros
+      : todosLosLibros.filter(
+          (libro) =>
+            libro.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            libro.autor.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
   const toggleExpand = (id) => {
     setLibroExpandido(libroExpandido === id ? null : id);
@@ -155,7 +158,8 @@ const Categorias = () => {
                   <i className="fas fa-search"></i>
                   Resultados para: "{searchTerm}"
                   <span className="resultados-count">
-                    ({librosFiltrados.length} {librosFiltrados.length === 1 ? 'resultado' : 'resultados'})
+                    ({librosFiltrados.length}{" "}
+                    {librosFiltrados.length === 1 ? "resultado" : "resultados"})
                   </span>
                 </h2>
               ) : (
