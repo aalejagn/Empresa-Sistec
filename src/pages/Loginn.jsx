@@ -276,9 +276,7 @@ const Login = () => {
             </div>
           </form>
 
-          <div className="login-separator">
-            <span className="login-separator-text">o</span>
-          </div>
+
 
           {/* Botones de inicio de sesión social */}
           <div className="login-social-section">

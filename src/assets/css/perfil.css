@@ -98,6 +98,7 @@
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   color: #2d3748;
+  font-family: tahoma;
 }
 
 /* === INFO GENERAL === */
@@ -162,14 +163,249 @@
 
 /* === EMPRESA === */
 .empresa-info {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.empresa-header {
   text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  color: #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .empresa-logo {
   width: 120px;
   height: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  animation: fadeInDown 0.8s ease;
+}
+
+.empresa-slogan h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-family: Tahoma, sans-serif;
+  color: #2d3748;
+  animation: fadeInUp 0.8s ease;
+}
+
+.empresa-slogan .subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: Tahoma, sans-serif;
+  color: #555;
+  animation: fadeInUp 1s ease;
+}
+
+.empresa-mision {
+  background: white;
+  padding: 2rem;
   border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.empresa-mision:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.empresa-mision h4 {
+  color: #5DBFB3;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: Tahoma, sans-serif;
+}
+
+.empresa-mision p {
+  color: #555;
+  line-height: 1.8;
+  font-size: 1rem;
+  font-family: Tahoma, sans-serif;
+}
+
+.empresa-valores {
+  margin-bottom: 2rem;
+}
+
+.empresa-valores h4 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  font-family: Tahoma, sans-serif;
+}
+
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.valor-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid #5DBFB3;
+}
+
+.valor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.valor-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.valor-card h5 {
+  color: #5DBFB3;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: Tahoma, sans-serif;
+}
+
+.valor-card p {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-family: Tahoma, sans-serif;
+}
+
+.empresa-stats {
+  background: linear-gradient(135deg, #52b3b9 0%, #5DBFB3 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  color: #2d3748;
+  box-shadow: 0 10px 30px rgba(82, 179, 185, 0.3);
+}
+
+.empresa-stats h4 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: Tahoma, sans-serif;
+  color: #2d3748;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-box {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-family: Tahoma, sans-serif;
+  color: #2d3748;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: Tahoma, sans-serif;
+  color: #555;
+}
+
+.empresa-contacto {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.empresa-contacto h4 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: Tahoma, sans-serif;
+}
+
+.empresa-contacto > p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-family: Tahoma, sans-serif;
+}
+
+.contacto-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-contacto-primary,
+.btn-contacto-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-family: Tahoma, sans-serif;
+}
+
+.btn-contacto-primary {
+  background: #5DBFB3;
+  color: white;
+  box-shadow: 0 4px 15px rgba(93, 191, 179, 0.3);
+}
+
+.btn-contacto-primary:hover {
+  background: #52b3b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(93, 191, 179, 0.4);
+}
+
+.btn-contacto-secondary {
+  background: transparent;
+  color: #5DBFB3;
+  border: 2px solid #5DBFB3;
+}
+
+.btn-contacto-secondary:hover {
+  background: #5DBFB3;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(93, 191, 179, 0.3);
 }
 
 /* === HISTORIAL DE COMPRAS === */
@@ -571,12 +807,32 @@
   text-align: left;  
 }
 
-
-
+/* === ANIMACIONES === */
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
@@ -585,7 +841,7 @@
   }
   .perfil-sidebar {
     width: 100%;
-    margin-top:1rem ;
+    margin-top:1rem;
   }
   .perfil-content {
     width: 100%;
@@ -627,5 +883,40 @@
   }
   .historial-stats {
     width: 100%;
+  }
+  
+  /* Responsive para Sobre SISTEC READ */
+  .empresa-header {
+    padding: 1.5rem;
+  }
+  
+  .empresa-slogan h3 {
+    font-size: 1.5rem;
+  }
+  
+  .empresa-slogan .subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .valores-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .contacto-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-contacto-primary,
+  .btn-contacto-secondary {
+    width: 100%;
+    justify-content: center;
   }
 }

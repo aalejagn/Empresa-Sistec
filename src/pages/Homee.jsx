@@ -68,7 +68,6 @@ const Home = () => {
                 <a href="https://empresa-sistec-t5fv.vercel.app/categorias" className="cta-button">
                   Explorar Catálogo
                 </a>
-パス
               </div>
             </div>
           </section>

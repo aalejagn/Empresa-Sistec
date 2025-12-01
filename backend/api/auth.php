@@ -1,34 +1,62 @@
 <?php
-// backend/api/auth.php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Origin: https://empresa-sistec-t5fv.vercel.app');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(200); exit; }
 
-require '../config/database.php';
-require 'sendmail.php';
+require dirname(__DIR__) . '/config/database.php';
+require __DIR__ . '/sendmail.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
+$input = file_get_contents('php://input');
+$data  = json_decode($input, true) ?: [];
 $action = $data['action'] ?? '';
 
-// Función auxiliar para cargar y renderizar templates
-function renderTemplate($templateFile, $replacements)
-{
-    $templatePath = __DIR__ . '/templates/emails/' . $templateFile;
-    if (!file_exists($templatePath)) {
-        throw new Exception("Template no encontrado: " . $templatePath);
-    }
-    $html = file_get_contents($templatePath);
-    foreach ($replacements as $key => $value) {
-        $html = str_replace('{' . $key . '}', $value, $html);
-    }
+function renderTemplate($file, $vars=[]) {
+    $path = __DIR__ . '/' . $file;
+    if (!file_exists($path)) return "Template no encontrado";
+    $html = file_get_contents($path);
+    foreach ($vars as $k=>$v) $html = str_replace('{'.$k.'}', htmlspecialchars($v), $html);
     return $html;
+}
+
+// ====================== LOGIN CON GOOGLE ======================
+if ($action === 'google_login') {
+    $token = $data['credential'] ?? '';
+    $CLIENT_ID = '874023563138-7cn5pd2c3nga4oi1ds6j10a6aqd0dg43.apps.googleusercontent.com';
+    
+    $res = file_get_contents("https://oauth2.googleapis.com/tokeninfo?id_token=$token");
+    $google = json_decode($res, true);
+
+    if (!$google || $google['aud'] !== $CLIENT_ID || !$google['email_verified']) {
+        echo json_encode(['error'=>'Token inválido']); exit;
+    }
+
+    $email = $google['email'];
+    $nombre = $google['name'] ?? explode('@',$email)[0];
+
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email=?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
+
+    if (!$user) {
+        $pdo->prepare("INSERT INTO usuarios (nombre,email,google_id,rol,creado_en) VALUES (?,?,?, 'usuario', NOW())")
+            ->execute([$nombre, $email, $google['sub']]);
+        $userId = $pdo->lastInsertId();
+    } else {
+        $userId = $user['id'];
+    }
+
+    session_start();
+    $_SESSION['user_id'] = $userId;
+    $_SESSION['user_email'] = $email;
+    $_SESSION['user_nombre'] = $nombre;
+    $_SESSION['user_rol'] = 'usuario';
+
+    echo json_encode(['success'=>true, 'user'=>['id'=>$userId,'nombre'=>$nombre,'email'=>$email]]);
+    exit;
 }
 
 // ============== REGISTRO DE USUARIO ==============
@@ -143,7 +171,7 @@ if ($action === 'forgot_password') {
         $upd->execute([$token, $expires, $user['id']]);
 
         // Generar link de recuperación
-        $link = "http://localhost:5173/recuperar-contraseña?token={$token}";
+        $link = "https://empresa-sistec-t5fv.vercel.app/recuperar-contrase%C3%B1a?token={$token}";
 
         // ============== ENVIAR CORREO DE RECUPERACIÓN ==============
         $htmlRecuperacion = renderTemplate('email_recuperacion.html', [
@@ -304,7 +332,7 @@ if ($action === 'forgot_password') {
         $upd->execute([$token, $expires, $user['id']]);
 
         // Crear enlace de recuperación
-        $link = "http://localhost:5173/recuperar-contraseña?token=$token";
+        $link = "https://empresa-sistec-t5fv.vercel.app/recuperar-contrase%C3%B1a?token=$token";
 
         // ============== ENVIAR CORREO DE RECUPERACIÓN ==============
         $htmlRecuperacion = renderTemplate('email_recuperacion.html', [

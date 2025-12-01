@@ -244,19 +244,69 @@ const Perfil = () => {
           <div className="perfil-section">
             <h2>Sobre SISTEC READ</h2>
             <div className="empresa-info">
-              <img src="/assets/Images/logo.png" alt="SISTEC READ" className="empresa-logo" />
-              <p>
-                <strong>SISTEC READ</strong> es tu librería digital favorita. 
-                Fundada por apasionados de la lectura, ofrecemos miles de títulos 
-                con entrega rápida y segura en todo México.
-              </p>
-              <p>
-                <strong>Valores:</strong> Calidad, accesibilidad y amor por los libros.
-              </p>
+              <div className="empresa-header">
+                <img src="/assets/Images/logo.png" alt="SISTEC READ" className="empresa-logo" />
+                <div className="empresa-slogan">
+                  <h3>Tu puerta al mundo de la lectura</h3>
+                  <p className="subtitle">Conectando lectores con sus historias favoritas desde 2024</p>
+                </div>
+              </div>
+
+              <div className="empresa-mision">
+                <h4>Nuestra Misión</h4>
+                <p>
+                  En <strong>SISTEC READ</strong>, creemos que cada libro es una nueva aventura. 
+                  Nos dedicamos a hacer que la lectura sea accesible para todos, ofreciendo 
+                  miles de títulos con entrega rápida y segura en todo México.
+                </p>
+              </div>
+
+              <div className="empresa-valores">
+                <h4>Nuestros Valores</h4>
+                <div className="valores-grid">
+                  <div className="valor-card">
+                    <div className="valor-icon">📚</div>
+                    <h5>Pasión por la Lectura</h5>
+                    <p>Creemos en el poder transformador de los libros</p>
+                  </div>
+                  <div className="valor-card">
+                    <div className="valor-icon">⚡</div>
+                    <h5>Calidad</h5>
+                    <p>Solo los mejores títulos llegan a tu hogar</p>
+                  </div>
+                  <div className="valor-card">
+                    <div className="valor-icon">🌟</div>
+                    <h5>Accesibilidad</h5>
+                    <p>Lectura para todos, sin barreras</p>
+                  </div>
+                  <div className="valor-card">
+                    <div className="valor-icon">🚀</div>
+                    <h5>Innovación</h5>
+                    <p>Tecnología al servicio de los lectores</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="empresa-contacto">
+                <h4>¿Tienes Preguntas?</h4>
+                <p>Nuestro equipo está aquí para ayudarte</p>
+                <div className="contacto-buttons">
+                  <a href="/ubicacion" className="btn-contacto-secondary">
+                    <MapPin size={18} /> Visítanos
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         );
 
+      // ========================================
+      // NUEVA SECCIÓN: ESTADÍSTICAS
+      // ========================================
+      case 'estadisticas':
+        return <EstadisticasUsuario usuarioId={user?.id} />;
+
+        
       case 'config':
         return (
           <div className="perfil-section">

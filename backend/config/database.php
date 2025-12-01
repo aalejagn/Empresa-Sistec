@@ -1,36 +1,53 @@
 <?php
+// conexion.php  ← guárdalo con este nombre
 
-// Detecta automáticamente si estás en local o en AwardSpace
-if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '::1') {
-    // ====== CONFIGURACIÓN LOCAL (tu PC) ======
+header('Content-Type: application/json; charset=utf-8');
+
+// Detecta si estás en local (XAMPP) o en producción (AwardSpace)
+if (
+    isset($_SERVER['HTTP_HOST']) && 
+    ($_SERVER['HTTP_HOST'] == 'localhost' || 
+     strpos($_SERVER['HTTP_HOST'], '127.0.0.1') !== false || 
+     strpos($_SERVER['HTTP_HOST'], '192.168.') !== false)
+    || isset($_SERVER['SERVER_ADDR']) && 
+    ($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '::1')
+) {
+    // CONFIGURACIÓN LOCAL → XAMPP (tu computadora)
     $host = 'localhost';
-    $port = 3308;                    // o 3306, el que uses tú
-    $db   = 'sistecread';
-    $user = 'root';
-    $pass = '';
+    $port = 3308;                    // ← TU PUERTO CORRECTO
+    $dbname = '4711571_sistecread';         // ← nombre de tu base de datos local
+    $username = 'root';
+    $password = '';                  // ← sin contraseña, como tienes ahora
 } else {
-    // ====== CONFIGURACIÓN AWARDSPACE (servidor real) ======
+    // CONFIGURACIÓN PRODUCCIÓN → AwardSpace
     $host = 'fdb1032.awardspace.net';
     $port = 3306;
-    $db   = '4711571_sistecread';
-    $user = '4711571_sistecread';
-    $pass = 'pb[)p;(]5Yey}53X';  // ¡¡¡esta línea sí cámbiala!!!
+    $dbname = '4711571_sistecread';
+    $username = '4711571_sistecread';
+    $password = 'pb[)p;(]5Yey}53X';  // ← contraseña real del hosting
 }
 
-$host = "hopper.proxy.rlwy.net";
-$port = 43445;
-$dbname = "railway";
-$username = "root";
-$password = "TU_PASSWORD_REAL"; // la de Railway
+$dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
+
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
-    // opcional: para que veas que conectó
-    // echo "Conectado a la base de datos";
+    $pdo = new PDO($dsn, $username, $password, $options);
+    // ¡Conexión exitosa!
+    // echo json_encode(['status' => 'success', 'message' => 'Conectado a MySQL']);
 } catch (PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
+    // Error claro para que sepas qué pasó
+    http_response_code(500);
+    die(json_encode([
+        'error' => 'Conexión fallida',
+        'message' => $e->getMessage(),
+        'host' => $host,
+        'port' => $port,
+        'db' => $dbname
+    ]));
 }
 ?>

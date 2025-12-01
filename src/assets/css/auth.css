@@ -63,7 +63,7 @@ body.login-page {
   width: 100vw;
   /* IMAGEN DE FONDO CON OVERLAY */
   background-image: 
-    url('https://images.unsplash.com/photo-1722182877533-7378b60bf1e8?fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGlicmFyeSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D&ixlib=rb-4.1.0&q=60&w=3000');
+    url('./public/assets/Images/fondologin.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -555,7 +555,6 @@ body.login-page {
   top: -0.625rem;
   left: 50%;
   transform: translateX(-50%);
-  background: white;
   padding: 0 1rem;
   color: #6B7B8C;
   font-size: 0.8rem;
@@ -1165,3 +1164,345 @@ body.login-page,
   max-width: 100vw;
   overflow-x: hidden !important;
 } 
+
+/* ============================================
+   ESTILOS PARA ESTADÍSTICAS Y LOGROS
+   Agregar al final de tu perfil.css
+   ============================================ */
+
+/* Header de estadísticas */
+.estadisticas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.estadisticas-header h2 {
+  margin-bottom: 0.5rem;
+}
+
+/* Tarjetas de métricas */
+.estadisticas-metricas {
+  margin-bottom: 2rem;
+}
+
+.metrica-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.metrica-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+.metrica-azul::before {
+  background: linear-gradient(90deg, #3B82F6, #2563EB);
+}
+
+.metrica-verde::before {
+  background: linear-gradient(90deg, #10B981, #059669);
+}
+
+.metrica-morado::before {
+  background: linear-gradient(90deg, #8B5CF6, #7C3AED);
+}
+
+.metrica-naranja::before {
+  background: linear-gradient(90deg, #F59E0B, #D97706);
+}
+
+.metrica-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.metrica-card .info-icon {
+  color: #4F46E5;
+  margin-bottom: 0.5rem;
+}
+
+.metrica-numero {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.metrica-card p {
+  color: #6b7280;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Gráficas */
+.estadisticas-graficas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.grafica-container {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.grafica-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.grafica-content {
+  min-height: 300px;
+}
+
+/* Logros */
+.logros-section {
+  margin-bottom: 2rem;
+}
+
+.seccion-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.logros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.logro-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.logro-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.logro-verde {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: white;
+}
+
+.logro-azul {
+  background: linear-gradient(135deg, #3B82F6, #2563EB);
+  color: white;
+}
+
+.logro-amarillo {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  color: white;
+}
+
+.logro-morado {
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+  color: white;
+}
+
+.logro-naranja {
+  background: linear-gradient(135deg, #F97316, #EA580C);
+  color: white;
+}
+
+.logro-bloqueado {
+  background: linear-gradient(135deg, #E5E7EB, #D1D5DB);
+  color: #6B7280;
+}
+
+.logro-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.logro-icono {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.logro-titulo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.logro-descripcion {
+  margin: 0;
+  opacity: 0.95;
+  font-size: 0.95rem;
+}
+
+/* Libros favoritos */
+.libros-favoritos-section {
+  margin-bottom: 2rem;
+}
+
+.libros-favoritos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.libro-favorito-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.libro-favorito-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.libro-favorito-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.libro-favorito-info {
+  padding: 1rem;
+}
+
+.libro-favorito-titulo {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.libro-favorito-autor {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 0.75rem 0;
+}
+
+.libro-favorito-veces {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4F46E5;
+  margin: 0;
+}
+
+/* Datos adicionales */
+.datos-adicionales {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.dato-item {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  padding: 1rem;
+  background: #F9FAFB;
+  border-radius: 8px;
+  border-left: 4px solid #4F46E5;
+}
+
+.dato-item svg {
+  color: #4F46E5;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.dato-item strong {
+  display: block;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.dato-item p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .estadisticas-graficas {
+    grid-template-columns: 1fr;
+  }
+  
+  .estadisticas-metricas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .metrica-numero {
+    font-size: 1.5rem;
+  }
+  
+  .logros-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .libros-favoritos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .grafica-container {
+    min-width: 0;
+  }
+  
+  .datos-adicionales {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .estadisticas-metricas {
+    grid-template-columns: 1fr;
+  }
+  
+  .estadisticas-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
