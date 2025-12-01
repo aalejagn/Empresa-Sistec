@@ -5,7 +5,7 @@
 
 /* Contenedor principal del carrito */
 .carrito-main {
-  padding: 3rem 1rem 4rem;
+  padding: 3rem 1rem 4rem
   min-height: calc(100vh - 200px);
   background: #f5f5f5;
   width: 100%;
@@ -39,16 +39,16 @@
 }
 
 .empty-cart i {
-  font-size: 5rem;
+  font-size: 2rem;
   color: #52b3b9;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0rem;
 }
 
 .empty-cart h2 {
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 1rem;
-  font-family: Cambria, serif;
+  font-family: Tahoma;
 }
 
 .empty-cart p {
@@ -63,7 +63,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   background: linear-gradient(135deg, #2b6163 0%, #177378 100%);
   color: white;
   text-decoration: none;
@@ -116,7 +116,7 @@
   font-size: 2rem;
   color: #52b3b9;
   font-weight: 600;
-  font-family: Cambria, serif;
+  font-family: tahoma;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -359,7 +359,7 @@
   padding-bottom: 1rem;
   border-bottom: 3px solid #52b3b9;
   font-weight: 600;
-  font-family: Cambria, serif;
+  font-family: tahoma;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -422,15 +422,14 @@
 }
 
 .btn-continue {
-  background: transparent;
-  color: #52b3b9;
-  border: 2px solid #52b3b9;
+  background: linear-gradient(135deg, #2b6163 0%, #177378 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(43, 97, 99, 0.3);
 }
 
 .btn-continue:hover {
-  background: #52b3b9;
-  color: white;
   transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(43, 97, 99, 0.4);
 }
 
 /* Badges de seguridad */
@@ -487,6 +486,7 @@
   .cart-item {
     grid-template-columns: 100px 1fr;
     gap: 1rem;
+    
   }
 
   .item-image {
@@ -506,9 +506,13 @@
     margin-top: 1rem;
   }
 
-  .btn-remove {
-    position: static;
-  }
+.btn-remove {
+  position: static;
+  font-size: 17px;
+  margin-top: 0.5rem;
+}
+
+
 
   .cart-header {
     flex-direction: column;
@@ -544,7 +548,7 @@
 
   .cart-items-section,
   .cart-summary {
-    padding: 1.5rem;
+    padding: 0.8rem;
   }
 
   .cart-item {
@@ -612,6 +616,13 @@
   .cart-header h2 {
     font-size: 1.5rem;
   }
+  .btn-remove {
+    top: 20px;
+    bottom: 5rem;
+    right: 5rem;
+  }
+
+  
 }
 
 /* Móviles muy pequeños */
@@ -635,5 +646,11 @@
   .item-actions {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  
+  .cart-items-section,
+  .cart-summary {
+    padding: 0.2rem;
   }
 }

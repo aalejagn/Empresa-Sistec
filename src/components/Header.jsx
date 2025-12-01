@@ -17,11 +17,16 @@ const Header = () => {
   const navigate = useNavigate();
 
   const { searchTerm, setSearchTerm } = useSearch();
-  const { cart } = useCart(); // ← PARA SABER CUÁNTOS LIBROS HAY EN EL CARRITO
+  const { cart } = useCart();
   const [cartAnimated, setCartAnimated] = useState(false);
   const prevCartCountRef = useRef(0);
 
-  const { user, logout } = useAuth(); // ← AÑADE ESTO
+  const { user, logout } = useAuth();
+
+  // === FUNCIÓN PARA DETECTAR SI EL ENLACE ESTÁ ACTIVO ===
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   // === CERRAR MENÚ AL CAMBIAR DE PÁGINA ===
   useEffect(() => {
@@ -130,7 +135,6 @@ const Header = () => {
     const currentCount = cart.reduce((total, item) => total + item.cantidad, 0);
 
     if (currentCount > prevCartCountRef.current) {
-      // Se agregó un item, activar animación
       setCartAnimated(true);
       setTimeout(() => setCartAnimated(false), 600);
     }
@@ -201,11 +205,11 @@ const Header = () => {
               </div>
             </div>
 
-            {/* ENLACES */}
+            {/* ENLACES CON CLASE ACTIVE */}
             <li>
               <Link
                 to="/acercade"
-                className="nav-link"
+                className={`nav-link ${isActive("/acercade") ? "active" : ""}`}
                 onClick={handleLinkClick}
               >
                 Nosotros
@@ -214,7 +218,7 @@ const Header = () => {
             <li>
               <Link
                 to="/categorias"
-                className="nav-link"
+                className={`nav-link ${isActive("/categorias") ? "active" : ""}`}
                 onClick={handleLinkClick}
               >
                 Catálogo
@@ -223,7 +227,7 @@ const Header = () => {
             <li>
               <Link
                 to="/ubicacion"
-                className="nav-link"
+                className={`nav-link ${isActive("/ubicacion") ? "active" : ""}`}
                 onClick={handleLinkClick}
               >
                 Ubicación
@@ -232,7 +236,7 @@ const Header = () => {
             <li>
               <Link
                 to="/contactanos"
-                className="nav-link"
+                className={`nav-link ${isActive("/contactanos") ? "active" : ""}`}
                 onClick={handleLinkClick}
               >
                 Contáctanos
@@ -257,10 +261,10 @@ const Header = () => {
               {user && (
                 <Link
                   to="/perfil"
-                  className="nav-link"
+                  className={`nav-link ${isActive("/perfil") ? "active" : ""}`}
                   onClick={handleLinkClick}
                 >
-                  <i class="fa-solid fa-address-card"></i>
+                  <i className="fa-solid fa-address-card"></i>
                 </Link>
               )}
             </li>
@@ -314,7 +318,7 @@ const Header = () => {
                 className="search-input"
                 value={searchTerm}
                 onChange={handleSearchChange}
-                onKeyDown={handleSearchSubmit}  // ← AÑADE ESTO
+                onKeyDown={handleSearchSubmit}
               />
               <button className="search-btn" aria-label="Buscar">
                 <i className="fas fa-search"></i>

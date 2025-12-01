@@ -1192,6 +1192,27 @@ iframe {
     right: 0;
 }
 
+.btn-add-cart-home {
+  margin-top: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.btn-add-cart-home:hover {
+  background-color: #218838;
+}
+
+.btn-add-cart-home i {
+  margin-right: 8px;
+}
+
 /* === RESPONSIVE PARA CARRUSEL === */
 @media (max-width: 768px) {
     .categoria-card {

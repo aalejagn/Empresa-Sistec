@@ -244,7 +244,7 @@ header.main-header {
   display: none;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  padding: 1rem 3.1rem 1rem 0.9rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 1rem;
   width: 100%;
@@ -265,7 +265,7 @@ header.main-header {
 
 .mobile-menu-icons {
   display: flex;
-  gap: 1rem;
+  gap: 0.rem;
   align-items: center;
 }
 
@@ -760,4 +760,27 @@ header.main-header {
   100% {
     transform: scale(1);
   }
+}
+
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.25); /* Fondo blanco semi-transparente */
+  color: white !important;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Efecto hover mejorado */
+.nav-link {
+  transition: all 0.3s ease;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
 }

@@ -67,6 +67,10 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
+.checkout-summary h2{
+  font-family: tahoma;
+}
+
 .summary-items {
   max-height: 300px;
   overflow-y: auto;
@@ -102,6 +106,7 @@
   color: #52b3b9;
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
+  font-family: tahoma;
 }
 
 .checkout-form input,
@@ -113,6 +118,14 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 1rem;
+  font-family: Arial;
+}
+
+.checkout-form textarea{
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100px;
+  max-height: 300px;
 }
 
 .tarjeta-row {

@@ -232,7 +232,7 @@ const Categorias = () => {
                         </div>
 
                         <p className="libro-precio-compacto">
-                          ${parseFloat(libro.precio).toFixed(2)} USD
+                          ${parseFloat(libro.precio).toFixed(2)} MXN
                         </p>
                       </div>
 

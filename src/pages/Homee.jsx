@@ -1,18 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CategoryCarousel from "../components/CategoryCarousel";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
 import { Link } from "react-router-dom";
+import { useCart } from "../components/CartContext";
 
 const Home = () => {
+  const { addToCart } = useCart();
+  
+  // Estado para los más vendidos desde la BD
+  const [masVendidos, setMasVendidos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Cargar los más vendidos desde la base de datos
+  useEffect(() => {
+    fetch("/api/libros.php?cat=mas-vendidos")
+      .then(res => {
+        if (!res.ok) throw new Error("Error al cargar más vendidos");
+        return res.json();
+      })
+      .then(data => {
+        // Decodificar texto si es necesario (igual que en Categorias.jsx)
+        const decoded = data.map(libro => ({
+          ...libro,
+          descripcion: libro.descripcion?.replace(/\\u([\da-fA-F]{4})/g, (_, hex) => 
+            String.fromCharCode(parseInt(hex, 16))
+          ) || ""
+        }));
+        setMasVendidos(decoded);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setError("No se pudieron cargar los más vendidos");
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div>
-      {/* Encabezado */}
       <Header />
       <main>
         <div className="container">
-          {/* Sección de bienvenida */}
+          {/* === TODAS TUS SECCIONES ANTERIORES QUEDAN IGUAL === */}
           <section className="welcome-section">
             <div className="welcome-content">
               <div className="welcome-image">
@@ -34,49 +65,29 @@ const Home = () => {
                   cuidadosamente organizadas y encuentra tu próxima gran
                   lectura.
                 </p>
-                <a href="/categorias" className="cta-button">
+                <a href="https://empresa-sistec-t5fv.vercel.app/categorias" className="cta-button">
                   Explorar Catálogo
                 </a>
+パス
               </div>
             </div>
           </section>
 
-          {/* Sección de redes sociales */}
           <section className="social-media-section">
             <div className="container">
               <div className="social-content">
                 <h2 className="social-title">#NosGustaContarHistorias</h2>
                 <div className="social-icons-wrapper">
-                  <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    className="social-icon-link"
-                    aria-label="Facebook"
-                  >
+                  <a href="https://facebook.com" target="_blank" className="social-icon-link" aria-label="Facebook">
                     <i className="fab fa-facebook-f"></i>
                   </a>
-                  <a
-                    href="https://twitter.com"
-                    target="_blank"
-                    className="social-icon-link"
-                    aria-label="Twitter"
-                  >
+                  <a href="https://twitter.com" target="_blank" className="social-icon-link" aria-label="Twitter">
                     <i className="fab fa-twitter"></i>
                   </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    className="social-icon-link"
-                    aria-label="Instagram"
-                  >
+                  <a href="https://instagram.com" target="_blank" className="social-icon-link" aria-label="Instagram">
                     <i className="fab fa-instagram"></i>
                   </a>
-                  <a
-                    href="https://youtube.com"
-                    target="_blank"
-                    className="social-icon-link"
-                    aria-label="YouTube"
-                  >
+                  <a href="https://youtube.com" target="_blank" className="social-icon-link" aria-label="YouTube">
                     <i className="fab fa-youtube"></i>
                   </a>
                 </div>
@@ -84,10 +95,8 @@ const Home = () => {
             </div>
           </section>
 
-          {/* Carrusel dinámico */}
           <CategoryCarousel />
 
-          {/* Sección de estadísticas */}
           <section className="stats-section">
             <div className="stats-container">
               <div className="stat-item">
@@ -105,164 +114,64 @@ const Home = () => {
             </div>
           </section>
         </div>
-        {/* Sección de más vendidos */}
+
+        {/* SECCIÓN MÁS VENDIDOS AHORA USA LA BASE DE DATOS */}
         <section className="bestsellers-section">
           <div className="container">
             <h2 className="section-title-home">Los Más Vendidos</h2>
             <p className="bestsellers-subtitle">
               Los libros favoritos de nuestros lectores
             </p>
-            <div className="bestsellers-grid">
-              <div className="bestseller-card">
-                <div className="bestseller-badge">Más Vendido</div>
-                <div className="bestseller-image-container">
-                  <img
-                    src="https://shop.mtwyouth.org/cdn/shop/files/61_KbxrnHxL.jpg?v=1736152142&width=990"
-                    alt="Sus ojos miraban a Dios"
-                    className="bestseller-img"
-                  />
-                </div>
-                <div className="bestseller-info">
-                  <h3 className="bestseller-title">Sus ojos miraban a Dios</h3>
-                  <p className="bestseller-author">Zora Neale Hurston</p>
-                  <p className="bestseller-category">
-                    Literatura Contemporánea
-                  </p>
-                  <div className="bestseller-rating">
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                  </div>
-                  <p className="bestseller-price">$17.99 USD</p>
-                </div>
-              </div>
-              {/*Libro 2:El diario de una niña*/}
-              <div className="bestseller-card">
-                <div className="bestseller-badge">Mas Vendido</div>
-                <div className="bestseller-image-container">
-                  <img
-                    src="https://shop.mtwyouth.org/cdn/shop/files/51DvoRaqkvL.jpg?v=1741801884&width=990"
-                    alt="El diario de una niña"
-                    className="bestseller-img"
-                  />
-                </div>
-                <div class="bestseller-info">
-                  <h3 class="bestseller-title">El diario de una niña</h3>
-                  <p class="bestseller-author">Ana Frank</p>
-                  <p class="bestseller-category">Literatura Histórica</p>
-                  <div class="bestseller-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <p class="bestseller-price">$8.99 USD</p>
-                </div>
-              </div>
-              {/*Libro 3:Crimen y castigo*/}
-              <div class="bestseller-card">
-                <div class="bestseller-badge">Mas Vendido</div>
-                <div class="bestseller-image-container">
-                  <img
-                    src="https://shop.mtwyouth.org/cdn/shop/files/51X8dkqlDdL.jpg?v=1754762058&width=990"
-                    alt="Crimen y castigo"
-                    class="bestseller-img"
-                  />
-                </div>
-                <div class="bestseller-info">
-                  <h3 class="bestseller-title">Crimen y castigo</h3>
-                  <p class="bestseller-author">Fiódor Dostoievski</p>
-                  <p class="bestseller-category">Ficción Internacional</p>
-                  <div class="bestseller-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <p class="bestseller-price">$22.00 USD</p>
-                </div>
-              </div>
-              {/*Libro 4:Nimona*/}
-              <div class="bestseller-card">
-                <div class="bestseller-badge">Mas Vendido</div>
-                <div class="bestseller-image-container">
-                  <img
-                    src="https://shop.mtwyouth.org/cdn/shop/files/51boHj8x7vL_fc22898b-f15b-454c-90cd-628053e43afb.jpg?v=1736145118&width=990"
-                    alt="Nimona"
-                    class="bestseller-img"
-                  />
-                </div>
-                <div class="bestseller-info">
-                  <h3 class="bestseller-title">Nimona</h3>
-                  <p class="bestseller-author">Noelle Stevenson</p>
-                  <p class="bestseller-category">Novelas Gráficas</p>
-                  <div class="bestseller-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                  </div>
-                  <p class="bestseller-price">$18.99 USD</p>
-                </div>
-              </div>
-              {/*Libro 5:Semilla Silvestre*/}
-              <div class="bestseller-card">
-                <div class="bestseller-badge">Mas Vendido</div>
-                <div class="bestseller-image-container">
-                  <img
-                    src="https://shop.mtwyouth.org/cdn/shop/files/51YYB09ZfYL.jpg?v=1740535456&width=990"
-                    alt="Semilla silvestre"
-                    class="bestseller-img"
-                  />
-                </div>
-                <div class="bestseller-info">
-                  <h3 class="bestseller-title">Semilla silvestre</h3>
-                  <p class="bestseller-author">Octavia E. Butler</p>
-                  <p class="bestseller-category">Ciencia Ficción</p>
-                  <div class="bestseller-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                  </div>
-                  <p class="bestseller-price">$18.99 USD</p>
-                </div>
-              </div>
-              {/*Libro 5:Potencial Oculto*/}
-              <div class="bestseller-card">
-                <div class="bestseller-badge">Mas Vendido</div>
-                <div class="bestseller-image-container">
-                  <img
-                    src="https://shop.mtwyouth.org/cdn/shop/files/41yQYmGoutL.jpg?v=1744408410&width=990"
-                    alt="Potencial oculto"
-                    class="bestseller-img"
-                  />
-                </div>
-                <div class="bestseller-info">
-                  <h3 class="bestseller-title">Potencial oculto</h3>
-                  <p class="bestseller-author">Adam Grant</p>
-                  <p class="bestseller-category">No Ficción</p>
-                  <div class="bestseller-rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <p class="bestseller-price">$32.00 USD</p>
-                </div>
-              </div>
 
-              {/* Agrega más bestseller-cards si quieres */}
-            </div>
+            {isLoading ? (
+              <p style={{ textAlign: "center", padding: "40px" }}>
+                <i className="fas fa-spinner fa-spin"></i> Cargando más vendidos...
+              </p>
+            ) : error ? (
+              <p style={{ textAlign: "center", color: "#e74c3c" }}>{error}</p>
+            ) : masVendidos.length === 0 ? (
+              <p style={{ textAlign: "center" }}>No hay libros destacados aún.</p>
+            ) : (
+              <div className="bestsellers-grid">
+                {masVendidos.slice(0, 6).map((libro) => (
+                  <div key={libro.id} className="bestseller-card">
+                    <div className="bestseller-badge">Más Vendido</div>
+                    <div className="bestseller-image-container">
+                      <img
+                        src={libro.imagen}
+                        alt={libro.titulo}
+                        className="bestseller-img"
+                      />
+                    </div>
+                    <div className="bestseller-info">
+                      <h3 className="bestseller-title">{libro.titulo}</h3>
+                      <p className="bestseller-author">{libro.autor}</p>
+                      <p className="bestseller-category">
+                        {libro.categoria || "Categoría"}
+                      </p>
+                      <div className="bestseller-rating">
+                        {[...Array(5)].map((_, i) => (
+                          <i key={i} className="fas fa-star"></i>
+                        ))}
+                      </div>
+                      <p className="bestseller-price">
+                        ${parseFloat(libro.precio).toFixed(2)} MXN
+                      </p>
+
+                      <button
+                        className="btn-add-cart-home"
+                        onClick={() => addToCart({ ...libro, cantidad: 1 })}
+                      >
+                        <i className="fas fa-cart-plus"></i> Añadir al Carrito
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="bestsellers-cta">
-              <a href="/categorias" className="btn-ver-mas">
+              <a href="https://empresa-sistec-t5fv.vercel.app/categorias" className="btn-ver-mas">
                 Ver Catálogo Completo
                 <i className="fas fa-arrow-right"></i>
               </a>
@@ -271,7 +180,6 @@ const Home = () => {
         </section>
       </main>
 
-      {/* Footer - Ahora como componente */}
       <Footer />
     </div>
   );

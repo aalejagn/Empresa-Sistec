@@ -525,7 +525,7 @@ const MetodoPago = () => {
           </div>
 
           <Link to="/carrito" className="btn btn-continue">
-            Volver al Carrito
+            <i className="fas fa-arrow-left"> </i> Volver al Carrito
           </Link>
         </div>
       </main>

@@ -160,7 +160,7 @@ const Carrito = () => {
                   <i className="fas fa-credit-card"></i> Proceder al Pago
                 </button>
                 <Link to="/categorias" className="btn btn-continue">
-                  <i className="fas fa-arrow-left"></i> Seguir Comprando
+                  <i className="fas fa-arrow-left"></i>Seguir Comprando
                 </Link>
                 <div className="security-badges">
                   <i className="fas fa-lock"></i>
