@@ -53,36 +53,46 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // REGISTRO
-  const register = async (nombre, email, password) => {
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        // SIN credentials
-        body: JSON.stringify({ action: "register", nombre, email, password }),
-      });
+// REGISTRO
+const register = async (nombre, apellido_paterno, apellido_materno, email, password, confirm_password, fecha_nacimiento, direccion, genero) => {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        action: "register", 
+        nombre, 
+        apellido_paterno, 
+        apellido_materno, 
+        email, 
+        password, 
+        confirm_password, 
+        fecha_nacimiento, 
+        direccion, 
+        genero 
+      }),
+    });
 
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.success) {
-        setUser(data.user);
-        localStorage.setItem("user", JSON.stringify(data.user)); // Guarda
-        alert("✅ " + data.message);
-        navigate("/categorias");
-        return { success: true };
-      } else {
-        alert("❌ " + data.error);
-        return { success: false, error: data.error };
-      }
-    } catch (error) {
-      console.error("Error en registro:", error);
-      alert("❌ Error: " + error.message + "\nVerifica PHP en: " + API_URL);
-      return { success: false, error: "Error de conexión" };
+    if (data.success) {
+      setUser(data.user);
+      localStorage.setItem("user", JSON.stringify(data.user)); // Guarda
+      alert("✅ " + data.message);
+      navigate("/categorias");
+      return { success: true };
+    } else {
+      alert("❌ " + data.error);
+      return { success: false, error: data.error };
     }
-  };
+  } catch (error) {
+    console.error("Error en registro:", error);
+    alert("❌ Error: " + error.message + "\nVerifica PHP en: " + API_URL);
+    return { success: false, error: "Error de conexión" };
+  }
+};
 
   // LOGIN
   const login = async (email, password) => {

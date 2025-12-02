@@ -62,17 +62,23 @@ if ($action === 'google_login') {
 // ============== REGISTRO DE USUARIO ==============
 if ($action === 'register') {
     $nombre = trim($data['nombre'] ?? '');
+    $apellido_paterno = trim($data['apellido_paterno'] ?? '');
+    $apellido_materno = trim($data['apellido_materno'] ?? '');
     $email = trim($data['email'] ?? '');
     $password = trim($data['password'] ?? '');
+    $confirm_password = trim($data['confirm_password'] ?? '');
+    $fecha_nacimiento = $data['fecha_nacimiento'] ?? '';
+    $direccion = trim($data['direccion'] ?? '');
+    $genero = $data['genero'] ?? 'prefiero_no_decir';
 
-    // Validaciones (sin cambios)
-    if (empty($nombre) || empty($email) || empty($password)) {
+    // Validaciones básicas
+    if (empty($nombre) || empty($apellido_paterno) || empty($email) || empty($password) || empty($confirm_password) || empty($fecha_nacimiento) || empty($direccion)) {
         echo json_encode(['error' => 'Todos los campos son requeridos']);
         exit;
     }
 
-    if (strlen($nombre) < 2) {
-        echo json_encode(['error' => 'El nombre debe tener al menos 2 caracteres']);
+    if (strlen($nombre) < 2 || strlen($apellido_paterno) < 2) {
+        echo json_encode(['error' => 'Nombre y apellido paterno deben tener al menos 2 caracteres']);
         exit;
     }
 
@@ -86,8 +92,30 @@ if ($action === 'register') {
         exit;
     }
 
+    if ($password !== $confirm_password) {
+        echo json_encode(['error' => 'Las contraseñas no coinciden']);
+        exit;
+    }
+
+    // Validar fecha de nacimiento (mayor de 13 años)
+    $fecha_nac = new DateTime($fecha_nacimiento);
+    $hoy = new DateTime();
+    $edad = $hoy->diff($fecha_nac)->y;
+    if ($edad < 13) {
+        echo json_encode(['error' => 'Debes tener al menos 13 años para registrarte']);
+        exit;
+    }
+
+    if (!in_array($genero, ['masculino', 'femenino', 'otro', 'prefiero_no_decir'])) {
+        echo json_encode(['error' => 'Género inválido']);
+        exit;
+    }
+
+    // Concatenar nombre completo
+    $nombre_completo = trim("$nombre $apellido_paterno $apellido_materno");
+
     try {
-        // Verificar si el email ya existe (sin cambios)
+        // Verificar si el email ya existe
         $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
         $stmt->execute([$email]);
 
@@ -96,34 +124,39 @@ if ($action === 'register') {
             exit;
         }
 
-        // Hashear contraseña (sin cambios)
+        // Hashear contraseña
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Insertar usuario (sin cambios)
+        // Insertar usuario con campos nuevos
         $stmt = $pdo->prepare("
-            INSERT INTO usuarios (nombre, email, password, rol, creado_en) 
-            VALUES (?, ?, ?, 'usuario', NOW())
+            INSERT INTO usuarios (
+                nombre, apellido_paterno, apellido_materno, email, password, fecha_nacimiento, 
+                direccion, genero, rol, creado_en
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'usuario', NOW())
         ");
-        $stmt->execute([$nombre, $email, $hashedPassword]);
+        $stmt->execute([
+            $nombre_completo, $apellido_paterno, $apellido_materno, $email, $hashedPassword,
+            $fecha_nacimiento, $direccion, $genero
+        ]);
 
-        // Obtener el ID del usuario recién creado (sin cambios)
+        // Obtener el ID del usuario recién creado
         $userId = $pdo->lastInsertId();
 
         // ============== ENVIAR CORREO DE BIENVENIDA ==============
         $htmlBienvenida = renderTemplate('email_bienvenida.html', [
-            'nombre' => $nombre,
+            'nombre' => $nombre_completo,
             'email' => $email,
-            'password' => $password
+            'password' => $password  // Nota: En producción, NO envíes la contraseña por email por seguridad
         ]);
 
-        // Enviar correo de bienvenida (sin cambios)
-        enviarCorreo($email, $nombre, '🎉 Bienvenido a SISTEC READ - Tus credenciales de acceso', $htmlBienvenida);
+        // Enviar correo de bienvenida
+        enviarCorreo($email, $nombre_completo, '🎉 Bienvenido a SISTEC READ - Tus credenciales de acceso', $htmlBienvenida);
 
-        // Iniciar sesión automáticamente (sin cambios)
+        // Iniciar sesión automáticamente
         session_start();
         $_SESSION['user_id'] = $userId;
         $_SESSION['user_email'] = $email;
-        $_SESSION['user_nombre'] = $nombre;
+        $_SESSION['user_nombre'] = $nombre_completo;
         $_SESSION['user_rol'] = 'usuario';
 
         echo json_encode([
@@ -131,7 +164,7 @@ if ($action === 'register') {
             'message' => '✅ Cuenta creada exitosamente. Revisa tu correo para ver tus credenciales.',
             'user' => [
                 'id' => $userId,
-                'nombre' => $nombre,
+                'nombre' => $nombre_completo,
                 'email' => $email,
                 'rol' => 'usuario'
             ]
