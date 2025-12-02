@@ -30,7 +30,7 @@ const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
-      navigate("/https://empresa-sistec-t5fv.vercel.app/perfil", { replace: true });
+      navigate("/perfil", { replace: true });
     }
   }, [user, navigate]);
 
