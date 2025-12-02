@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";           // ← línea 2
 import {
   Mail,
   Lock,
@@ -24,7 +25,14 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [touched, setTouched] = useState({ email: false, password: false });
 
-  const { login } = useAuth();  // ← AÑADIDO para usar el contexto
+const { login, user } = useAuth();                        // ← línea ~30
+const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/https://empresa-sistec-t5fv.vercel.app/perfil", { replace: true });
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     document.body.classList.add("login-page");

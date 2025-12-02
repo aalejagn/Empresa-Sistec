@@ -2,8 +2,15 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useAuth } from "../components/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Contactanos = () => {
+
+  //Nuevos 01/12
+  const { user } = useAuth()
+  const navigate = useNavigate()
+
   // Estado para el formulario
   const [formData, setFormData] = useState({
     nombre: "",
@@ -27,6 +34,13 @@ const Contactanos = () => {
   // Enviar formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ← AQUÍ (protección)
+    if (!user) {
+      alert("Debes iniciar sesión para enviar un mensaje");
+      navigate("/https://empresa-sistec-t5fv.vercel.app/login");
+      return;
+    }
     setIsLoading(true);
     setStatus("");
     console.log("Enviando datos: ", formData);

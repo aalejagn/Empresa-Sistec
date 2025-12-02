@@ -13,14 +13,14 @@ if (
     ($_SERVER['SERVER_ADDR'] == '127.0.0.1' || $_SERVER['SERVER_ADDR'] == '::1')
 ) {
     // CONFIGURACIÓN LOCAL → XAMPP (tu computadora)
-    $host = 'localhost';
+    $host = '127.0.0.1';
     $port = 3308;                    // ← TU PUERTO CORRECTO
     $dbname = '4711571_sistecread';         // ← nombre de tu base de datos local
     $username = 'root';
     $password = '';                  // ← sin contraseña, como tienes ahora
 } else {
     // CONFIGURACIÓN PRODUCCIÓN → AwardSpace
-    $host = 'fdb1032.awardspace.net';
+    $host = '';
     $port = 3306;
     $dbname = '4711571_sistecread';
     $username = '4711571_sistecread';
