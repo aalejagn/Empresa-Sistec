@@ -15,7 +15,7 @@ const Home = () => {
 
   // Cargar los más vendidos desde la base de datos
   useEffect(() => {
-    fetch("/api/libros.php?cat=mas-vendidos")
+    fetch("/api/mas_vendidos.php?cat=mas-vendidos")
       .then(res => {
         if (!res.ok) throw new Error("Error al cargar más vendidos");
         return res.json();

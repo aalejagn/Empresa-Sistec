@@ -1,5 +1,5 @@
 <?php
-// api/middleware/auth_required.php
+// api/auth_required.php
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
