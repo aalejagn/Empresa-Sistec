@@ -63,7 +63,7 @@ body.login-page {
   width: 100vw;
   /* IMAGEN DE FONDO CON OVERLAY */
   background-image: 
-    url('./public/assets/Images/fondologin.jpg');
+    url('https://res.cloudinary.com/dfcaljjed/image/upload/v1764650059/fondologin_wznq9z.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
