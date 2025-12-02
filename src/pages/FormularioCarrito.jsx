@@ -1,5 +1,6 @@
 // src/pages/Checkout.jsx
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";  // ← AGREGA ESTO
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useCart } from "../components/CartContext";
@@ -7,8 +8,8 @@ import { useAuth } from "../components/AuthContext";
 
 const Checkout = () => {
   const { cart } = useCart();
-  const {user} = useAuth()
-  const navigate = useNavigate();
+  const { user } = useAuth();
+  const navigate = useNavigate();  // ← AHORA SÍ, DENTRO DEL COMPONENTE
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -38,7 +39,7 @@ const Checkout = () => {
   useEffect(() => {
     if (!user) {
       alert("Debes iniciar sesión para continuar con la compra");
-      navigate("/https://empresa-sistec-t5fv.vercel.app/login");
+      navigate("/login");
     }
   }, [user, navigate]);
 

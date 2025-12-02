@@ -1,17 +1,18 @@
 // src/pages/Carrito.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useCart } from "../components/CartContext";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../components/AuthContext";  // ← NUEVO (solo esta línea)
 
 const Carrito = () => {
   const { cart, updateQuantity, removeItem, clearCart } = useCart();
+  const { user } = useAuth();  // ← NUEVO (solo esta línea)
   const navigate = useNavigate();
 
   // Cálculos
-  const IVA_RATE = 0.16; // 16% para México
+  const IVA_RATE = 0.16;
   const calculateSubtotal = () => {
     return cart.reduce(
       (total, item) => total + parseFloat(item.precio) * item.cantidad,
@@ -23,21 +24,28 @@ const Carrito = () => {
   const iva = subtotal * IVA_RATE;
   const total = subtotal + iva;
 
+  // ← AQUÍ ESTÁ LO NUEVO (solo este manejador cambió)
   const handleCheckout = () => {
     if (cart.length === 0) {
       alert("El carrito está vacío.");
       return;
     }
-    alert("¡Compra simulada! Procediendo al pago...");
+
+    if (!user) {
+      alert("Debes iniciar sesión para continuar con la compra");
+      navigate("/login");
+      return;
+    }
+
+    navigate("/checkout");
   };
+  // ← FIN DE LO NUEVO
 
   return (
     <>
       <Header />
       <main className="carrito-main">
         <div className="container">
-          {" "}
-          {/* Usa .container de style.css */}
           <h1 className="page-title">Tu Carrito de Compras</h1>
           {cart.length === 0 ? (
             <div className="empty-cart">
@@ -45,7 +53,7 @@ const Carrito = () => {
               <h2>Tu carrito está vacío</h2>
               <p>¡Explora nuestro catálogo y encuentra tus libros favoritos!</p>
               <Link to="/categorias" className="btn btn-primary">
-                <i className="fas fa-book"></i> Explorar Libros
+                Explorar Libros
               </Link>
             </div>
           ) : (
@@ -55,7 +63,7 @@ const Carrito = () => {
                 <div className="cart-header">
                   <h2>Artículos ({cart.length})</h2>
                   <button className="btn-clear-cart" onClick={clearCart}>
-                    <i className="fas fa-trash"></i> Vaciar Carrito
+                    Vaciar Carrito
                   </button>
                 </div>
 
@@ -69,16 +77,16 @@ const Carrito = () => {
                       <div className="item-details">
                         <h3 className="item-title">{item.titulo}</h3>
                         <p className="item-author">
-                          <i className="fas fa-user"></i> {item.autor}
+                          {item.autor}
                         </p>
                         {item.editorial && (
                           <p className="item-editorial">
-                            <i className="fas fa-building"></i> {item.editorial}
+                            {item.editorial}
                           </p>
                         )}
                         {item.publicado && (
                           <p className="item-year">
-                            <i className="fas fa-calendar"></i> {item.publicado}
+                            {item.publicado}
                           </p>
                         )}
                         <p className="item-price">
@@ -95,7 +103,7 @@ const Carrito = () => {
                             }
                             disabled={item.cantidad <= 1}
                           >
-                            <i className="fas fa-minus"></i>
+                            -
                           </button>
                           <span className="quantity">{item.cantidad}</span>
                           <button
@@ -104,17 +112,14 @@ const Carrito = () => {
                               updateQuantity(item.id, item.cantidad + 1)
                             }
                           >
-                            <i className="fas fa-plus"></i>
+                            +
                           </button>
                         </div>
 
                         <div className="item-subtotal">
                           <span className="subtotal-label">Subtotal:</span>
                           <span className="subtotal-amount">
-                            $
-                            {(parseFloat(item.precio) * item.cantidad).toFixed(
-                              2
-                            )}
+                            ${(parseFloat(item.precio) * item.cantidad).toFixed(2)}
                           </span>
                         </div>
 
@@ -123,7 +128,7 @@ const Carrito = () => {
                           onClick={() => removeItem(item.id)}
                           title="Eliminar del carrito"
                         >
-                          <i className="fas fa-times"></i>
+                          x
                         </button>
                       </div>
                     </div>
@@ -138,8 +143,7 @@ const Carrito = () => {
                   <div className="summary-row">
                     <span>
                       Subtotal (
-                      {cart.reduce((acc, item) => acc + item.cantidad, 0)}{" "}
-                      artículos):
+                      {cart.reduce((acc, item) => acc + item.cantidad, 0)} artículos):
                     </span>
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
@@ -153,18 +157,20 @@ const Carrito = () => {
                     <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
+
+                {/* ← AQUÍ CAMBIÉ EL onClick */}
                 <button
                   className="btn btn-checkout"
-                  onClick={() => navigate("/checkout")}
+                  onClick={handleCheckout}   // ← ahora usa la función protegida
                 >
-                  <i className="fas fa-credit-card"></i> Proceder al Pago
+                  Proceder al Pago
                 </button>
+
                 <Link to="/categorias" className="btn btn-continue">
-                  <i className="fas fa-arrow-left"></i>Seguir Comprando
+                  Seguir Comprando
                 </Link>
                 <div className="security-badges">
-                  <i className="fas fa-lock"></i>
-                  <span>Compra 100% segura</span>
+                  Compra 100% segura
                 </div>
               </div>
             </div>
