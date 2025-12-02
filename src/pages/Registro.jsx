@@ -446,28 +446,6 @@ const Registrar = () => {
 
           {step === 2 && (
             <>
-              {/* Dirección */}
-              <div className="login-input-group">
-                <label htmlFor="direccion" className="login-label">
-                  Dirección <span className="login-required">*</span>
-                </label>
-                <div className="login-input-wrapper">
-                  <textarea
-                    id="direccion"
-                    value={direccion}
-                    onChange={handleDireccionChange}
-                    onBlur={handleDireccionBlur}
-                    className={`login-input login-textarea ${touched.direccion ? (direccionValid ? 'valid' : direccionError ? 'error' : '') : ''}`}
-                    placeholder="Ingresa tu dirección completa"
-                  />
-                  <Home className="login-input-icon" style={{ color: direccionValid ? '#5fb4b7' : '#999' }} />
-                  {touched.direccion && direccionValid && <CheckCircle className="login-valid-icon" style={{ color: '#5fb4b7' }} />}
-                  {touched.direccion && direccionError && <AlertCircle className="login-error-icon" style={{ color: '#ef4444' }} />}
-                </div>
-                {touched.direccion && direccionError && <p className="login-error-message"><span className="login-error-dot"></span>{direccionError}</p>}
-                {touched.direccion && direccionValid && <p className="login-success-message"><span className="login-success-dot"></span>Dirección válida ✓</p>}
-              </div>
-
               {/* Género */}
               <div className="login-input-group">
                 <label htmlFor="genero" className="login-label">
@@ -544,6 +522,29 @@ const Registrar = () => {
                 </div>
                 {touched.confirmPassword && confirmPasswordError && <p className="login-error-message"><span className="login-error-dot"></span>{confirmPasswordError}</p>}
                 {touched.confirmPassword && confirmPasswordValid && <p className="login-success-message"><span className="login-success-dot"></span>Contraseñas coinciden ✓</p>}
+              </div>
+
+
+              {/* Dirección */}
+              <div className="login-input-group">
+                <label htmlFor="direccion" className="login-label">
+                  Dirección <span className="login-required">*</span>
+                </label>
+                <div className="login-input-wrapper">
+                  <textarea
+                    id="direccion"
+                    value={direccion}
+                    onChange={handleDireccionChange}
+                    onBlur={handleDireccionBlur}
+                    className={`login-input login-textarea ${touched.direccion ? (direccionValid ? 'valid' : direccionError ? 'error' : '') : ''}`}
+                    placeholder="Ingresa tu dirección completa"
+                  />
+                  <Home className="login-input-icon" style={{ color: direccionValid ? '#5fb4b7' : '#999' }} />
+                  {touched.direccion && direccionValid && <CheckCircle className="login-valid-icon" style={{ color: '#5fb4b7' }} />}
+                  {touched.direccion && direccionError && <AlertCircle className="login-error-icon" style={{ color: '#ef4444' }} />}
+                </div>
+                {touched.direccion && direccionError && <p className="login-error-message"><span className="login-error-dot"></span>{direccionError}</p>}
+                {touched.direccion && direccionValid && <p className="login-success-message"><span className="login-success-dot"></span>Dirección válida ✓</p>}
               </div>
             </>
           )}

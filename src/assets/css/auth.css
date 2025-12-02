@@ -342,6 +342,15 @@ body.login-page {
   background: rgba(232, 139, 125, 0.04);
 }
 
+/* ===== ESTILOS PARA TEXTAREA (DIRECCIÓN) ===== */
+.login-textarea {
+  height: 80px;
+  resize: vertical;
+  min-height: 60px;
+  max-height: 150px;
+  padding: 0.65rem 1rem 0.65rem 2.5rem; /* Igual que inputs */
+}
+
 .login-input-icon {
   position: absolute;
   left: 0.75rem;
@@ -1506,3 +1515,6 @@ body.login-page,
     gap: 1rem;
   }
 }
+
+
+
