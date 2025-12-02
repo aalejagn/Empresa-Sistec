@@ -38,7 +38,7 @@ const Contactanos = () => {
     // ← AQUÍ (protección)
     if (!user) {
       alert("Debes iniciar sesión para enviar un mensaje");
-      navigate("/https://empresa-sistec-t5fv.vercel.app/login");
+      navigate("/login");
       return;
     }
     setIsLoading(true);

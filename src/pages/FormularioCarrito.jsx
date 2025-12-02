@@ -1,6 +1,5 @@
 // src/pages/Checkout.jsx
-import React, { useEffectEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useCart } from "../components/CartContext";
@@ -406,7 +405,7 @@ const Checkout = () => {
           </div>
 
           <Link to="/carrito" className="btn btn-continue">
-             <i className="fas fa-arrow-left"> </i> Volver al Carrito
+            <i className="fas fa-arrow-left"> </i> Volver al Carrito
           </Link>
         </div>
       </main>
