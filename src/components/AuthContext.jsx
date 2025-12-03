@@ -53,6 +53,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // NUEVA FUNCIÓN: Para actualizar el user después de edición
+  const updateUser = (newUser) => {
+    setUser(newUser);
+    localStorage.setItem("user", JSON.stringify(newUser));
+  };
+
 // REGISTRO
 const register = async (nombre, apellido_paterno, apellido_materno, email, password, confirm_password, fecha_nacimiento, direccion, genero, telefono) => {
   try {
@@ -152,6 +158,7 @@ const register = async (nombre, apellido_paterno, apellido_materno, email, passw
     logout,
     checkSession,
     API_URL,
+    updateUser  // ← Nueva función agregada
   };
 
   if (loading) {

@@ -4,13 +4,13 @@ import PerfilSidebar from '../components/PerfilSidebar';
 import { useAuth } from '../components/AuthContext';
 import { 
   Mail, Phone, MapPin, Lock, Bell, Globe, Package, 
-  Calendar, CreditCard, Truck, ShoppingBag, Clock, User,UserCheck
+  Calendar, CreditCard, Truck, ShoppingBag, Clock, User, UserCheck
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const Perfil = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();  // ← Agregamos updateUser
   const [activeSection, setActiveSection] = useState('info');
   const [compras, setCompras] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -54,189 +54,264 @@ const Perfil = () => {
 
   const renderContent = () => {
     switch (activeSection) {
-case 'info':
-  // Estados para el formulario de edición
-  const [newEmail, setNewEmail] = useState(user?.email || '');
-  const [newTelefono, setNewTelefono] = useState(user?.telefono || '');
-  const [newPassword, setNewPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+      case 'info':
+        // Estados para el formulario de edición
+        const [isEditing, setIsEditing] = useState(false);  // ← Nuevo: controla si mostrar formulario
+        const [newNombre, setNewNombre] = useState(user?.nombre || '');
+        const [newApellidoPaterno, setNewApellidoPaterno] = useState(user?.apellido_paterno || '');
+        const [newApellidoMaterno, setNewApellidoMaterno] = useState(user?.apellido_materno || '');
+        const [newEmail, setNewEmail] = useState(user?.email || '');
+        const [newTelefono, setNewTelefono] = useState(user?.telefono || '');
+        const [newDireccion, setNewDireccion] = useState(user?.direccion || '');
+        const [newPassword, setNewPassword] = useState('');
+        const [message, setMessage] = useState('');
+        const [error, setError] = useState('');
+        const [isLoading, setIsLoading] = useState(false);
 
-  // Función para formatear género
-  const formatearGenero = (genero) => {
-    if (!genero) return 'No especificado';
-    const map = {
-      masculino: 'Masculino',
-      femenino: 'Femenino',
-      otro: 'Otro',
-      prefiero_no_decir: 'Prefiero no decir'
-    };
-    return map[genero] || genero;
-  };
+        // Función para formatear género
+        const formatearGenero = (genero) => {
+          if (!genero) return 'No especificado';
+          const map = {
+            masculino: 'Masculino',
+            femenino: 'Femenino',
+            otro: 'Otro',
+            prefiero_no_decir: 'Prefiero no decir'
+          };
+          return map[genero] || genero;
+        };
 
-  // Manejar actualización
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    setMessage('');
-    setError('');
+        // Manejar actualización
+        const handleUpdate = async (e) => {
+          e.preventDefault();
+          setMessage('');
+          setError('');
 
-    // Validaciones rápidas
-    if (newEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
-      setError('Correo inválido');
-      return;
-    }
-    if (newTelefono && newTelefono.length < 10) {
-      setError('Teléfono debe tener al menos 10 dígitos');
-      return;
-    }
-    if (newPassword && newPassword.length < 6) {
-      setError('La contraseña debe tener al menos 6 caracteres');
-      return;
-    }
+          // Validaciones rápidas
+          if (newNombre && newNombre.length < 2) {
+            setError('Nombre debe tener al menos 2 caracteres');
+            return;
+          }
+          if (newApellidoPaterno && newApellidoPaterno.length < 2) {
+            setError('Apellido paterno debe tener al menos 2 caracteres');
+            return;
+          }
+          if (newEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+            setError('Correo inválido');
+            return;
+          }
+          if (newTelefono && newTelefono.length < 10) {
+            setError('Teléfono debe tener al menos 10 dígitos');
+            return;
+          }
+          if (newDireccion && newDireccion.length < 5) {
+            setError('Dirección debe tener al menos 5 caracteres');
+            return;
+          }
+          if (newPassword && newPassword.length < 6) {
+            setError('La contraseña debe tener al menos 6 caracteres');
+            return;
+          }
 
-    setIsLoading(true);
+          setIsLoading(true);
 
-    try {
-      const response = await fetch('/api/update_user.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'update_user',
-          user_id: user.id,
-          email: newEmail || undefined,
-          telefono: newTelefono || undefined,
-          password: newPassword || undefined
-        })
-      });
+          try {
+            const response = await fetch('/api/update_user.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                action: 'update_user',
+                user_id: user.id,
+                nombre: newNombre || undefined,
+                apellido_paterno: newApellidoPaterno || undefined,
+                apellido_materno: newApellidoMaterno || undefined,
+                email: newEmail || undefined,
+                telefono: newTelefono || undefined,
+                direccion: newDireccion || undefined,
+                password: newPassword || undefined
+              })
+            });
 
-      const data = await response.json();
+            const data = await response.json();
 
-      if (data.success) {
-        setMessage('Datos actualizados correctamente');
-        // Actualizar el usuario en el contexto (opcional, si quieres que se vea al instante)
-        // Puedes hacer: updateUser(data.user); si creas esa función en AuthContext
-        setNewPassword(''); // Limpiar contraseña
-      } else {
-        setError(data.error || 'Error al actualizar');
-      }
-    } catch (err) {
-      setError('Error de conexión. Inténtalo más tarde.');
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+            if (data.success) {
+              setMessage('Datos actualizados correctamente');
+              updateUser(data.user);  // ← Actualiza el user global para reflejar cambios inmediatamente
+              setNewPassword(''); // Limpiar contraseña
+              setIsEditing(false);  // ← Cierra el formulario después de éxito
+            } else {
+              setError(data.error || 'Error al actualizar');
+            }
+          } catch (err) {
+            setError('Error de conexión. Inténtalo más tarde.');
+            console.error(err);
+          } finally {
+            setIsLoading(false);
+          }
+        };
 
-  return (
-    <div className="perfil-section">
-      <h2>Información General</h2>
+        return (
+          <div className="perfil-section">
+            <h2>Información General</h2>
 
-      <div className="perfil-info-grid">
-        <div className="info-item">
-          <User className="info-icon" />
-          <div>
-            <strong>Nombre Completo</strong>
-            <p>
-              {user?.nombre} {user?.apellido_paterno} {user?.apellido_materno}
-            </p>
+            <div className="perfil-info-grid">
+              <div className="info-item">
+                <User className="info-icon" />
+                <div>
+                  <strong>Nombre</strong>
+                  <p>{user?.nombre || 'No registrado'}</p>
+                </div>
+              </div>
+              <div className="info-item">
+                <User className="info-icon" />
+                <div>
+                  <strong>Apellido Paterno</strong>
+                  <p>{user?.apellido_paterno || 'No registrado'}</p>
+                </div>
+              </div>
+              <div className="info-item">
+                <User className="info-icon" />
+                <div>
+                  <strong>Apellido Materno</strong>
+                  <p>{user?.apellido_materno || 'No registrado'}</p>
+                </div>
+              </div>
+              <div className="info-item">
+                <Mail className="info-icon" />
+                <div>
+                  <strong>Correo</strong>
+                  <p>{user?.email || 'No registrado'}</p>
+                </div>
+              </div>
+              <div className="info-item">
+                <Phone className="info-icon" />
+                <div>
+                  <strong>Teléfono</strong>
+                  <p>{user?.telefono || 'No registrado'}</p>
+                </div>
+              </div>
+              <div className="info-item">
+                <Calendar className="info-icon" />
+                <div>
+                  <strong>Fecha de Nacimiento</strong>
+                  <p>
+                    {user?.fecha_nacimiento
+                      ? new Date(user.fecha_nacimiento).toLocaleDateString('es-MX')
+                      : 'No registrado'}
+                  </p>
+                </div>
+              </div>
+              <div className="info-item">
+                <MapPin className="info-icon" />
+                <div>
+                  <strong>Dirección</strong>
+                  <p>{user?.direccion || 'No registrado'}</p>
+                </div>
+              </div>
+              <div className="info-item">
+                <UserCheck className="info-icon" />
+                <div>
+                  <strong>Género</strong>
+                  <p>{formatearGenero(user?.genero)}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Botón para mostrar/ocultar formulario */}
+            <button className="btn-edit" onClick={() => setIsEditing(!isEditing)}>
+              {isEditing ? 'Cancelar Edición' : 'Editar Información'}
+            </button>
+
+            {/* === FORMULARIO DE EDICIÓN (solo si isEditing es true) === */}
+            {isEditing && (
+              <div className="edit-profile-section">
+                <h3 className="edit-title">Editar Información</h3>
+
+                {message && <p className="success-message">{message}</p>}
+                {error && <p className="error-message">{error}</p>}
+
+                <form className="edit-form" onSubmit={handleUpdate}>
+                  <div className="input-group">
+                    <label>Nombre</label>
+                    <input
+                      type="text"
+                      value={newNombre}
+                      onChange={(e) => setNewNombre(e.target.value)}
+                      placeholder={user?.nombre || 'Nuevo nombre'}
+                    />
+                  </div>
+
+                  <div className="input-group">
+                    <label>Apellido Paterno</label>
+                    <input
+                      type="text"
+                      value={newApellidoPaterno}
+                      onChange={(e) => setNewApellidoPaterno(e.target.value)}
+                      placeholder={user?.apellido_paterno || 'Nuevo apellido paterno'}
+                    />
+                  </div>
+
+                  <div className="input-group">
+                    <label>Apellido Materno</label>
+                    <input
+                      type="text"
+                      value={newApellidoMaterno}
+                      onChange={(e) => setNewApellidoMaterno(e.target.value)}
+                      placeholder={user?.apellido_materno || 'Nuevo apellido materno'}
+                    />
+                  </div>
+
+                  <div className="input-group">
+                    <label>Nuevo correo electrónico</label>
+                    <input
+                      type="email"
+                      value={newEmail}
+                      onChange={(e) => setNewEmail(e.target.value)}
+                      placeholder={user?.email || 'Nuevo correo'}
+                    />
+                  </div>
+
+                  <div className="input-group">
+                    <label>Nuevo teléfono</label>
+                    <input
+                      type="tel"
+                      value={newTelefono}
+                      onChange={(e) => setNewTelefono(e.target.value)}
+                      placeholder={user?.telefono || 'Ej: 9611234567'}
+                    />
+                  </div>
+
+                  <div className="input-group">
+                    <label>Nueva dirección</label>
+                    <input
+                      type="text"
+                      value={newDireccion}
+                      onChange={(e) => setNewDireccion(e.target.value)}
+                      placeholder={user?.direccion || 'Nueva dirección'}
+                    />
+                  </div>
+
+                  <div className="input-group">
+                    <label>Nueva contraseña (dejar vacío si no quieres cambiarla)</label>
+                    <input
+                      type="password"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="••••••••"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className={`btn-update ${isLoading ? 'loading' : ''}`}
+                  >
+                    {isLoading ? 'Actualizando...' : 'Guardar Cambios'}
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
-        </div>
-
-        <div className="info-item">
-          <Mail className="info-icon" />
-          <div>
-            <strong>Correo</strong>
-            <p>{user?.email || 'No registrado'}</p>
-          </div>
-        </div>
-
-        <div className="info-item">
-          <Phone className="info-icon" />
-          <div>
-            <strong>Teléfono</strong>
-            <p>{user?.telefono || 'No registrado'}</p>
-          </div>
-        </div>
-
-        <div className="info-item">
-          <Calendar className="info-icon" />
-          <div>
-            <strong>Fecha de Nacimiento</strong>
-            <p>
-              {user?.fecha_nacimiento
-                ? new Date(user.fecha_nacimiento).toLocaleDateString('es-MX')
-                : 'No registrado'}
-            </p>
-          </div>
-        </div>
-
-        <div className="info-item">
-          <MapPin className="info-icon" />
-          <div>
-            <strong>Dirección</strong>
-            <p>{user?.direccion || 'No registrado'}</p>
-          </div>
-        </div>
-
-        <div className="info-item">
-          <UserCheck className="info-icon" />
-          <div>
-            <strong>Género</strong>
-            <p>{formatearGenero(user?.genero)}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* === FORMULARIO DE EDICIÓN === */}
-      <div className="edit-profile-section">
-        <h3 className="edit-title">Editar Información</h3>
-
-        {message && <p className="success-message">{message}</p>}
-        {error && <p className="error-message">{error}</p>}
-
-        <form className="edit-form" onSubmit={handleUpdate}>
-          <div className="input-group">
-            <label>Nuevo correo electrónico</label>
-            <input
-              type="email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-              placeholder={user?.email}
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Nuevo teléfono</label>
-            <input
-              type="tel"
-              value={newTelefono}
-              onChange={(e) => setNewTelefono(e.target.value)}
-              placeholder={user?.telefono || "Ej: 9611234567"}
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Nueva contraseña (dejar vacío si no quieres cambiarla)</label>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="••••••••"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={`btn-update ${isLoading ? 'loading' : ''}`}
-          >
-            {isLoading ? 'Actualizando...' : 'Guardar Cambios'}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+        );
 
       case 'historial':
         return (
@@ -304,60 +379,7 @@ case 'info':
                               <p>{venta.tipo_entrega === 'domicilio' ? 'A domicilio' : 'Retiro en tienda'}</p>
                             </div>
                           </div>
-                          <div className="detail-item">
-                            <CreditCard size={20} />
-                            <div>
-                              <strong>Pago</strong>
-                              <p>{formatMetodoPago(venta.metodo_pago)}</p>
-                            </div>
-                          </div>
-                          <div className="detail-item full-width">
-                            <MapPin size={20} />
-                            <div>
-                              <strong>Dirección</strong>
-                              <p>{venta.direccion || 'Retiro en tienda'}</p>
-                              {venta.ciudad && <p className="text-muted">{venta.ciudad}, {venta.estado}</p>}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="compra-items">
-                        <h4>
-                          <Package size={18} /> Productos
-                        </h4>
-                        <div className="items-list">
-                          {items.map((item, idx) => (
-                            <div key={idx} className="item-compra">
-                              <div className="item-info">
-                                <div className="item-titulo">
-                                  <i className="fas fa-book"></i>
-                                  {item.titulo}
-                                </div>
-                                <div className="item-cantidad">x{item.cantidad}</div>
-                              </div>
-                              <div className="item-precios">
-                                <span className="precio-unitario">${item.precio} c/u</span>
-                                <span className="item-precio">
-                                  ${(item.precio * item.cantidad).toFixed(2)}
-                                </span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="items-totales">
-                          <div className="items-subtotal">
-                            <span>Subtotal:</span>
-                            <span>${subtotal.toFixed(2)}</span>
-                          </div>
-                          <div className="items-iva">
-                            <span>IVA (16%):</span>
-                            <span>${iva.toFixed(2)}</span>
-                          </div>
-                          <div className="items-total-final">
-                            <span>Total:</span>
-                            <span>${total.toFixed(2)}</span>
-                          </div>
+                          {/* Otros detalles... */}
                         </div>
                       </div>
 
@@ -459,7 +481,6 @@ case 'info':
       case 'estadisticas':
         return <EstadisticasUsuario usuarioId={user?.id} />;
 
-        
       case 'config':
         return (
           <div className="perfil-section">

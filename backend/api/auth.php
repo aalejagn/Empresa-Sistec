@@ -1,11 +1,17 @@
 <?php
+// Limpieza total de salida (evita errores JSON)
+ob_clean();
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: https://empresa-sistec-t5fv.vercel.app');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(200); exit; }
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
 require dirname(__DIR__) . '/config/database.php';
 require __DIR__ . '/sendmail.php';
@@ -20,6 +26,24 @@ function renderTemplate($file, $vars=[]) {
     $html = file_get_contents($path);
     foreach ($vars as $k=>$v) $html = str_replace('{'.$k.'}', htmlspecialchars($v), $html);
     return $html;
+}
+
+// ====================== VERIFICAR SESIÓN ======================
+if ($action === 'check_session') {
+    session_start();
+    if (isset($_SESSION['user_id'])) {
+        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+        $fullUser = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        echo json_encode([
+            'success' => true,
+            'user' => $fullUser
+        ]);
+    } else {
+        echo json_encode(['success' => false]);
+    }
+    exit;
 }
 
 // ====================== LOGIN CON GOOGLE ======================
@@ -55,7 +79,11 @@ if ($action === 'google_login') {
     $_SESSION['user_nombre'] = $nombre;
     $_SESSION['user_rol'] = 'usuario';
 
-    echo json_encode(['success'=>true, 'user'=>['id'=>$userId,'nombre'=>$nombre,'email'=>$email]]);
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
+    $stmt->execute([$userId]);
+    $fullUser = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    echo json_encode(['success'=>true, 'user'=> $fullUser]);
     exit;
 }
 
@@ -70,9 +98,10 @@ if ($action === 'register') {
     $fecha_nacimiento = $data['fecha_nacimiento'] ?? '';
     $direccion = trim($data['direccion'] ?? '');
     $genero = $data['genero'] ?? 'prefiero_no_decir';
+    $telefono = trim($data['telefono'] ?? '');
 
     // Validaciones básicas
-    if (empty($nombre) || empty($apellido_paterno) || empty($email) || empty($password) || empty($confirm_password) || empty($fecha_nacimiento) || empty($direccion)) {
+    if (empty($nombre) || empty($apellido_paterno) || empty($email) || empty($password) || empty($confirm_password) || empty($fecha_nacimiento) || empty($direccion) || empty($telefono)) {
         echo json_encode(['error' => 'Todos los campos son requeridos']);
         exit;
     }
@@ -127,20 +156,25 @@ if ($action === 'register') {
         // Hashear contraseña
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Insertar usuario con campos nuevos
+        // Insertar usuario con campos nuevos (INCLUIDO TELÉFONO)
         $stmt = $pdo->prepare("
             INSERT INTO usuarios (
                 nombre, apellido_paterno, apellido_materno, email, password, fecha_nacimiento, 
-                direccion, genero, rol, creado_en
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'usuario', NOW())
+                direccion, genero, telefono, rol, creado_en
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'usuario', NOW())
         ");
         $stmt->execute([
             $nombre_completo, $apellido_paterno, $apellido_materno, $email, $hashedPassword,
-            $fecha_nacimiento, $direccion, $genero
+            $fecha_nacimiento, $direccion, $genero, $telefono
         ]);
 
         // Obtener el ID del usuario recién creado
         $userId = $pdo->lastInsertId();
+
+        // Obtener fullUser
+        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
+        $stmt->execute([$userId]);
+        $fullUser = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // ============== ENVIAR CORREO DE BIENVENIDA ==============
         $htmlBienvenida = renderTemplate('email_bienvenida.html', [
@@ -162,70 +196,11 @@ if ($action === 'register') {
         echo json_encode([
             'success' => true,
             'message' => '✅ Cuenta creada exitosamente. Revisa tu correo para ver tus credenciales.',
-            'user' => [
-                'id' => $userId,
-                'nombre' => $nombre_completo,
-                'email' => $email,
-                'rol' => 'usuario'
-            ]
+            'user' => $fullUser
         ]);
 
     } catch (Exception $e) {
         echo json_encode(['error' => 'Error al registrar usuario: ' . $e->getMessage()]);
-    }
-    exit;
-}
-
-// ============== FORGOT PASSWORD (Enviar token de recuperación) ==============
-if ($action === 'forgot_password') {
-    $email = trim($data['email'] ?? '');
-
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(['error' => 'Email inválido o requerido']);
-        exit;
-    }
-
-    try {
-        $stmt = $pdo->prepare("SELECT id, nombre FROM usuarios WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
-
-        if (!$user) {
-            echo json_encode(['error' => 'No se encontró una cuenta con este email']);
-            exit;
-        }
-
-        // Generar token de 6 dígitos
-        $token = sprintf("%06d", mt_rand(0, 999999));
-        $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
-
-        // Guardar token en BD
-        $upd = $pdo->prepare("UPDATE usuarios SET reset_token = ?, reset_expires = ? WHERE id = ?");
-        $upd->execute([$token, $expires, $user['id']]);
-
-        // Generar link de recuperación
-        $link = "https://empresa-sistec-t5fv.vercel.app/recuperar-contrase%C3%B1a?token={$token}";
-
-        // ============== ENVIAR CORREO DE RECUPERACIÓN ==============
-        $htmlRecuperacion = renderTemplate('email_recuperacion.html', [
-            'nombre' => $user['nombre'],
-            'token' => $token,
-            'link' => $link
-        ]);
-
-        // Enviar correo
-        if (enviarCorreo($email, $user['nombre'], '🔒 Recuperar contraseña - SISTEC READ', $htmlRecuperacion)) {
-            echo json_encode([
-                'success' => true,
-                'message' => '📧 Correo enviado exitosamente. Revisa tu bandeja de entrada.'
-            ]);
-        } else {
-            echo json_encode([
-                'error' => 'No se pudo enviar el correo. Verifica la configuración de SMTP.'
-            ]);
-        }
-    } catch (Exception $e) {
-        echo json_encode(['error' => 'Error interno: ' . $e->getMessage()]);
     }
     exit;
 }
@@ -276,6 +251,7 @@ if ($action === 'reset_password') {
         $htmlConfirmacion = renderTemplate('email_confirmacion.html', [
             'nombre' => $user['nombre']
         ]);
+        enviarCorreo($user['email'], $user['nombre'], 'Contraseña actualizada - SISTEC READ', $htmlConfirmacion);
 
         // Enviar confirmación por correo
         enviarCorreo($user['email'], $user['nombre'], '✅ Contraseña actualizada - SISTEC READ', $htmlConfirmacion);
@@ -317,12 +293,7 @@ if ($action === 'login') {
             echo json_encode([
                 'success' => true,
                 'message' => 'Inicio de sesión exitoso',
-                'user' => [
-                    'id' => $user['id'],
-                    'nombre' => $user['nombre'],
-                    'email' => $user['email'],
-                    'rol' => $user['rol']
-                ]
+                'user' => $user  // ← Devuelve fullUser
             ]);
         } else {
             echo json_encode(['error' => 'Email o contraseña incorrectos']);
@@ -332,9 +303,6 @@ if ($action === 'login') {
     }
     exit;
 }
-
-
-
 
 // ============== RECUPERAR CONTRASEÑA (Enviar email con token) ==============
 if ($action === 'forgot_password') {
@@ -437,7 +405,7 @@ if ($action === 'reset_password') {
         ");
         $upd->execute([$hashedPassword, $user['id']]);
 
-// ============== ENVIAR CONFIRMACIÓN DE CAMBIO ==============
+        // ============== ENVIAR CONFIRMACIÓN DE CAMBIO ==============
         $htmlConfirmacion = renderTemplate('email_confirmacion.html', [
             'nombre' => $user['nombre']
         ]);
@@ -462,27 +430,6 @@ if ($action === 'logout') {
     session_start();
     session_destroy();
     echo json_encode(['success' => true, 'message' => 'Sesión cerrada']);
-    exit;
-}
-
-// ============== VERIFICAR SESIÓN ==============
-if ($action === 'check_session') {
-    session_start();
-    if (isset($_SESSION['user_id'])) {
-        // ← AQUÍ ESTABA EL PROBLEMA: solo devolvías 4 campos
-        // ← AHORA devolvemos TODO el usuario desde la BD
-        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
-        $stmt->execute([$_SESSION['user_id']]);
-        $fullUser = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        echo json_encode([
-            'success' => true,
-            'message' => 'Cuenta creada exitosamente. Revisa tu correo para ver tus credenciales.',
-            'user' => $fullUser  // ← Cambia esto: en vez de solo 4 campos, devuelve TODO
-]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'No hay sesión activa']);
-    }
     exit;
 }
 
