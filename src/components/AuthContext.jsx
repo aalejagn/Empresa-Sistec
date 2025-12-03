@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
 
   const checkSession = async () => {
     // Primero intenta de localStorage
-    setUser(data.user);
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
@@ -55,7 +54,7 @@ export const AuthProvider = ({ children }) => {
   };
 
 // REGISTRO
-const register = async (nombre, apellido_paterno, apellido_materno, email, password, confirm_password, fecha_nacimiento, direccion, genero) => {
+const register = async (nombre, apellido_paterno, apellido_materno, email, password, confirm_password, fecha_nacimiento, direccion, genero, telefono) => {
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -71,7 +70,7 @@ const register = async (nombre, apellido_paterno, apellido_materno, email, passw
         fecha_nacimiento, 
         direccion, 
         genero,
-        telefono  // ←Nuevo
+        telefono  // ← Nuevo (correcto)
       }),
     });
 
