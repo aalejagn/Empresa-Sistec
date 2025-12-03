@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Lock, User, Eye, EyeOff, CheckCircle, AlertCircle, Calendar, Home, UserCheck } from 'lucide-react';
+import { Mail, Lock, User, Eye, EyeOff, CheckCircle, AlertCircle, Calendar, Home, UserCheck,Phone } from 'lucide-react';
 import '../assets/css/auth.css';
 import { useAuth } from '../components/AuthContext';
 import LoginFooter from '../components/LoginFooter';

@@ -245,16 +245,6 @@ const InfoSection = ({ user, updateUser }) => {
               />
             </div>
 
-            <div className="input-group">
-              <label>Nueva contraseña (dejar vacío si no quieres cambiarla)</label>
-              <input
-                type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="••••••••"
-              />
-            </div>
-
             <button
               type="submit"
               disabled={isLoading}
@@ -268,9 +258,9 @@ const InfoSection = ({ user, updateUser }) => {
     </div>
   );
 };
-
-// Nuevo componente para la sección 'privacidad'
+// Reemplaza todo el componente PrivacidadSection por este:
 const PrivacidadSection = ({ user }) => {
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -278,12 +268,28 @@ const PrivacidadSection = ({ user }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // Opciones de privacidad (puedes guardarlas en backend más adelante)
+  const [privacySettings, setPrivacySettings] = useState({
+    emailNotifications: true,
+    profileVisibility: false,
+    showPurchaseHistory: true,
+    marketingEmails: false,
+    twoFactorEnabled: false
+  });
+
+  const handlePrivacyToggle = (key) => {
+    setPrivacySettings(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
+    // Aquí podrías hacer un fetch para guardar en el backend
+  };
+
   const handleChangePassword = async (e) => {
     e.preventDefault();
     setMessage('');
     setError('');
 
-    // Validaciones
     if (!oldPassword || !newPassword || !confirmPassword) {
       setError('Todos los campos son obligatorios');
       return;
@@ -313,10 +319,11 @@ const PrivacidadSection = ({ user }) => {
       const data = await response.json();
 
       if (data.success) {
-        setMessage('¡Contraseña cambiada exitosamente! 🎉');
+        setMessage('¡Contraseña cambiada exitosamente!');
         setOldPassword('');
         setNewPassword('');
         setConfirmPassword('');
+        setShowPasswordForm(false); // Cerrar el formulario
       } else {
         setError(data.error || 'Error al cambiar la contraseña');
       }
@@ -333,73 +340,160 @@ const PrivacidadSection = ({ user }) => {
       <h2>Privacidad y Seguridad</h2>
 
       <div className="privacy-options">
-        <div className="config-item">
-          <Lock className="info-icon" style={{ width: 24, height: 24, color: '#5DBFB3' }} />
-          <div>
-            <strong>Cambiar Contraseña</strong>
-            <p>Actualiza tu contraseña para mantener tu cuenta segura</p>
+        <div className="privacy-card">
+          <h3><Bell className="info-icon" /> Notificaciones</h3>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={privacySettings.emailNotifications}
+                onChange={() => handlePrivacyToggle('emailNotifications')}
+              />
+              <span className="checkmark"></span>
+              Recibir notificaciones por correo electrónico
+            </label>
+
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={privacySettings.marketingEmails}
+                onChange={() => handlePrivacyToggle('marketingEmails')}
+              />
+              <span className="checkmark"></span>
+              Recibir ofertas y promociones
+            </label>
+          </div>
+        </div>
+
+        <div className="privacy-card">
+          <h3><Globe className="info-icon" /> Visibilidad del Perfil</h3>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={privacySettings.profileVisibility}
+                onChange={() => handlePrivacyToggle('profileVisibility')}
+              />
+              <span className="checkmark"></span>
+              Permitir que otros usuarios vean mi perfil público
+            </label>
+
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={privacySettings.showPurchaseHistory}
+                onChange={() => handlePrivacyToggle('showPurchaseHistory')}
+              />
+              <span className="checkmark"></span>
+              Mostrar mi historial de compras públicamente
+            </label>
+          </div>
+        </div>
+
+        <div className="privacy-card">
+          <h3><Lock className="info-icon" style={{ color: '#e74c3c' }} /> Seguridad Avanzada</h3>
+          <div className="security-actions">
+            <div className="security-item">
+              <div>
+                <strong>Autenticación en Dos Pasos (2FA)</strong>
+                <p className="text-muted">Añade una capa extra de seguridad</p>
+              </div>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  checked={privacySettings.twoFactorEnabled}
+                  onChange={() => handlePrivacyToggle('twoFactorEnabled')}
+                />
+                <span className="slider"></span>
+              </label>
+            </div>
+
+            <div className="security-item">
+              <div>
+                <strong>Cambiar Contraseña</strong>
+                <p className="text-muted">Actualiza tu contraseña periódicamente</p>
+              </div>
+              <button
+                onClick={() => setShowPasswordForm(!showPasswordForm)}
+                className="btn-change-password"
+              >
+                {showPasswordForm ? 'Cancelar' : 'Cambiar Contraseña'}
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="edit-profile-section" style={{ marginTop: '2rem', border: '2px dashed #5DBFB3' }}>
-        <h3 className="edit-title">Cambiar Contraseña</h3>
+      {/* Formulario de cambiar contraseña (solo si showPasswordForm es true) */}
+      {showPasswordForm && (
+        <div className="edit-profile-section password-change-form">
+          <h3>Cambiar Contraseña</h3>
+          {message && <p className="success-message">{message}</p>}
+          {error && <p className="error-message">{error}</p>}
 
-        {message && <p className="success-message">{message}</p>}
-        {error && <p className="error-message">{error}</p>}
+          <form onSubmit={handleChangePassword} className="edit-form">
+            <div className="input-group">
+              <label>Contraseña Actual</label>
+              <input
+                type="password"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+              />
+            </div>
 
-        <form className="edit-form" onSubmit={handleChangePassword}>
-          <div className="input-group">
-            <label>Contraseña Actual</label>
-            <input
-              type="password"
-              value={oldPassword}
-              onChange={(e) => setOldPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
-          </div>
+            <div className="input-group">
+              <label>Nueva Contraseña</label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="Mínimo 6 caracteres"
+                required
+              />
+            </div>
 
-          <div className="input-group">
-            <label>Nueva Contraseña</label>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Mínimo 6 caracteres"
-              required
-            />
-          </div>
+            <div className="input-group">
+              <label>Confirmar Nueva Contraseña</label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Repite la nueva contraseña"
+                required
+              />
+            </div>
 
-          <div className="input-group">
-            <label>Confirmar Nueva Contraseña</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Repite la nueva contraseña"
-              required
-            />
-          </div>
+            <div className="form-actions">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`btn-update ${isLoading ? 'loading' : ''}`}
+              >
+                {isLoading ? 'Cambiando...' : 'Actualizar Contraseña'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowPasswordForm(false)}
+                className="btn-cancel"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={`btn-update ${isLoading ? 'loading' : ''}`}
-            style={{ minWidth: '220px' }}
-          >
-            {isLoading ? 'Cambiando...' : 'Cambiar Contraseña'}
-          </button>
-        </form>
-      </div>
-
-      <div style={{ marginTop: '3rem', padding: '1.5rem', background: '#f8f9fa', borderRadius: '12px' }}>
-        <h4>Consejos de seguridad</h4>
-        <ul style={{ margin: '1rem 0', color: '#555', lineHeight: '1.6' }}>
-          <li>Usa una contraseña única (no la repitas en otros sitios)</li>
-          <li>Combina letras mayúsculas, minúsculas, números y símbolos</li>
-          <li>Cambia tu contraseña cada 3-6 meses</li>
-          <li>Nunca compartas tu contraseña</li>
+      {/* Consejos de seguridad */}
+      <div className="security-tips">
+        <h4>Consejos para mantener tu cuenta segura</h4>
+        <ul>
+          <li>No compartas tu contraseña con nadie</li>
+          <li>Usa contraseñas diferentes en cada sitio web</li>
+          <li>Activa la autenticación en dos pasos</li>
+          <li>Revisa tus sesiones activas regularmente</li>
+          <li>Evita conectarte desde redes Wi-Fi públicas</li>
         </ul>
       </div>
     </div>
