@@ -333,6 +333,9 @@ if ($action === 'login') {
     exit;
 }
 
+
+
+
 // ============== RECUPERAR CONTRASEÑA (Enviar email con token) ==============
 if ($action === 'forgot_password') {
     $email = trim($data['email'] ?? '');
@@ -466,15 +469,17 @@ if ($action === 'logout') {
 if ($action === 'check_session') {
     session_start();
     if (isset($_SESSION['user_id'])) {
+        // ← AQUÍ ESTABA EL PROBLEMA: solo devolvías 4 campos
+        // ← AHORA devolvemos TODO el usuario desde la BD
+        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+        $fullUser = $stmt->fetch(PDO::FETCH_ASSOC);
+
         echo json_encode([
             'success' => true,
-            'user' => [
-                'id' => $_SESSION['user_id'],
-                'nombre' => $_SESSION['user_nombre'],
-                'email' => $_SESSION['user_email'],
-                'rol' => $_SESSION['user_rol']
-            ]
-        ]);
+            'message' => 'Cuenta creada exitosamente. Revisa tu correo para ver tus credenciales.',
+            'user' => $fullUser  // ← Cambia esto: en vez de solo 4 campos, devuelve TODO
+]);
     } else {
         echo json_encode(['success' => false, 'message' => 'No hay sesión activa']);
     }

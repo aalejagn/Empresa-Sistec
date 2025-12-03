@@ -16,6 +16,7 @@ const Registrar = () => {
   const [fechaNacimiento, setFechaNacimiento] = useState('');
   const [direccion, setDireccion] = useState('');
   const [genero, setGenero] = useState('prefiero_no_decir');
+  const [telefono, setTelefono] = useState('');
 
   const [nombreError, setNombreError] = useState('');
   const [apellidoPaternoError, setApellidoPaternoError] = useState('');
@@ -26,6 +27,7 @@ const Registrar = () => {
   const [fechaNacimientoError, setFechaNacimientoError] = useState('');
   const [direccionError, setDireccionError] = useState('');
   const [generoError, setGeneroError] = useState('');
+  const [telefonoError, setTelefonoError] = useState('');
 
   const [nombreValid, setNombreValid] = useState(false);
   const [apellidoPaternoValid, setApellidoPaternoValid] = useState(false);
@@ -36,6 +38,7 @@ const Registrar = () => {
   const [fechaNacimientoValid, setFechaNacimientoValid] = useState(false);
   const [direccionValid, setDireccionValid] = useState(false);
   const [generoValid, setGeneroValid] = useState(true); // Por defecto válido
+  const [telefonoValid, setTelefonoValid] = useState(false);
 
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -202,6 +205,28 @@ const Registrar = () => {
     }
   };
 
+
+  // Nueva validación para teléfono
+  const validateTelefono = (value) => {
+    if (!value) {
+      setTelefonoError('El teléfono es requerido');
+      setTelefonoValid(false);
+      return false;
+    } else if (value.length < 10) {
+      setTelefonoError('El teléfono debe tener al menos 10 dígitos');
+      setTelefonoValid(false);
+      return false;
+    } else if (!/^\d+$/.test(value)) {
+      setTelefonoError('Solo números');
+      setTelefonoValid(false);
+      return false;
+    } else {
+      setTelefonoError('');
+      setTelefonoValid(true);
+      return true;
+    }
+  };
+
   // Handlers de cambio
   const handleNombreChange = (e) => {
     const value = e.target.value;
@@ -267,6 +292,14 @@ const Registrar = () => {
     checkSubmitEnabled();
   };
 
+  // Handler cambio teléfono
+  const handleTelefonoChange = (e) => {
+    const value = e.target.value;
+    setTelefono(value);
+    validateTelefono(value);
+    checkSubmitEnabled();
+  };
+
   // Handlers de blur (para touched)
   const handleNombreBlur = () => setTouched({ ...touched, nombre: true });
   const handleApellidoPaternoBlur = () => setTouched({ ...touched, apellidoPaterno: true });
@@ -277,36 +310,42 @@ const Registrar = () => {
   const handleFechaNacimientoBlur = () => setTouched({ ...touched, fechaNacimiento: true });
   const handleDireccionBlur = () => setTouched({ ...touched, direccion: true });
   const handleGeneroBlur = () => setTouched({ ...touched, genero: true });
+  const handleTelefonoBlur = () => setTouched({ ...touched, telefono: true });
 
-  // Chequea si el botón debe habilitarse (según el paso)
+// En checkSubmitEnabled, para paso 2 agregar telefonoValid
   const checkSubmitEnabled = () => {
     if (step === 1) {
       setIsSubmitEnabled(nombreValid && apellidoPaternoValid && apellidoMaternoValid && emailValid && fechaNacimientoValid);
     } else {
-      setIsSubmitEnabled(direccionValid && generoValid && passwordValid && confirmPasswordValid);
+      setIsSubmitEnabled(direccionValid && generoValid && passwordValid && confirmPasswordValid && telefonoValid);
     }
   };
+
+
 
   // Manejo de "Siguiente" (valida paso 1 y pasa a paso 2)
   const handleNext = () => {
     const isStep1Valid = validateNombre(nombre) && validateApellido(apellidoPaterno, true) && 
-                         validateApellido(apellidoMaterno, false) && validateEmail(email) && 
-                         validateFechaNacimiento(fechaNacimiento);
+                        validateApellido(apellidoMaterno, false) && validateEmail(email) && 
+                        validateFechaNacimiento(fechaNacimiento);
     if (isStep1Valid) {
       setStep(2);
     }
   };
 
+  
+
   // Manejo de submit final (en paso 2)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isStep2Valid = validateDireccion(direccion) && validateGenero(genero) && 
-                         validatePassword(password) && validateConfirmPassword(confirmPassword);
+                        validatePassword(password) && validateConfirmPassword(confirmPassword);
     if (isStep2Valid && isSubmitEnabled) {
-      await register(
-        nombre, apellidoPaterno, apellidoMaterno, email, password, confirmPassword, 
-        fechaNacimiento, direccion, genero
-      );
+      // En handleSubmit, pasar teléfono a register
+        await register(
+          nombre, apellidoPaterno, apellidoMaterno, email, password, confirmPassword, 
+          fechaNacimiento, direccion, genero, telefono  // NUEVO
+        );
     }
   };
 
@@ -472,6 +511,30 @@ const Registrar = () => {
                 {touched.genero && generoValid && <p className="login-success-message"><span className="login-success-dot"></span>Género válido ✓</p>}
               </div>
 
+              {/* // En el render, en {step === 2}, agregar campo teléfono después de género */}
+                <div className="login-input-group">
+                  <label htmlFor="telefono" className="login-label">
+                    Teléfono <span className="login-required">*</span>
+                  </label>
+                  <div className="login-input-wrapper">
+                    <input
+                      type="tel"
+                      id="telefono"
+                      value={telefono}
+                      onChange={handleTelefonoChange}
+                      onBlur={handleTelefonoBlur}
+                      className={`login-input ${touched.telefono ? (telefonoValid ? 'valid' : telefonoError ? 'error' : '') : ''}`}
+                      placeholder="Ej: 9611234567"
+                    />
+                    <Phone className="login-input-icon" style={{ color: telefonoValid ? '#5fb4b7' : '#999' }} />
+                    {touched.telefono && telefonoValid && <CheckCircle className="login-valid-icon" style={{ color: '#5fb4b7' }} />}
+                    {touched.telefono && telefonoError && <AlertCircle className="login-error-icon" style={{ color: '#ef4444' }} />}
+                  </div>
+                  {touched.telefono && telefonoError && <p className="login-error-message"><span className="login-error-dot"></span>{telefonoError}</p>}
+                  {touched.telefono && telefonoValid && <p className="login-success-message"><span className="login-success-dot"></span>Teléfono válido ✓</p>}
+                </div>
+
+
               {/* Contraseña */}
               <div className="login-input-group">
                 <label htmlFor="password" className="login-label">
@@ -596,6 +659,11 @@ const Registrar = () => {
                 <div className="login-status-item">
                   <div className={`login-status-dot ${generoValid ? 'active' : ''}`}></div>
                   <span className={`login-status-text ${generoValid ? 'active' : ''}`}>Género</span>
+                </div>
+
+                <div className="login-status-item">
+                  <div className={`login-status-dot ${telefonoValid ? 'active' : ''}`}></div>
+                  <span className={`login-status-text ${telefonoValid ? 'active' : ''}`}>Teléfono</span>
                 </div>
                 <div className="login-status-item">
                   <div className={`login-status-dot ${passwordValid ? 'active' : ''}`}></div>

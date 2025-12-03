@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkSession = async () => {
     // Primero intenta de localStorage
+    setUser(data.user);
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
@@ -69,7 +70,8 @@ const register = async (nombre, apellido_paterno, apellido_materno, email, passw
         confirm_password, 
         fecha_nacimiento, 
         direccion, 
-        genero 
+        genero,
+        telefono  // ←Nuevo
       }),
     });
 
