@@ -269,6 +269,143 @@ const InfoSection = ({ user, updateUser }) => {
   );
 };
 
+// Nuevo componente para la sección 'privacidad'
+const PrivacidadSection = ({ user }) => {
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    setError('');
+
+    // Validaciones
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      setError('Todos los campos son obligatorios');
+      return;
+    }
+    if (newPassword.length < 6) {
+      setError('La nueva contraseña debe tener al menos 6 caracteres');
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setError('Las contraseñas nuevas no coinciden');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/change_password.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_id: user.id,
+          old_password: oldPassword,
+          new_password: newPassword
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage('¡Contraseña cambiada exitosamente! 🎉');
+        setOldPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        setError(data.error || 'Error al cambiar la contraseña');
+      }
+    } catch (err) {
+      setError('Error de conexión. Inténtalo más tarde.');
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="perfil-section">
+      <h2>Privacidad y Seguridad</h2>
+
+      <div className="privacy-options">
+        <div className="config-item">
+          <Lock className="info-icon" style={{ width: 24, height: 24, color: '#5DBFB3' }} />
+          <div>
+            <strong>Cambiar Contraseña</strong>
+            <p>Actualiza tu contraseña para mantener tu cuenta segura</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="edit-profile-section" style={{ marginTop: '2rem', border: '2px dashed #5DBFB3' }}>
+        <h3 className="edit-title">Cambiar Contraseña</h3>
+
+        {message && <p className="success-message">{message}</p>}
+        {error && <p className="error-message">{error}</p>}
+
+        <form className="edit-form" onSubmit={handleChangePassword}>
+          <div className="input-group">
+            <label>Contraseña Actual</label>
+            <input
+              type="password"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Nueva Contraseña</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="Mínimo 6 caracteres"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Confirmar Nueva Contraseña</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Repite la nueva contraseña"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`btn-update ${isLoading ? 'loading' : ''}`}
+            style={{ minWidth: '220px' }}
+          >
+            {isLoading ? 'Cambiando...' : 'Cambiar Contraseña'}
+          </button>
+        </form>
+      </div>
+
+      <div style={{ marginTop: '3rem', padding: '1.5rem', background: '#f8f9fa', borderRadius: '12px' }}>
+        <h4>Consejos de seguridad</h4>
+        <ul style={{ margin: '1rem 0', color: '#555', lineHeight: '1.6' }}>
+          <li>Usa una contraseña única (no la repitas en otros sitios)</li>
+          <li>Combina letras mayúsculas, minúsculas, números y símbolos</li>
+          <li>Cambia tu contraseña cada 3-6 meses</li>
+          <li>Nunca compartas tu contraseña</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
 const Perfil = () => {
   const { user, updateUser } = useAuth();
   const [activeSection, setActiveSection] = useState('info');
@@ -454,22 +591,7 @@ const Perfil = () => {
         );
 
       case 'privacidad':
-        return (
-          <div className="perfil-section">
-            <h2>Privacidad</h2>
-            <div className="privacy-options">
-              <label>
-                <input type="checkbox" defaultChecked />
-                <span>Recibir notificaciones por correo</span>
-              </label>
-              <label>
-                <input type="checkbox" defaultChecked />
-                <span>Permitir que otros vean mi perfil</span>
-              </label>
-            </div>
-            <button className="btn-danger">Cambiar Contraseña</button>
-          </div>
-        );
+        return <PrivacidadSection user={user} />;
 
       case 'empresa':
         return (
