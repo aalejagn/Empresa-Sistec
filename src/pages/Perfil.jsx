@@ -4,7 +4,7 @@ import PerfilSidebar from '../components/PerfilSidebar';
 import { useAuth } from '../components/AuthContext';
 import { 
   Mail, Phone, MapPin, Lock, Bell, Globe, Package, 
-  Calendar, CreditCard, Truck, ShoppingBag, Clock 
+  Calendar, CreditCard, Truck, ShoppingBag, Clock, User,UserCheck
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -54,36 +54,189 @@ const Perfil = () => {
 
   const renderContent = () => {
     switch (activeSection) {
-      case 'info':
-        return (
-          <div className="perfil-section">
-            <h2>Información General</h2>
-            <div className="perfil-info-grid">
-              <div className="info-item">
-                <Mail className="info-icon" />
-                <div>
-                  <strong>Correo</strong>
-                  <p>{user?.email || 'No registrado'}</p>
-                </div>
-              </div>
-              <div className="info-item">
-                <Phone className="info-icon" />
-                <div>
-                  <strong>Nombre</strong>
-                  <p>{user?.nombre || 'Sin nombre'}</p>
-                </div>
-              </div>
-              <div className="info-item">
-                <MapPin className="info-icon" />
-                <div>
-                  <strong>Usuario desde</strong>
-                  <p>{new Date().toLocaleDateString('es-MX')}</p>
-                </div>
-              </div>
-            </div>
-            <button className="btn-edit">Editar Información</button>
+case 'info':
+  // Estados para el formulario de edición
+  const [newEmail, setNewEmail] = useState(user?.email || '');
+  const [newTelefono, setNewTelefono] = useState(user?.telefono || '');
+  const [newPassword, setNewPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Función para formatear género
+  const formatearGenero = (genero) => {
+    if (!genero) return 'No especificado';
+    const map = {
+      masculino: 'Masculino',
+      femenino: 'Femenino',
+      otro: 'Otro',
+      prefiero_no_decir: 'Prefiero no decir'
+    };
+    return map[genero] || genero;
+  };
+
+  // Manejar actualización
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    setError('');
+
+    // Validaciones rápidas
+    if (newEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+      setError('Correo inválido');
+      return;
+    }
+    if (newTelefono && newTelefono.length < 10) {
+      setError('Teléfono debe tener al menos 10 dígitos');
+      return;
+    }
+    if (newPassword && newPassword.length < 6) {
+      setError('La contraseña debe tener al menos 6 caracteres');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/update_user.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'update_user',
+          user_id: user.id,
+          email: newEmail || undefined,
+          telefono: newTelefono || undefined,
+          password: newPassword || undefined
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage('Datos actualizados correctamente');
+        // Actualizar el usuario en el contexto (opcional, si quieres que se vea al instante)
+        // Puedes hacer: updateUser(data.user); si creas esa función en AuthContext
+        setNewPassword(''); // Limpiar contraseña
+      } else {
+        setError(data.error || 'Error al actualizar');
+      }
+    } catch (err) {
+      setError('Error de conexión. Inténtalo más tarde.');
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="perfil-section">
+      <h2>Información General</h2>
+
+      <div className="perfil-info-grid">
+        <div className="info-item">
+          <User className="info-icon" />
+          <div>
+            <strong>Nombre Completo</strong>
+            <p>
+              {user?.nombre} {user?.apellido_paterno} {user?.apellido_materno}
+            </p>
           </div>
-        );
+        </div>
+
+        <div className="info-item">
+          <Mail className="info-icon" />
+          <div>
+            <strong>Correo</strong>
+            <p>{user?.email || 'No registrado'}</p>
+          </div>
+        </div>
+
+        <div className="info-item">
+          <Phone className="info-icon" />
+          <div>
+            <strong>Teléfono</strong>
+            <p>{user?.telefono || 'No registrado'}</p>
+          </div>
+        </div>
+
+        <div className="info-item">
+          <Calendar className="info-icon" />
+          <div>
+            <strong>Fecha de Nacimiento</strong>
+            <p>
+              {user?.fecha_nacimiento
+                ? new Date(user.fecha_nacimiento).toLocaleDateString('es-MX')
+                : 'No registrado'}
+            </p>
+          </div>
+        </div>
+
+        <div className="info-item">
+          <MapPin className="info-icon" />
+          <div>
+            <strong>Dirección</strong>
+            <p>{user?.direccion || 'No registrado'}</p>
+          </div>
+        </div>
+
+        <div className="info-item">
+          <UserCheck className="info-icon" />
+          <div>
+            <strong>Género</strong>
+            <p>{formatearGenero(user?.genero)}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* === FORMULARIO DE EDICIÓN === */}
+      <div className="edit-profile-section">
+        <h3 className="edit-title">Editar Información</h3>
+
+        {message && <p className="success-message">{message}</p>}
+        {error && <p className="error-message">{error}</p>}
+
+        <form className="edit-form" onSubmit={handleUpdate}>
+          <div className="input-group">
+            <label>Nuevo correo electrónico</label>
+            <input
+              type="email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              placeholder={user?.email}
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Nuevo teléfono</label>
+            <input
+              type="tel"
+              value={newTelefono}
+              onChange={(e) => setNewTelefono(e.target.value)}
+              placeholder={user?.telefono || "Ej: 9611234567"}
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Nueva contraseña (dejar vacío si no quieres cambiarla)</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`btn-update ${isLoading ? 'loading' : ''}`}
+          >
+            {isLoading ? 'Actualizando...' : 'Guardar Cambios'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 
       case 'historial':
         return (
