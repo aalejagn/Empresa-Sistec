@@ -59,7 +59,7 @@ const AcercaDe = () => {
             <article className="team-section">
               <h2 className="categoria-titulo">Nuestro Equipo</h2>
               <p className="team-intro">
-                Conoce a los desarrolladores apasionados que hacen posible SISTEC READ
+                Conoce al equipo de tecnología que hace posible tu experiencia en SISTEC READ
               </p>
 
               <div className="team-grid">
@@ -67,18 +67,18 @@ const AcercaDe = () => {
                 <div className="team-member">
                   <div className="team-photo">
                     <img 
-                      src="blob:https://onedrive.live.com/0fd3d645-6f28-4838-8967-a0e06c539e5c" 
+                      src="https://res.cloudinary.com/dfcaljjed/image/upload/v1765078751/WhatsApp_Image_2025-12-06_at_9.23.52_PM_jrdia6.jpg" 
                       alt="Alesiyo - Desarrollador Backend"
                       loading="lazy"
                     />
                   </div>
                   <div className="team-info">
                     <h3>Alesiyo</h3>
-                    <p className="team-role">Backend Developer & Database Architect</p>
+                    <p className="team-role">Especialista en Sistemas y Bases de Datos</p>
                     <p className="team-description">
-                      Experto en desarrollo backend y arquitectura de bases de datos. 
-                      Alesiyo construye la columna vertebral de SISTEC READ, asegurando 
-                      que cada operación sea rápida, segura y escalable.
+                      Encargado de que toda la información de la librería funcione correctamente 
+                      detrás de escena. Se asegura de que tus pedidos, búsquedas y compras se 
+                      procesen de manera rápida y segura en todo momento.
                     </p>
                   </div>
                 </div>
@@ -87,18 +87,18 @@ const AcercaDe = () => {
                 <div className="team-member">
                   <div className="team-photo">
                     <img 
-                      src="/ruta/a/tu/imagen-chester.jpg" 
+                      src="https://res.cloudinary.com/dfcaljjed/image/upload/v1765078751/WhatsApp_Image_2025-12-06_at_9.24.31_PM_kwecec.jpg" 
                       alt="Chester - Desarrollador Frontend"
                       loading="lazy"
                     />
                   </div>
                   <div className="team-info">
                     <h3>Chester</h3>
-                    <p className="team-role">Frontend Developer & UI Specialist</p>
+                    <p className="team-role">Diseñador de Experiencia Web</p>
                     <p className="team-description">
-                      Maestro del frontend y especialista en interfaces de usuario. 
-                      Chester transforma ideas en experiencias visuales atractivas e 
-                      intuitivas que los usuarios disfrutan navegar.
+                      Responsable de crear la página web que estás viendo ahora mismo. 
+                      Chester diseña cada botón, menú y sección para que encuentres tus 
+                      libros favoritos de forma fácil y agradable.
                     </p>
                   </div>
                 </div>
@@ -107,18 +107,18 @@ const AcercaDe = () => {
                 <div className="team-member">
                   <div className="team-photo">
                     <img 
-                      src="/ruta/a/tu/imagen-fernando.jpg" 
+                      src="https://res.cloudinary.com/dfcaljjed/image/upload/v1765078752/WhatsApp_Image_2025-12-06_at_9.25.10_PM_cvj26v.jpg" 
                       alt="Fernando - Tester y Estratega"
                       loading="lazy"
                     />
                   </div>
                   <div className="team-info">
                     <h3>Fernando</h3>
-                    <p className="team-role">QA Tester & Creative Strategist</p>
+                    <p className="team-role">Control de Calidad e Innovación</p>
                     <p className="team-description">
-                      Generador de ideas y guardian de la calidad. Fernando prueba 
-                      cada funcionalidad hasta el más mínimo detalle y aporta ideas 
-                      innovadoras que mejoran constantemente nuestra plataforma.
+                      Se encarga de probar que todo funcione perfectamente antes de que llegue 
+                      a ti. También aporta nuevas ideas para mejorar tu experiencia de compra 
+                      y hacer que SISTEC READ sea cada vez mejor.
                     </p>
                   </div>
                 </div>

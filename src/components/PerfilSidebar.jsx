@@ -7,7 +7,6 @@ const PerfilSidebar = ({ activeSection, setActiveSection }) => {
 
   const menuItems = [
     { id: 'info', label: 'Información General', icon: User },
-    { id: 'estadisticas', label: 'Estadísticas', icon: BarChart3 }, // ← NUEVO
     { id: 'historial', label: 'Historial de Compras', icon: ShoppingBag },
     { id: 'privacidad', label: 'Privacidad', icon: Shield },
     { id: 'empresa', label: 'Sobre SISTEC READ', icon: Building2 },
