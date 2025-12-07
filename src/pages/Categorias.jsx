@@ -283,6 +283,7 @@ const Categorias = () => {
                     }`}
                     onClick={() => setCategoriaActual("mas-vendidos")}
                   >
+                    <i className="fas fa-fire"></i>
                     Más Vendidos
                   </li>
                 </ul>

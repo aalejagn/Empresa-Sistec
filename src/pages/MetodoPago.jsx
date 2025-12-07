@@ -1,5 +1,5 @@
 // src/pages/MetodoPago.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -11,6 +11,7 @@ const MetodoPago = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  // ← MUEVE ESTO DESPUÉS DE LOS HOOKS
   let datosEnvio = {};
   try {
     const saved = localStorage.getItem("datosEnvio");
