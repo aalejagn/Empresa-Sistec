@@ -6,12 +6,9 @@ import { useAuth } from "../components/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Contactanos = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
-  //Nuevos 01/12
-  const { user } = useAuth()
-  const navigate = useNavigate()
-
-  // Estado para el formulario
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
@@ -19,11 +16,9 @@ const Contactanos = () => {
     mensaje: "",
   });
 
-  // Estado para mensaje de respuesta
   const [status, setStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Manejar cambios en los inputs
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -31,21 +26,21 @@ const Contactanos = () => {
     });
   };
 
-  // Enviar formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ← AQUÍ (protección)
     if (!user) {
-      alert("Debes iniciar sesión para enviar un mensaje");
+      alert("⚠️ Debes iniciar sesión para enviar un mensaje");
       navigate("/login");
       return;
     }
+
     setIsLoading(true);
     setStatus("");
-    console.log("Enviando datos: ", formData);
 
     try {
+      console.log("📤 Enviando:", formData);
+
       const response = await fetch("/api/contacto.php", {
         method: "POST",
         headers: {
@@ -54,28 +49,27 @@ const Contactanos = () => {
         body: JSON.stringify(formData),
       });
 
-      console.log("RESPUESTA:", response); // ← AÑADE ESTO
+      console.log("📥 Status:", response.status);
 
-      if (!response.ok) {
-        const text = await response.text(); // ← AÑADE ESTO
-        console.error("ERROR HTML:", text); // ← AÑADE ESTO
-        throw new Error(`HTTP ${response.status}`);
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await response.text();
+        console.error("❌ Respuesta no es JSON:", text);
+        throw new Error("El servidor no devolvió JSON válido");
       }
+
       const result = await response.json();
-      console.log("JSON:", result);
+      console.log("✅ Respuesta:", result);
 
       if (result.success) {
-        setStatus("Mensaje enviado con éxito!");
-        setFormData({ nombre: "", email: "", asunto: "", mensaje: "" }); // Limpiar
+        setStatus("✅ " + result.message);
+        setFormData({ nombre: "", email: "", asunto: "", mensaje: "" });
       } else {
-        setStatus("Error: " + result.error);
+        setStatus("❌ Error: " + result.error);
       }
     } catch (error) {
-      console.error("ERROR EN FETCH:", error); // ← AÑADE ESTO
-      console.error("ERROR MESSAGE:", error.message); // ← AÑADE ESTO
-      setStatus(
-        "Error de conexión. Verifica que el servidor PHP esté corriendo."
-      );
+      console.error("❌ Error:", error);
+      setStatus("❌ Error de conexión: " + error.message);
     } finally {
       setIsLoading(false);
     }
@@ -84,7 +78,6 @@ const Contactanos = () => {
   return (
     <>
       <Header />
-
       <main>
         <div className="container">
           <section className="contact-section">
@@ -95,11 +88,9 @@ const Contactanos = () => {
               <p>
                 Estamos aquí para ayudarte. Usa el formulario a continuación
                 para ponerte en contacto con nosotros sobre cualquier consulta,
-                sugerencia o problema que tengas. Nuestro equipo responderá lo
-                antes posible.
+                sugerencia o problema que tengas.
               </p>
 
-              {/* FORMULARIO CONECTADO */}
               <form className="contact-form" onSubmit={handleSubmit}>
                 <label htmlFor="nombre">Nombre:</label>
                 <input
@@ -161,16 +152,15 @@ const Contactanos = () => {
                 </button>
               </form>
 
-              {/* MENSAJE DE ESTADO */}
               {status && (
                 <p
                   style={{
                     marginTop: "1rem",
                     padding: "0.5rem",
-                    backgroundColor: status.includes("éxito")
+                    backgroundColor: status.includes("✅")
                       ? "#d4edda"
                       : "#f8d7da",
-                    color: status.includes("éxito") ? "#155724" : "#721c24",
+                    color: status.includes("✅") ? "#155724" : "#721c24",
                     borderRadius: "4px",
                     textAlign: "center",
                   }}
@@ -180,13 +170,12 @@ const Contactanos = () => {
               )}
             </article>
 
-            {/* ASIDE (sin cambios) */}
             <aside>
               <h3>Otras formas de contacto</h3>
               <ul>
                 <li>
                   <strong>Correo:</strong>
-                  <a href="mailto:infosistecread@gmail.com">
+                  <a href="mailto:sistecread.info@gmail.com">
                     sistecread.info@gmail.com
                   </a>
                 </li>
@@ -194,35 +183,11 @@ const Contactanos = () => {
                   <strong>Teléfono:</strong>
                   <a href="tel:+529611234567">+52 (961) 123-4567</a>
                 </li>
-                <li>
-                  <strong>Contacto por áreas:</strong>
-                  <ul>
-                    <li>
-                      <strong>Ventas:</strong>
-                      <a href="mailto:ventassistecread@gmail.com">
-                        ventassistecread@gmail.com
-                      </a>
-                    </li>
-                    <li>
-                      <strong>Soporte técnico:</strong>
-                      <a href="mailto:soportesistecread@gmail.com">
-                        soportesistecread@gmail.com
-                      </a>
-                    </li>
-                    <li>
-                      <strong>Facturación:</strong>
-                      <a href="mailto:facturacionsistecread@gmail.com">
-                        facturacionsistecread@gmail.com
-                      </a>
-                    </li>
-                  </ul>
-                </li>
               </ul>
             </aside>
           </section>
         </div>
       </main>
-
       <Footer />
     </>
   );

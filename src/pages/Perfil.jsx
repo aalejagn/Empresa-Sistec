@@ -747,10 +747,7 @@ const Perfil = () => {
             </div>
           </div>
         );
-
-      case 'estadisticas':
-        return <EstadisticasUsuario usuarioId={user?.id} />;
-
+        
       case 'config':
         return (
           <div className="perfil-section">
