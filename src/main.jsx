@@ -8,6 +8,7 @@ import App from "./App.jsx";
 import "./assets/css/global.css";
 import "./assets/css/catalago.css";
 import "./assets/css/contactanos.css";
+import "./assets/css/CategoryCarousel.css";
 import "./assets/css/footer.css";
 import "./assets/css/header.css";
 import "./assets/css/auth.css";
@@ -17,6 +18,9 @@ import "./assets/css/valores.css";
 import "./assets/css/carrito.css";
 import "./assets/css/checkout.css";
 import "./assets/css/perfil.css";
+import "./assets/css/legal-pages.css"
+import "./assets/css/LoginFooter.css"
+
 
 // Providers (solo se importan los que se usan directamente)
 import { CartProvider } from "./components/CartContext.jsx";
