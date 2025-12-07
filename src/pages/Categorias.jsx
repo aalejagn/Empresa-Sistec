@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 import { useCart } from "../components/CartContext";
 import { useSearch } from "../components/SearchContext";
 
-// Importa tus CSS aquí (ajusta la ruta si es necesario)
 import "../assets/css/catalago.css";
 import "../assets/css/style.css";
 
@@ -22,7 +21,6 @@ const Categorias = () => {
   const { addToCart } = useCart();
   const { searchTerm } = useSearch();
 
-  // Categorías reales de tu SQL
   const categorias = [
     { key: "mas-vendidos", nombre: "Más Vendidos", icon: "fa-fire" },
     {
@@ -78,7 +76,6 @@ const Categorias = () => {
     },
   ];
 
-  // Función para decodificar Unicode
   const decodeUnicode = (text) => {
     if (!text) return text;
     return text.replace(/\\u([\da-fA-F]{4})/g, (_, hex) =>
@@ -86,13 +83,20 @@ const Categorias = () => {
     );
   };
 
-  // Fetch libros por categoría
+  // CARGA DE LIBROS (AQUÍ ESTÁ EL CAMBIO CLAVE)
   useEffect(() => {
     setIsLoading(true);
     setError(null);
     setLibroExpandido(null);
 
-    fetch(`/api/libros.php?cat=${categoriaActual}`) // <- CAMBIO: Usa /api/
+    let url = `/api/libros.php?cat=${categoriaActual}`;
+
+    // SI ES "MÁS VENDIDOS" → USA EL ENDPOINT ESPECIAL
+    if (categoriaActual === "mas-vendidos") {
+      url = "/api/mas_vendidos.php?cat=mas-vendidos";
+    }
+
+    fetch(url)
       .then((res) => {
         if (!res.ok) throw new Error(`Error ${res.status}`);
         return res.json();
@@ -100,8 +104,11 @@ const Categorias = () => {
       .then((data) => {
         const decodedData = data.map((libro) => ({
           ...libro,
-          descripcion: decodeUnicode(libro.descripcion),
-          encuadernacion: decodeUnicode(libro.encuadernacion),
+          titulo: decodeUnicode(libro.titulo || ""),
+          autor: decodeUnicode(libro.autor || ""),
+          descripcion: decodeUnicode(libro.descripcion || ""),
+          encuadernacion: decodeUnicode(libro.encuadernacion || ""),
+          editorial: decodeUnicode(libro.editorial || ""),
         }));
         setLibros(decodedData);
         setIsLoading(false);
@@ -115,7 +122,7 @@ const Categorias = () => {
 
   // Cargar TODOS los libros al montar (para búsqueda global)
   useEffect(() => {
-    fetch(`/api/libros.php?cat=${categoriaActual}`) // <- CAMBIO: Usa /api/
+    fetch(`/api/libros.php?cat=literatura-contemporanea`)
       .then((res) => res.json())
       .then((data) => {
         const decodedData = data.map((libro) => ({
@@ -128,7 +135,6 @@ const Categorias = () => {
       .catch((err) => console.error("Error cargando todos los libros:", err));
   }, []);
 
-  // Filtrar libros según el término de búsqueda
   const librosFiltrados =
     searchTerm.trim() === ""
       ? libros
@@ -150,11 +156,10 @@ const Categorias = () => {
           <h1 className="page-title">Catálogo de Libros</h1>
 
           <div className="content-wrapper">
-            {/* Contenido principal (izquierda) */}
+            {/* Contenido principal */}
             <div className="libros-content">
               {searchTerm.trim() !== "" ? (
                 <h2 className="categoria-titulo-actual">
-                  <i className="fas fa-search"></i>
                   Resultados para: "{searchTerm}"
                   <span className="resultados-count">
                     ({librosFiltrados.length}{" "}
@@ -165,27 +170,27 @@ const Categorias = () => {
                 <h2 className="categoria-titulo-actual">
                   <i
                     className={`fas ${
-                      categorias.find((c) => c.key === categoriaActual)?.icon ||
-                      "fa-book"
+                      categoriaActual === "mas-vendidos"
+                        ? "fa-fire"
+                        : categorias.find((c) => c.key === categoriaActual)?.icon || "fa-book"
                     }`}
                   ></i>
-                  {categorias.find((c) => c.key === categoriaActual)?.nombre ||
-                    "Categoría"}
+                  {categoriaActual === "mas-vendidos"
+                    ? "Más Vendidos"
+                    : categorias.find((c) => c.key === categoriaActual)?.nombre || "Categoría"}
                 </h2>
               )}
 
               {isLoading && searchTerm.trim() === "" ? (
                 <div className="loading">
-                  <i className="fas fa-spinner"></i> Cargando libros...
+                  Cargando libros...
                 </div>
               ) : error ? (
                 <div className="no-books-message">
-                  <i className="fas fa-exclamation-circle"></i>
                   <p>{error}</p>
                 </div>
               ) : librosFiltrados.length === 0 ? (
                 <div className="no-books-message">
-                  <i className="fas fa-book-open"></i>
                   <p>
                     {searchTerm.trim() !== ""
                       ? `No se encontraron libros para "${searchTerm}"`
@@ -200,7 +205,6 @@ const Categorias = () => {
                       libroExpandido === libro.id ? "active" : ""
                     }`}
                   >
-                    {/* HEADER - Clickeable para expandir */}
                     <div
                       className="libro-header"
                       onClick={() => toggleExpand(libro.id)}
@@ -220,12 +224,10 @@ const Categorias = () => {
 
                         <div className="libro-detalles-compactos">
                           <p>
-                            <i className="fas fa-calendar-alt"></i>{" "}
                             {libro.publicado}
                           </p>
                           {libro.encuadernacion && (
                             <p>
-                              <i className="fas fa-book"></i>{" "}
                               {libro.encuadernacion}
                             </p>
                           )}
@@ -236,7 +238,6 @@ const Categorias = () => {
                         </p>
                       </div>
 
-                      {/* Ícono toggle */}
                       <div className="toggle-icon">
                         <i
                           className={`fas ${
@@ -248,7 +249,6 @@ const Categorias = () => {
                       </div>
                     </div>
 
-                    {/* DESCRIPCIÓN EXPANDIBLE */}
                     <div className="libro-descripcion-expandible">
                       <div className="libro-descripcion-texto">
                         <p>{libro.descripcion}</p>
@@ -261,10 +261,10 @@ const Categorias = () => {
                           className="btn-add-cart"
                           onClick={(e) => {
                             e.stopPropagation();
-                            addToCart(libro);
+                            addToCart({ ...libro, cantidad: 1 });
                           }}
                         >
-                          <i className="fas fa-cart-plus"></i> Añadir al Carrito
+                          Añadir al Carrito
                         </button>
                       </div>
                     </div>
@@ -273,7 +273,7 @@ const Categorias = () => {
               )}
             </div>
 
-            {/* Sidebar a la DERECHA */}
+            {/* Sidebar */}
             <aside className="sidebar-categorias">
               <div className="sidebar-section">
                 <ul className="categoria-list">
@@ -283,14 +283,12 @@ const Categorias = () => {
                     }`}
                     onClick={() => setCategoriaActual("mas-vendidos")}
                   >
-                    <i className="fas fa-fire"></i>
-                    <span>Más Vendidos</span>
+                    Más Vendidos
                   </li>
                 </ul>
               </div>
               <div className="sidebar-section">
                 <h3 className="sidebar-title">
-                  <i className="fas fa-list"></i>
                   Categorías
                 </h3>
                 <ul className="categoria-list">
@@ -302,7 +300,6 @@ const Categorias = () => {
                       }`}
                       onClick={() => setCategoriaActual(cat.key)}
                     >
-                      <i className={`fas ${cat.icon}`}></i>
                       <span>{cat.nombre}</span>
                     </li>
                   ))}

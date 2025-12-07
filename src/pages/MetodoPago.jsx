@@ -19,10 +19,12 @@ const MetodoPago = () => {
     console.error("Error al leer datosEnvio:", e);
   }
 
-  if (!datosEnvio.nombre || !datosEnvio.tipoEntrega) {
-    navigate("/checkout");
-    return null;
-  }
+  useEffect(() => {
+    if (!datosEnvio.nombre || !datosEnvio.tipoEntrega) {
+      navigate("/checkout");
+    }
+  }, [datosEnvio, navigate]);
+
 
   const [formData, setFormData] = useState({
     metodoPago: "",
