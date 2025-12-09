@@ -326,35 +326,43 @@ body {
     margin: 0 auto; /* Centrar el grid */
   }
 
-  .categoria-item,
+.categoria-item,
   .bestseller-item {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.85rem;
-    text-align: center;
-    border-radius: 8px;
-    background: white;
-    border: 2px solid #e0e0e0;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /* Permitir que el texto se parta en varias líneas */
+    white-space: normal !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+    
+    /* Centrar el contenido verticalmente */
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.3rem;
+    text-align: center;
+    
+    /* Espaciado interno más cómodo */
+    padding: 0.9rem 0.6rem !important;
+    line-height: 1.3;
+    height: auto;
+    min-height: 70px; /* Para que todas tengan altura similar */
+    
+    /* Tipografía más pequeña pero legible */
+    font-size: 0.82rem !important;
   }
 
-  .bestseller-item,
-  .top {
-    background-color: rgb(224, 44, 44);
-  }
-
+  /* Iconos más pequeños y arriba del texto */
   .categoria-item i,
   .bestseller-item i {
-    font-size: 0.9rem;
-    flex-shrink: 0;
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem !important;
   }
+
+  /* "Más Vendidos" especial para que no se vea raro */
+  .bestseller-item {
+    min-height: 70px;
+    padding: center;
+  }
+
 
   .categoria-item:hover,
   .bestseller-item:hover {
@@ -468,11 +476,11 @@ body {
 
   .categoria-item,
   .bestseller-item {
-    padding: 0.6rem 0.5rem;
-    font-size: 0.75rem;
-    border-radius: 6px;
-    gap: 0.2rem;
+    font-size: 0.78rem !important;
+    padding: 0.8rem 0.5rem !important;
+    min-height: 68px;
   }
+  
 
   .categoria-item i,
   .bestseller-item i {
@@ -530,13 +538,14 @@ body {
 @media (max-width: 360px) {
   .categoria-item,
   .bestseller-item {
-    padding: 0.5rem 0.4rem;
-    font-size: 0.7rem;
+    font-size: 0.73rem !important;
+    padding: 0.7rem 0.4rem !important;
+    min-height: 65px;
   }
 
   .categoria-item i,
   .bestseller-item i {
-    display: none; /* Ocultar iconos en pantallas muy pequeñas */
+    font-size: 1rem !important;
   }
 }
 
