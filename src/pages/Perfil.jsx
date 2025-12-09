@@ -595,7 +595,7 @@ const Perfil = () => {
                             </div>
                             <div className={`compra-estatus estatus-${venta.estado}`}>
                               {venta.estado === 'pendiente' ? 'Procesando' : 
-                               venta.estado === 'pagado' ? 'Enviado' : 'Entregado'}
+                              venta.estado === 'pagado' ? 'Enviado' : 'Entregado'}
                             </div>
                           </div>
                         </div>

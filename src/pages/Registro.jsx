@@ -355,6 +355,7 @@ const Registrar = () => {
       <div className="login-decoration" style={{ animationDelay: '1s' }}></div>
       <div className="login-decoration" style={{ animationDelay: '2s' }}></div>
       
+      
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo-wrapper">
