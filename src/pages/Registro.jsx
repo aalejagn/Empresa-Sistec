@@ -511,29 +511,56 @@ const Registrar = () => {
                 {touched.genero && generoValid && <p className="login-success-message"><span className="login-success-dot"></span>Género válido ✓</p>}
               </div>
 
-              {/* // En el render, en {step === 2}, agregar campo teléfono después de género */}
-                <div className="login-input-group">
-                  <label htmlFor="telefono" className="login-label">
-                    Teléfono <span className="login-required">*</span>
+                {/* Teléfono con selector de país y banderitas */}
+              <div className="login-input-group">
+                  <label className="login-label">
+                    Telefono <span className="login-required">*</span>
                   </label>
-                  <div className="login-input-wrapper">
-                    <input
-                      type="tel"
-                      id="telefono"
-                      value={telefono}
-                      onChange={handleTelefonoChange}
-                      onBlur={handleTelefonoBlur}
-                      className={`login-input ${touched.telefono ? (telefonoValid ? 'valid' : telefonoError ? 'error' : '') : ''}`}
-                      placeholder="Ej: 9611234567"
-                    />
-                    <Phone className="login-input-icon" style={{ color: telefonoValid ? '#5fb4b7' : '#999' }} />
-                    {touched.telefono && telefonoValid && <CheckCircle className="login-valid-icon" style={{ color: '#5fb4b7' }} />}
-                    {touched.telefono && telefonoError && <AlertCircle className="login-error-icon" style={{ color: '#ef4444' }} />}
-                  </div>
-                  {touched.telefono && telefonoError && <p className="login-error-message"><span className="login-error-dot"></span>{telefonoError}</p>}
-                  {touched.telefono && telefonoValid && <p className="login-success-message"><span className="login-success-dot"></span>Teléfono válido ✓</p>}
-                </div>
+                  <div className="phone-container">
+                    {/* Selector de paÃ­s con banderita */}
+                    <select
+                      className="login-country-select"
+                      onChange={(e) => {
+                        const select = e.target;
+                        select.setAttribute('value', e.target.value);
+                      }}
+                      defaultValue="+52"
+                    >
+                      <option value="+52">+52</option>
+                      <option value="+1">+1</option>
+                      <option value="+34">+34</option>
+                    </select>
 
+                    {/* Input del numero */}
+                    <div className="login-input-wrapper phone-input-wrapper" style={{ flex: 1 }}>
+                      <input
+                        type="tel"
+                        id="telefono"
+                        value={telefono}
+                        onChange={handleTelefonoChange}
+                        onBlur={handleTelefonoBlur}
+                        maxLength={12}
+                        className={`login-input phone-input-small ${touched.telefono ? (telefonoValid ? 'valid' : telefonoError ? 'error' : '') : ''}`}
+                        placeholder="961 123 4567"
+                      />
+                      <Phone className="login-input-icon" style={{ color: telefonoValid ? '#5fb4b7' : '#999' }} />
+                      {touched.telefono && telefonoValid && <CheckCircle className="login-valid-icon" style={{ color: '#5fb4b7' }} />}
+                      {touched.telefono && telefonoError && <AlertCircle className="login-error-icon" style={{ color: '#ef4444' }} />}
+                    </div>
+                  </div>
+
+                  {/* Mensajes de error/Exito */}
+                  {touched.telefono && telefonoError && (
+                    <p className="login-error-message">
+                      <span className="login-error-dot"></span>{telefonoError}
+                    </p>
+                  )}
+                  {touched.telefono && telefonoValid && (
+                    <p className="login-success-message">
+                      <span className="login-success-dot"></span>Telefono valido
+                    </p>
+                  )}
+                </div>
 
               {/* Contraseña */}
               <div className="login-input-group">

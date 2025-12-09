@@ -1681,3 +1681,147 @@ body.login-page,
 
 
 
+/* Ocultar el placeholder feo del input date y poner uno personalizado */
+.login-input[type="date"] {
+  color: var(--color-texto);
+  font-family: inherit;
+}
+
+.login-input[type="date"]:not(:focus):not(:valid) {
+  color: #A5B5C5;
+}
+
+.login-input[type="date"]::placeholder {
+  color: #A5B5C5;
+  opacity: 1;
+}
+
+.login-input[type="date"]:focus::placeholder,
+.login-input[type="date"]:valid::placeholder {
+  opacity: 0;
+}
+
+/* BLOQUEAR por completo que el usuario redimensione el textarea */
+.login-textarea,
+textarea.login-input {
+  resize: none !important;
+}
+
+/* Opcional: que crezca solo un poco si escribe mucho (queda elegante) */
+.login-textarea {
+  min-height: 80px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+
+/* ===== PLACEHOLDERS CON LA MISMA TIPOGRAFÍA QUE EL RESTO DEL FORMULARIO ===== */
+.login-input::placeholder,
+.login-textarea::placeholder {
+  color: #A5B5C5 !important;           /* Gris suave como en tus inputs */
+  font-size: 0.8rem !important;        /* Exactamente el mismo tamaño que el texto */
+  font-weight: 400 !important;         /* Peso normal, igual que tus inputs */
+  font-family: inherit !important;     /* Usa la misma fuente que el body/input */
+  opacity: 1 !important;               /* Evita que algunos navegadores lo hagan más claro */
+  transition: opacity 0.3s ease;       /* Suave cuando desaparece al escribir */
+}
+
+/* Cuando el usuario empieza a escribir o enfoca, el placeholder se desvanece suavemente */
+.login-input:focus::placeholder-shown,
+.login-textarea:focus::placeholder {
+  opacity: 0.5;
+}
+
+/* Bonus: en móviles se ve aún mejor */
+@media (max-width: 480px) {
+  .login-input::placeholder,
+  .login-textarea::placeholder {
+    font-size: 0.78rem !important;
+  }
+}
+
+
+
+/* ============================================
+  TELÃ‰FONO CON SELECTOR DE PAÃS - VERSIÃ"N COMPACTA
+   ============================================ */
+
+/* Contenedor flex del telÃ©fono */
+.login-input-group .phone-container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* Select de paÃ­s (banderita + cÃ³digo) - MÃS PEQUEÑO */
+.login-country-select {
+  width: 75px !important;
+  height: 41px;
+  padding: 0 6px 0 28px !important;
+  border: 2px solid var(--color-borde);
+  border-radius: 0.75rem;
+  font-size: 0.75rem !important;
+  font-weight: 600;
+  color: var(--color-texto);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: 6px center;
+  background-size: 20px;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Flechita personalizada al lado derecho */
+.login-country-select {
+  background-image: 
+    url("https://flagcdn.com/48x36/mx.png"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235fb4b7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-position: 6px center, right 8px center;
+  background-size: 15px, 15px;
+  padding-right: 16px !important;
+}
+
+/* Cambia la bandera segÃºn el valor seleccionado */
+.login-country-select[value="+52"] { background-image: url("https://flagcdn.com/48x36/mx.png"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235fb4b7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); }
+.login-country-select[value="+1"]  { background-image: url("https://flagcdn.com/48x36/us.png"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235fb4b7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); }
+.login-country-select[value="+34"] { background-image: url("https://flagcdn.com/48x36/es.png"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235fb4b7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); }
+
+/* Hover y focus bonito */
+.login-country-select:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 4px rgba(95, 180, 183, 0.15);
+}
+
+/* Input del nÃºmero - AJUSTADO PARA QUE ENTRE EL ICONO */
+.phone-input-small {
+  padding: 0.65rem 2.5rem 0.65rem 2.5rem !important;
+  font-size: 0.8rem !important;
+}
+
+/* Icono de telÃ©fono dentro del input */
+.phone-input-wrapper .login-input-icon {
+  left: 0.75rem;
+  pointer-events: none;
+}
+
+/* Iconos de validaciÃ³n a la derecha */
+.phone-input-wrapper .login-valid-icon,
+.phone-input-wrapper .login-error-icon {
+  right: 0.75rem;
+}
+
+/* En mÃ³viles se ve perfecto */
+@media (max-width: 480px) {
+  .login-country-select {
+    width: 70px !important;
+    padding-left: 26px !important;
+    font-size: 0.72rem !important;
+    background-size: 18px, 9px;
+  }
+  .phone-input-small {
+    font-size: 0.78rem !important;
+  }
+}
