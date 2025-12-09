@@ -72,7 +72,7 @@ body.login-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0;
   margin: 0;
   position: relative;
@@ -80,7 +80,7 @@ body.login-page {
   /* Padding inferior = altura del footer + separación adicional */
   padding-bottom: calc(var(--footer-height) + var(--spacing-from-footer));
   /* Padding superior para balance */
-  padding-top: 1rem;
+  padding-top: 3rem;
 }
 
 /* Overlay oscuro sutil - MODIFICADO */

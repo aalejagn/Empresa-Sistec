@@ -368,6 +368,7 @@ const Registrar = () => {
           {step === 1 && (
             <>
               {/* Nombre */}
+            <div className="login-form-stage">
               <div className="login-input-group">
                 <label htmlFor="nombre" className="login-label">
                   Nombre <span className="login-required">*</span>
@@ -480,12 +481,15 @@ const Registrar = () => {
                 {touched.fechaNacimiento && fechaNacimientoError && <p className="login-error-message"><span className="login-error-dot"></span>{fechaNacimientoError}</p>}
                 {touched.fechaNacimiento && fechaNacimientoValid && <p className="login-success-message"><span className="login-success-dot"></span>Fecha válida ✓</p>}
               </div>
+            </div>
             </>
+            
           )}
 
           {step === 2 && (
             <>
               {/* Género */}
+              <div className="login-form-stage">
               <div className="login-input-group">
                 <label htmlFor="genero" className="login-label">
                   Género <span className="login-required">*</span>
@@ -635,6 +639,7 @@ const Registrar = () => {
                 </div>
                 {touched.direccion && direccionError && <p className="login-error-message"><span className="login-error-dot"></span>{direccionError}</p>}
                 {touched.direccion && direccionValid && <p className="login-success-message"><span className="login-success-dot"></span>Dirección válida ✓</p>}
+              </div>
               </div>
             </>
           )}
