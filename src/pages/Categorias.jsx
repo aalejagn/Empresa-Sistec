@@ -122,13 +122,16 @@ const Categorias = () => {
 
   // Cargar TODOS los libros al montar (para búsqueda global)
   useEffect(() => {
-    fetch(`/api/libros.php?cat=literatura-contemporanea`)
+    // Pedimos al endpoint sin el parámetro `cat` para obtener todos los libros
+    fetch(`/api/libros.php`)
       .then((res) => res.json())
       .then((data) => {
         const decodedData = data.map((libro) => ({
           ...libro,
-          descripcion: decodeUnicode(libro.descripcion),
-          encuadernacion: decodeUnicode(libro.encuadernacion),
+          titulo: decodeUnicode(libro.titulo || ""),
+          autor: decodeUnicode(libro.autor || ""),
+          descripcion: decodeUnicode(libro.descripcion || ""),
+          encuadernacion: decodeUnicode(libro.encuadernacion || ""),
         }));
         setTodosLosLibros(decodedData);
       })
