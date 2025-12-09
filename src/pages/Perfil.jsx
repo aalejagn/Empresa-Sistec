@@ -4,7 +4,8 @@ import PerfilSidebar from '../components/PerfilSidebar';
 import { useAuth } from '../components/AuthContext';
 import { 
   Mail, Phone, MapPin, Lock, Bell, Globe, Package, 
-  Calendar, CreditCard, Truck, ShoppingBag, Clock, User, UserCheck
+  Calendar, CreditCard, Truck, ShoppingBag, Clock, User, UserCheck,
+  ChevronDown, ChevronUp
 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -329,7 +330,6 @@ const PrivacidadSection = ({ user }) => {
       }
     } catch (err) {
       setError('Error de conexión. Inténtalo más tarde.');
-      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -339,161 +339,128 @@ const PrivacidadSection = ({ user }) => {
     <div className="perfil-section">
       <h2>Privacidad y Seguridad</h2>
 
-      <div className="privacy-options">
-        <div className="privacy-card">
-          <h3><Bell className="info-icon" /> Notificaciones</h3>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={privacySettings.emailNotifications}
-                onChange={() => handlePrivacyToggle('emailNotifications')}
-              />
-              <span className="checkmark"></span>
-              Recibir notificaciones por correo electrónico
-            </label>
+      <div className="privacy-card">
+        <h3>Configuración de Privacidad</h3>
+        <div className="checkbox-group">
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={privacySettings.emailNotifications}
+              onChange={() => handlePrivacyToggle('emailNotifications')}
+            />
+            <span className="checkmark"></span>
+            Recibir notificaciones por correo
+          </label>
 
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={privacySettings.marketingEmails}
-                onChange={() => handlePrivacyToggle('marketingEmails')}
-              />
-              <span className="checkmark"></span>
-              Recibir ofertas y promociones
-            </label>
-          </div>
-        </div>
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={privacySettings.profileVisibility}
+              onChange={() => handlePrivacyToggle('profileVisibility')}
+            />
+            <span className="checkmark"></span>
+            Perfil público
+          </label>
 
-        <div className="privacy-card">
-          <h3><Globe className="info-icon" /> Visibilidad del Perfil</h3>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={privacySettings.profileVisibility}
-                onChange={() => handlePrivacyToggle('profileVisibility')}
-              />
-              <span className="checkmark"></span>
-              Permitir que otros usuarios vean mi perfil público
-            </label>
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={privacySettings.showPurchaseHistory}
+              onChange={() => handlePrivacyToggle('showPurchaseHistory')}
+            />
+            <span className="checkmark"></span>
+            Mostrar historial de compras a otros
+          </label>
 
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={privacySettings.showPurchaseHistory}
-                onChange={() => handlePrivacyToggle('showPurchaseHistory')}
-              />
-              <span className="checkmark"></span>
-              Mostrar mi historial de compras públicamente
-            </label>
-          </div>
-        </div>
-
-        <div className="privacy-card">
-          <h3><Lock className="info-icon" style={{ color: '#e74c3c' }} /> Seguridad Avanzada</h3>
-          <div className="security-actions">
-            <div className="security-item">
-              <div>
-                <strong>Autenticación en Dos Pasos (2FA)</strong>
-                <p className="text-muted">Añade una capa extra de seguridad</p>
-              </div>
-              <label className="toggle-switch">
-                <input
-                  type="checkbox"
-                  checked={privacySettings.twoFactorEnabled}
-                  onChange={() => handlePrivacyToggle('twoFactorEnabled')}
-                />
-                <span className="slider"></span>
-              </label>
-            </div>
-
-            <div className="security-item">
-              <div>
-                <strong>Cambiar Contraseña</strong>
-                <p className="text-muted">Actualiza tu contraseña periódicamente</p>
-              </div>
-              <button
-                onClick={() => setShowPasswordForm(!showPasswordForm)}
-                className="btn-change-password"
-              >
-                {showPasswordForm ? 'Cancelar' : 'Cambiar Contraseña'}
-              </button>
-            </div>
-          </div>
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={privacySettings.marketingEmails}
+              onChange={() => handlePrivacyToggle('marketingEmails')}
+            />
+            <span className="checkmark"></span>
+            Recibir emails de marketing
+          </label>
         </div>
       </div>
 
-      {/* Formulario de cambiar contraseña (solo si showPasswordForm es true) */}
-      {showPasswordForm && (
-        <div className="edit-profile-section password-change-form">
-          <h3>Cambiar Contraseña</h3>
-          {message && <p className="success-message">{message}</p>}
-          {error && <p className="error-message">{error}</p>}
+      <div className="privacy-card">
+        <h3>Seguridad</h3>
+        <div className="security-item">
+          <span>Autenticación de dos factores</span>
+          <label className="toggle-switch">
+            <input
+              type="checkbox"
+              checked={privacySettings.twoFactorEnabled}
+              onChange={() => handlePrivacyToggle('twoFactorEnabled')}
+            />
+            <span className="slider"></span>
+          </label>
+        </div>
 
-          <form onSubmit={handleChangePassword} className="edit-form">
+        <div className="security-item">
+          <span>Cambiar contraseña</span>
+          <button 
+            className="btn-change-password"
+            onClick={() => setShowPasswordForm(!showPasswordForm)}
+          >
+            {showPasswordForm ? 'Cancelar' : 'Cambiar'}
+          </button>
+        </div>
+
+        {showPasswordForm && (
+          <form className="password-change-form" onSubmit={handleChangePassword}>
+            {message && <p className="success-message">{message}</p>}
+            {error && <p className="error-message">{error}</p>}
+
             <div className="input-group">
-              <label>Contraseña Actual</label>
+              <label>Contraseña actual</label>
               <input
                 type="password"
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
-                placeholder="••••••••"
                 required
               />
             </div>
 
             <div className="input-group">
-              <label>Nueva Contraseña</label>
+              <label>Nueva contraseña</label>
               <input
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="Mínimo 6 caracteres"
                 required
               />
             </div>
 
             <div className="input-group">
-              <label>Confirmar Nueva Contraseña</label>
+              <label>Confirmar nueva contraseña</label>
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Repite la nueva contraseña"
                 required
               />
             </div>
 
-            <div className="form-actions">
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`btn-update ${isLoading ? 'loading' : ''}`}
-              >
-                {isLoading ? 'Cambiando...' : 'Actualizar Contraseña'}
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowPasswordForm(false)}
-                className="btn-cancel"
-              >
-                Cancelar
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`btn-update ${isLoading ? 'loading' : ''}`}
+            >
+              {isLoading ? 'Cambiando...' : 'Cambiar Contraseña'}
+            </button>
           </form>
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* Consejos de seguridad */}
       <div className="security-tips">
-        <h4>Consejos para mantener tu cuenta segura</h4>
+        <h3>Consejos de Seguridad</h3>
         <ul>
-          <li>No compartas tu contraseña con nadie</li>
-          <li>Usa contraseñas diferentes en cada sitio web</li>
-          <li>Activa la autenticación en dos pasos</li>
-          <li>Revisa tus sesiones activas regularmente</li>
-          <li>Evita conectarte desde redes Wi-Fi públicas</li>
+          <li>Usa contraseñas únicas y fuertes</li>
+          <li>No compartas tu cuenta</li>
+          <li>Activa 2FA para mayor protección</li>
+          <li>Revisa tu historial de sesiones regularmente</li>
         </ul>
       </div>
     </div>
@@ -504,19 +471,38 @@ const Perfil = () => {
   const { user, updateUser } = useAuth();
   const [activeSection, setActiveSection] = useState('info');
   const [compras, setCompras] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [expandedCompras, setExpandedCompras] = useState(new Set());
 
   useEffect(() => {
-    if (activeSection === 'historial' && user?.id) {
-      cargarHistorial();
+    if (activeSection === 'historial') {
+      loadHistorial();
     }
-  }, [activeSection, user]);
+  }, [activeSection]);
 
-  const cargarHistorial = async () => {
-    setLoading(true);
+  const toggleCompra = (id) => {
+    setExpandedCompras(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
+  const loadHistorial = async () => {
+    if (!user?.id) return;
+
     try {
-      const res = await fetch(`/api/historial.php?usuario_id=${user.id}`);
-      const data = await res.json();
+      const response = await fetch('/api/historial_compras.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: user.id })
+      });
+
+      const data = await response.json();
       if (data.success) {
         setCompras(data.ventas);
       } else {
@@ -582,10 +568,11 @@ const Perfil = () => {
                   const subtotal = calcularSubtotal(items);
                   const iva = subtotal * 0.16;
                   const total = subtotal + iva;
+                  const isExpanded = expandedCompras.has(venta.id);
 
                   return (
                     <div key={venta.id} className="compra-card">
-                      <div className="compra-header">
+                      <div className="compra-header" onClick={() => toggleCompra(venta.id)}>
                         <div className="compra-info-principal">
                           <h3>Orden #{venta.id}</h3>
                           <div className="compra-meta">
@@ -603,79 +590,84 @@ const Perfil = () => {
                           <span className="total-label">Total</span>
                           <span className="total-amount">${total.toFixed(2)}</span>
                         </div>
+                        {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                       </div>
 
-                      <div className="compra-details">
-                        <div className="detail-row">
-                          <div className="detail-item">
-                            <Truck size={20} />
-                            <div>
-                              <strong>Entrega</strong>
-                              <p>{venta.tipo_entrega === 'domicilio' ? 'A domicilio' : 'Retiro en tienda'}</p>
-                            </div>
-                          </div>
-                          <div className="detail-item">
-                            <CreditCard size={20} />
-                            <div>
-                              <strong>Pago</strong>
-                              <p>{formatMetodoPago(venta.metodo_pago)}</p>
-                            </div>
-                          </div>
-                          <div className="detail-item full-width">
-                            <MapPin size={20} />
-                            <div>
-                              <strong>Dirección</strong>
-                              <p>{venta.direccion || 'Retiro en tienda'}</p>
-                              {venta.ciudad && <p className="text-muted">{venta.ciudad}, {venta.estado}</p>}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="compra-items">
-                        <h4>
-                          <Package size={18} /> Productos
-                        </h4>
-                        <div className="items-list">
-                          {items.map((item, idx) => (
-                            <div key={idx} className="item-compra">
-                              <div className="item-info">
-                                <div className="item-titulo">
-                                  <i className="fas fa-book"></i>
-                                  {item.titulo}
+                      {isExpanded && (
+                        <>
+                          <div className="compra-details">
+                            <div className="detail-row">
+                              <div className="detail-item">
+                                <Truck size={20} />
+                                <div>
+                                  <strong>Entrega</strong>
+                                  <p>{venta.tipo_entrega === 'domicilio' ? 'A domicilio' : 'Retiro en tienda'}</p>
                                 </div>
-                                <div className="item-cantidad">x{item.cantidad}</div>
                               </div>
-                              <div className="item-precios">
-                                <span className="precio-unitario">${item.precio} c/u</span>
-                                <span className="item-precio">
-                                  ${(item.precio * item.cantidad).toFixed(2)}
-                                </span>
+                              <div className="detail-item">
+                                <CreditCard size={20} />
+                                <div>
+                                  <strong>Pago</strong>
+                                  <p>{formatMetodoPago(venta.metodo_pago)}</p>
+                                </div>
+                              </div>
+                              <div className="detail-item full-width">
+                                <MapPin size={20} />
+                                <div>
+                                  <strong>Dirección</strong>
+                                  <p>{venta.direccion || 'Retiro en tienda'}</p>
+                                  {venta.ciudad && <p className="text-muted">{venta.ciudad}, {venta.estado}</p>}
+                                </div>
                               </div>
                             </div>
-                          ))}
-                        </div>
-                        <div className="items-totales">
-                          <div className="items-subtotal">
-                            <span>Subtotal:</span>
-                            <span>${subtotal.toFixed(2)}</span>
                           </div>
-                          <div className="items-iva">
-                            <span>IVA (16%):</span>
-                            <span>${iva.toFixed(2)}</span>
-                          </div>
-                          <div className="items-total-final">
-                            <span>Total:</span>
-                            <span>${total.toFixed(2)}</span>
-                          </div>
-                        </div>
-                      </div>
 
-                      <div className="compra-actions">
-                        <button className="btn-recomprar">
-                          <ShoppingBag size={16} /> Recomprar
-                        </button>
-                      </div>
+                          <div className="compra-items">
+                            <h4>
+                              <Package size={18} /> Productos
+                            </h4>
+                            <div className="items-list">
+                              {items.map((item, idx) => (
+                                <div key={idx} className="item-compra">
+                                  <div className="item-info">
+                                    <div className="item-titulo">
+                                      <i className="fas fa-book"></i>
+                                      {item.titulo}
+                                    </div>
+                                    <div className="item-cantidad">x{item.cantidad}</div>
+                                  </div>
+                                  <div className="item-precios">
+                                    <span className="precio-unitario">${item.precio} c/u</span>
+                                    <span className="item-precio">
+                                      ${(item.precio * item.cantidad).toFixed(2)}
+                                    </span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="items-totales">
+                              <div className="items-subtotal">
+                                <span>Subtotal:</span>
+                                <span>${subtotal.toFixed(2)}</span>
+                              </div>
+                              <div className="items-iva">
+                                <span>IVA (16%):</span>
+                                <span>${iva.toFixed(2)}</span>
+                              </div>
+                              <div className="items-total-final">
+                                <span>Total:</span>
+                                <span>${total.toFixed(2)}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="compra-actions">
+                            <button className="btn-recomprar">
+                              <ShoppingBag size={16} /> Recomprar
+                            </button>
+                          </div>
+                        </>
+                      )}
                     </div>
                   );
                 })}
