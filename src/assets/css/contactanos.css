@@ -158,7 +158,7 @@ article > p::before {
 }
 
 .contact-form textarea {
-    resize: vertical;
+    resize: none;
     min-height: 120px;
 }
 

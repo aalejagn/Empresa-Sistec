@@ -21,10 +21,42 @@ const Recuperacion_Contraseña = () => {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(token ? 2 : 1);
 
+  // NUEVO: Estado para validación en tiempo real del email (solo paso 1)
+  const [emailStatus, setEmailStatus] = useState(""); // "", "found", "not-found"
+
   useEffect(() => {
     document.body.classList.add("login-page");
     return () => document.body.classList.remove("login-page");
   }, []);
+
+  // NUEVO: Validación en tiempo real (simulada, sin tocar PHP)
+  useEffect(() => {
+    const fakeRegisteredEmails = [
+      "admin@sistecread.com",
+      "juan@gmail.com",
+      "maria@hotmail.com",
+      "test@ejemplo.com",
+      "usuario@sistecread.com",
+      "sistecread.info@gmail.com"
+    ];
+
+    const validate = () => {
+      if (!email || !email.includes("@") || email.length < 5) {
+        setEmailStatus("");
+        return;
+      }
+
+      const exists = fakeRegisteredEmails.some(
+        e => e.toLowerCase() === email.trim().toLowerCase()
+      );
+
+      setEmailStatus(exists ? "found" : "not-found");
+    };
+
+    const timer = setTimeout(validate, 500); // debounce 500ms
+
+    return () => clearTimeout(timer);
+  }, [email]);
 
   // ============== PASO 1: Enviar email de recuperación ==============
   const handleForgot = async (e) => {
@@ -150,13 +182,43 @@ const Recuperacion_Contraseña = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="login-input"
+                    className={`login-input ${emailStatus === "not-found" ? "error-border" : ""}`}
                     placeholder="tucorreo@ejemplo.com"
                     required
                     disabled={loading}
                   />
                   <Mail className="login-input-icon" />
                 </div>
+
+                {/* NUEVO: Mensaje en tiempo real */}
+                {emailStatus === "not-found" && (
+                  <p style={{
+                    color: "#ef4444",
+                    fontSize: "13px",
+                    marginTop: "6px",
+                    marginLeft: "4px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px"
+                  }}>
+                    <AlertCircle size={14} />
+                    Este correo no está registrado
+                  </p>
+                )}
+                {emailStatus === "found" && (
+                  <p style={{
+                    color: "#10b981",
+                    fontSize: "13px",
+                    marginTop: "6px",
+                    marginLeft: "4px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px"
+                  }}>
+                    <CheckCircle size={14} />
+                    Correo encontrado, listo para enviar
+                  </p>
+                )}
               </div>
 
               <button 
@@ -164,7 +226,7 @@ const Recuperacion_Contraseña = () => {
                 className={`login-button ${loading ? 'disabled' : 'enabled'}`}
                 disabled={loading}
               >
-                {loading ? '⏳ Enviando...' : '📧 Enviar código de recuperación'}
+                {loading ? 'Enviando...' : 'Enviar código de recuperación'}
               </button>
             </form>
           )}
