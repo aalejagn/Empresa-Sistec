@@ -65,7 +65,7 @@ const Home = () => {
                   cuidadosamente organizadas y encuentra tu próxima gran
                   lectura.
                 </p>
-                <a href="https://empresa-sistec-t5fv.vercel.app/categorias" className="cta-button">
+                <a href="https://sistec-read.vercel.app/categorias" className="cta-button">
                   Explorar Catálogo
                 </a>
               </div>
@@ -170,7 +170,7 @@ const Home = () => {
             )}
 
             <div className="bestsellers-cta">
-              <a href="https://empresa-sistec-t5fv.vercel.app/categorias" className="btn-ver-mas">
+              <a href="https://sistec-read.vercel.app/categorias" className="btn-ver-mas">
                 Ver Catálogo Completo
                 <i className="fas fa-arrow-right"></i>
               </a>

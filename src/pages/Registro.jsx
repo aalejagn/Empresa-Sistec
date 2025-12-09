@@ -355,7 +355,6 @@ const Registrar = () => {
       <div className="login-decoration" style={{ animationDelay: '1s' }}></div>
       <div className="login-decoration" style={{ animationDelay: '2s' }}></div>
       
-      
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo-wrapper">
@@ -624,59 +623,6 @@ const Registrar = () => {
               ? (isSubmitEnabled ? 'Siguiente' : '⚠ Completa los campos del Paso 1') 
               : (isSubmitEnabled ? '✓ Crear Cuenta' : '⚠ Completa los campos del Paso 2')}
           </button>
-
-          {/* Indicador de estado (adaptado por paso) */}
-          <div className="login-status-indicator">
-            {step === 1 && (
-              <>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${nombreValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${nombreValid ? 'active' : ''}`}>Nombre</span>
-                </div>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${apellidoPaternoValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${apellidoPaternoValid ? 'active' : ''}`}>Ap. Paterno</span>
-                </div>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${apellidoMaternoValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${apellidoMaternoValid ? 'active' : ''}`}>Ap. Materno</span>
-                </div>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${emailValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${emailValid ? 'active' : ''}`}>Email</span>
-                </div>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${fechaNacimientoValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${fechaNacimientoValid ? 'active' : ''}`}>Fecha Nac.</span>
-                </div>
-              </>
-            )}
-            {step === 2 && (
-              <>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${direccionValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${direccionValid ? 'active' : ''}`}>Dirección</span>
-                </div>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${generoValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${generoValid ? 'active' : ''}`}>Género</span>
-                </div>
-
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${telefonoValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${telefonoValid ? 'active' : ''}`}>Teléfono</span>
-                </div>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${passwordValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${passwordValid ? 'active' : ''}`}>Contraseña</span>
-                </div>
-                <div className="login-status-item">
-                  <div className={`login-status-dot ${confirmPasswordValid ? 'active' : ''}`}></div>
-                  <span className={`login-status-text ${confirmPasswordValid ? 'active' : ''}`}>Confirmar</span>
-                </div>
-              </>
-            )}
-          </div>
         </form>
 
         <div className="login-separator">

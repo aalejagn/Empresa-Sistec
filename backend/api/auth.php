@@ -3,7 +3,7 @@
 ob_clean();
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: https://empresa-sistec-t5fv.vercel.app');
+header('Access-Control-Allow-Origin: https://sistec-read.vercel.app');
 header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
@@ -336,7 +336,7 @@ if ($action === 'forgot_password') {
         $upd->execute([$token, $expires, $user['id']]);
 
         // Crear enlace de recuperación
-        $link = "https://empresa-sistec-t5fv.vercel.app/recuperar-contrase%C3%B1a?token=$token";
+        $link = "https://sistec-read.vercel.app/recuperar-contrase%C3%B1a?token=$token";
 
         // ============== ENVIAR CORREO DE RECUPERACIÓN ==============
         $htmlRecuperacion = renderTemplate('email_recuperacion.html', [

@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     echo json_encode([
         'success' => false,
         'error' => 'Debes iniciar sesión para realizar esta acción',
-        'redirect' => 'https://empresa-sistec-t5fv.vercel.app/login'
+        'redirect' => 'https://sistec-read.vercel.app/login'
     ]);
     exit;
 }
